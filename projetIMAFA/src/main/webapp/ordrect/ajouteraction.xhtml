@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	
+	<ui:define name="content">
+		<div class="content">
+			<div class="content_resize">
+				<div class="mainbar">
+					<div class="article">
+						<h2>Add action</h2>
+
+					</div>
+					<h:panelGroup columns="2">
+						<h:form>
+							<table>
+								<tr>
+									<td><h:outputText value="isin"></h:outputText></td>
+									<td><h:inputText id="em" required="true"
+											validatorMessage="the form of th email must be like : amine@dada.com"
+											requiredMessage="enter an email"
+											value="#{OrdreController.isin}">
+											
+										</h:inputText></td>
+								</tr>
+								<tr>
+									<td><h:message for="em" style="color:red" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="ticker"></h:outputText></td>
+									<td><h:inputText id="pa" required="true"
+											requiredMessage="enter a password"
+											value="#{OrdreController.ticker}">
+											<f:validateLength for="pa" />
+										</h:inputText></td>
+								</tr>
+								<tr>
+									<td><h:message for="pa" style="color:red" /></td>
+								</tr>
+
+								<tr>
+									<td><h:message for="pas" style="color:red" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Open"></h:outputText></td>
+									<td><h:inputText id="a" required="true"
+											requiredMessage="enter your First_name"
+											value="#{OrdreController.open}"></h:inputText></td>
+								</tr>
+								<tr>
+									<td><h:message for="a" style="color:red" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Last_name"></h:outputText></td>
+									<td><h:inputText id="b" required="true"
+											requiredMessage="enter your Last_name"
+											value="#{OrdreController.high}"></h:inputText></td>
+								</tr>
+								<tr>
+									<td><h:message for="b" style="color:red" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Phone number"></h:outputText></td>
+									<td><h:inputText id="num" required="true"
+											requiredMessage="enter your phone number"
+											value="#{OrdreController.low}">
+										</h:inputText></td>
+								</tr>
+
+								<tr>
+									<td><h:message for="num" style="color:red" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Postal_code"></h:outputText></td>
+									<td><h:inputText id="postal" required="true"
+											requiredMessage="enter your postal_code"
+											value="#{OrdreController.yield}">
+										</h:inputText></td>
+								</tr>
+
+								<tr>
+									<td><h:message for="postal" style="color:red" /></td>
+								</tr>
+
+								<tr>
+									<td><h:message for="birth" style="color:red" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Operation"></h:outputText></td>
+									<td><h:selectOneMenu id="cn" required="true"
+											requiredMessage="choose your operation"
+											value="#{OrdreController.operation}">
+											<f:selectItem itemLabel="Select gender" itemValue="#{null}" />
+											<f:selectItem itemValue="Achat" itemLabel="Achat" />
+											<f:selectItem itemValue="Vente" itemLabel="Vente" />
+										</h:selectOneMenu></td>
+								</tr>
+
+								<tr>
+									<td><h:message for="geo" style="color:red" /></td>
+								</tr>
+
+								<tr>
+									<td><h:message for="ge" style="color:red" /></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Cin"></h:outputText></td>
+									<td><h:inputText id="cin" required="true"
+											requiredMessage="enter your cin"
+											value="#{OrdreController.close}">
+										</h:inputText></td>
+								</tr>
+
+								<tr>
+									<td><h:message for="cin" style="color:red" /></td>
+								</tr>
+
+
+								<tr>
+									<td><h:outputText value="Address"></h:outputText></td>
+									<td><h:inputText id="ci" required="true"
+											requiredMessage="enter your address"
+											value="#{OrdreController.volume}"></h:inputText></td>
+								</tr>
+								<tr>
+									<td><h:message for="ci" style="color:red" /></td>
+								</tr>
+
+								<tr>
+									<td><h:outputText value="Job"></h:outputText></td>
+									<td><h:inputText id="c" required="true"
+											requiredMessage="enter your job"
+											value="#{OrdreController.variation}"></h:inputText></td>
+								</tr>
+								<tr>
+									<td><h:message for="c" style="color:red" /></td>
+								</tr>
+								<h:message for="btn" style="color:green" />
+
+							
+
+								<tr>
+									<td colspan="2"><h:commandButton style="float:center;"
+											action="#{OrdreController.addaction()}" /></td>
+								</tr>
+
+							</table>
+						</h:form>
+					</h:panelGroup>
+
+				</div>
+				      <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star">Users management</h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="">Check users</a></li>
+            <li><a href="">Stats users by area</a></li>
+            <li><a href="">Stats users by Inscription_Date</a></li>
+          </ul>
+        </div>
+      </div>
+
+				<div class="clr"></div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

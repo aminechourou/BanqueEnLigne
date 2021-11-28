@@ -60,7 +60,7 @@ public class ActionService implements IActionService {
 		return u;
 		
 	}
-	
+	/*
 	public List<Action> retrieveActionsByLibelle(String role)
 	{
 		List<Action> Actions = (List<Action>) actionRepository.retrieveActionsByLibelle(role);
@@ -71,7 +71,7 @@ public class ActionService implements IActionService {
 		return Actions;	
 	}
 	
-	
+	*/
 	/*
 	public List<Action> retrieveActionsByDate(String d1,String d2) throws ParseException
 	{
@@ -104,6 +104,12 @@ public class ActionService implements IActionService {
 
 	public void del(int id){
 		actionRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Action> retrieveActionsByLibelle(String libelle) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

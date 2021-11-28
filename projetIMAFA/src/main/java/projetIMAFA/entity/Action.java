@@ -3,6 +3,7 @@ package projetIMAFA.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,13 +21,40 @@ private static final long serialVersionUID = 1L;
 @GeneratedValue (strategy = GenerationType.IDENTITY)
 
 private int action_ID;
+
 @Temporal(TemporalType.DATE)
 private Date date;
+// 1 = achat / 0 = vente
 private int operation;	
-private String codetitre;
-private String libelle;
-private int cours;
-private int quantite;
+
+@Column(name="isin")
+private String isin;
+
+@Column(name="ticker")
+private String ticker;
+
+@Column(name="open")
+private float open;
+
+@Column(name="high")
+private float high;
+
+
+@Column(name="low")
+private float low;
+
+@Column(name="yield")
+private float yield;
+
+@Column(name="close")
+private float close;
+
+@Column(name="volume")
+private long volume;
+
+@Column(name="variation")
+private String variation;
+/**/
 private int Num_compte;
 public int getAction_ID() {
 	return action_ID;
@@ -46,30 +74,7 @@ public int getOperation() {
 public void setOperation(int operation) {
 	this.operation = operation;
 }
-public String getCodetitre() {
-	return codetitre;
-}
-public void setCodetitre(String codetitre) {
-	this.codetitre = codetitre;
-}
-public String getLibelle() {
-	return libelle;
-}
-public void setLibelle(String libelle) {
-	this.libelle = libelle;
-}
-public int getCours() {
-	return cours;
-}
-public void setCours(int cours) {
-	this.cours = cours;
-}
-public int getQuantite() {
-	return quantite;
-}
-public void setQuantite(int quantite) {
-	this.quantite = quantite;
-}
+
 public int getNum_compte() {
 	return Num_compte;
 }
@@ -79,34 +84,106 @@ public void setNum_compte(int num_compte) {
 public static long getSerialversionuid() {
 	return serialVersionUID;
 }
+
+
+
+public String getIsin() {
+	return isin;
+}
+public void setIsin(String isin) {
+	this.isin = isin;
+}
+public String getTicker() {
+	return ticker;
+}
+public void setTicker(String ticker) {
+	this.ticker = ticker;
+}
+public float getOpen() {
+	return open;
+}
+public void setOpen(float open) {
+	this.open = open;
+}
+public float getHigh() {
+	return high;
+}
+public void setHigh(float high) {
+	this.high = high;
+}
+public float getLow() {
+	return low;
+}
+public void setLow(float low) {
+	this.low = low;
+}
+public float getYield() {
+	return yield;
+}
+public void setYield(float yield) {
+	this.yield = yield;
+}
+public float getClose() {
+	return close;
+}
+public void setClose(float close) {
+	this.close = close;
+}
+public long getVolume() {
+	return volume;
+}
+public void setVolume(long volume) {
+	this.volume = volume;
+}
+public String getVariation() {
+	return variation;
+}
+public void setVariation(String variation) {
+	this.variation = variation;
+}
+
 @Override
 public String toString() {
-	return "Action [action_ID=" + action_ID + ", date=" + date + ", operation=" + operation + ", codetitre=" + codetitre
-			+ ", libelle=" + libelle + ", cours=" + cours + ", quantite=" + quantite + ", Num_compte=" + Num_compte
+	return "Action [action_ID=" + action_ID + ", date=" + date + ", operation=" + operation + ", isin=" + isin
+			+ ", ticker=" + ticker + ", open=" + open + ", high=" + high + ", low=" + low + ", yield=" + yield
+			+ ", close=" + close + ", volume=" + volume + ", variation=" + variation + ", Num_compte=" + Num_compte
 			+ "]";
 }
-public Action(int action_ID, Date date, int operation, String codetitre, String libelle, int cours, int quantite,
-		int num_compte) {
+
+public Action(int action_ID, Date date, int operation, String isin, String ticker, float open, float high, float low,
+		float yield, float close, long volume, String variation, int num_compte) {
 	super();
 	this.action_ID = action_ID;
 	this.date = date;
 	this.operation = operation;
-	this.codetitre = codetitre;
-	this.libelle = libelle;
-	this.cours = cours;
-	this.quantite = quantite;
+	this.isin = isin;
+	this.ticker = ticker;
+	this.open = open;
+	this.high = high;
+	this.low = low;
+	this.yield = yield;
+	this.close = close;
+	this.volume = volume;
+	this.variation = variation;
 	Num_compte = num_compte;
 }
-public Action(Date date, int operation, String codetitre, String libelle, int cours, int quantite, int num_compte) {
+public Action(Date date, int operation, String isin, String ticker, float open, float high, float low,
+		float yield, float close, long volume, String variation, int num_compte) {
 	super();
 	this.date = date;
 	this.operation = operation;
-	this.codetitre = codetitre;
-	this.libelle = libelle;
-	this.cours = cours;
-	this.quantite = quantite;
+	this.isin = isin;
+	this.ticker = ticker;
+	this.open = open;
+	this.high = high;
+	this.low = low;
+	this.yield = yield;
+	this.close = close;
+	this.volume = volume;
+	this.variation = variation;
 	Num_compte = num_compte;
 }
+
 public Action() {
 	super();
 }
