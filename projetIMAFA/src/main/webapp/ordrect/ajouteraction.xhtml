@@ -34,12 +34,14 @@
 									<td><h:message for="em" style="color:red" /></td>
 								</tr>
 								<tr>
-									<td><h:outputText value="ticker"></h:outputText></td>
-									<td><h:inputText id="pa" required="true"
-											requiredMessage="enter a password"
-											value="#{OrdreController.ticker}">
-											<f:validateLength for="pa" />
-										</h:inputText></td>
+									<td><h:outputText value="Ticker"></h:outputText></td>
+									<td><h:selectOneMenu id="g" required="true"
+											requiredMessage="choose a ticker"
+											value="#{OrdreController.libelled}">
+											<f:selectItem itemLabel="Select ticker"
+												itemValue="#{null}" />
+											<f:selectItems value="#{OrdreController.datalib}" />
+										</h:selectOneMenu></td>
 								</tr>
 								<tr>
 									<td><h:message for="pa" style="color:red" /></td>

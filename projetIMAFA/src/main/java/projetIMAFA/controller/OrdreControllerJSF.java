@@ -1,12 +1,14 @@
 package projetIMAFA.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.crypto.Data;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import projetIMAFA.entity.Action;
+import projetIMAFA.entity.Data_action;
 import projetIMAFA.entity.Ordre;
 import projetIMAFA.entity.TypeOrdre;
 import projetIMAFA.entity.TypeProduitFin;
 import projetIMAFA.service.IActionService;
+import projetIMAFA.service.IDataService;
 import projetIMAFA.service.IObligationService;
 import projetIMAFA.service.IOrdreService;
 import projetIMAFA.service.ISicavService;
+
 
 @Transactional
 @Scope(value = "session")
@@ -39,6 +44,9 @@ public class OrdreControllerJSF {
 
 	@Autowired
 	IObligationService obligationService;
+	
+	@Autowired
+	IDataService dataService;
 	
 	@Autowired
 	ISicavService sicavService;
@@ -60,6 +68,16 @@ public class OrdreControllerJSF {
 	private float close;
 	private long volume;
 	private String variation;
+	
+	/** data_action **/	
+	private Date dated;
+	private float opend;
+	private float highd;
+	private float lowd;
+	private float closed;
+	private long volumed;	
+	private String libelled;	
+	private List<String> datalib;
 	
 	public String addaction()
 	{
@@ -230,6 +248,79 @@ public class OrdreControllerJSF {
 
 	public void setVariation(String variation) {
 		this.variation = variation;
+	}
+
+	public IDataService getDataService() {
+		return dataService;
+	}
+
+	public void setDataService(IDataService dataService) {
+		this.dataService = dataService;
+	}
+
+	public Date getDated() {
+		return dated;
+	}
+
+	public void setDated(Date dated) {
+		this.dated = dated;
+	}
+
+	public float getOpend() {
+		return opend;
+	}
+
+	public void setOpend(float opend) {
+		this.opend = opend;
+	}
+
+	public float getHighd() {
+		return highd;
+	}
+
+	public void setHighd(float highd) {
+		this.highd = highd;
+	}
+
+	public float getLowd() {
+		return lowd;
+	}
+
+	public void setLowd(float lowd) {
+		this.lowd = lowd;
+	}
+
+	public float getClosed() {
+		return closed;
+	}
+
+	public void setClosed(float closed) {
+		this.closed = closed;
+	}
+
+	public long getVolumed() {
+		return volumed;
+	}
+
+	public void setVolumed(long volumed) {
+		this.volumed = volumed;
+	}
+
+	public String getLibelled() {
+		return libelled;
+	}
+
+	public void setLibelled(String libelled) {
+		this.libelled = libelled;
+	}
+
+	public List<String> getDatalib() {
+		datalib = dataService.afflib();
+		return datalib;
+	}
+
+	public void setDatalib(List<String> datalib) {
+		this.datalib = datalib;
 	}
 	
 
