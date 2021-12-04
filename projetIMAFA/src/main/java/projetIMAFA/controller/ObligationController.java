@@ -52,6 +52,8 @@ public class ObligationController {
 	return obligation;
 	}
 	
+	//vvvvvvvvv
+	
 	@DeleteMapping("/remove-obligation/{obligation-id}")
 	@ResponseBody
 	public void removeobligation(@PathVariable("obligation-id") String obligationId) {
@@ -70,6 +72,6 @@ public class ObligationController {
 	return obligationService.retrieveObligationsByNomentreprise(nom);
 	}
 		
-
+//ccccccccccccc
 	
 	}
