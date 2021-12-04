@@ -2,6 +2,7 @@ package projetIMAFA.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -14,13 +15,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import projetIMAFA.repo.OrdreRepository;
 import projetIMAFA.entity.Action;
+import projetIMAFA.entity.CompteTitre;
 import projetIMAFA.entity.Obligation;
 import projetIMAFA.entity.Ordre;
 import projetIMAFA.entity.Sicav;
 import projetIMAFA.entity.TypeOrdre;
 import projetIMAFA.entity.TypeProduitFin;
 import projetIMAFA.repo.ActionRepository;
+import projetIMAFA.repo.CompteTitreRepository;
 import projetIMAFA.repo.SicavRepository;
+import projetIMAFA.service.ComptetitreService;
 import projetIMAFA.service.IActionService;
 import projetIMAFA.service.IObligationService;
 import projetIMAFA.service.IOrdreService;
@@ -32,8 +36,9 @@ import projetIMAFA.repo.ObligationRepository;
 public class OrdreController {
 	@Autowired
 	IOrdreService ordreService ;
-	/*@Autowired
-	CompteTitreRepository compteTitreRepository;*/
+	
+	@Autowired
+	ComptetitreService compteTitreRepository;
 	
 	@Autowired
 	IActionService actionService;
@@ -52,22 +57,26 @@ public class OrdreController {
 	Date today = new Date();
 	ordre.setDateOrdre(today);
 	ordre.setIdpf(u.getAction_ID());
+	CompteTitre compteTitre = compteTitreRepository.retrieveComptetitre(u.getNum_compte());
+	ordre.setCompteTitre(compteTitre);
 	if(u.getOperation()==1)
 	{
 	ordre.setType(TypeOrdre.Achat);
+	ordre.setTypepf(TypeProduitFin.Action);
+	ordreService.addOrdre(ordre);
 	float s = ordre.getCompteTitre().getSolde();
-	s=s-u.getVolume()*u.getClose();
+    s=s-u.getVolume()*u.getClose();
+	ordre.getCompteTitre().setSolde(s);
 	
 	}
 	else{
-	ordre.setType(TypeOrdre.Vente);	
-	float s = ordre.getCompteTitre().getSolde();
-	s=s+u.getVolume()*u.getClose();
-	}
+	ordre.setType(TypeOrdre.Vente);
 	ordre.setTypepf(TypeProduitFin.Action);
 	ordreService.addOrdre(ordre);
-	
-
+	float s = ordre.getCompteTitre().getSolde();
+	s=s+u.getVolume()*u.getClose();
+	ordre.getCompteTitre().setSolde(s);
+	}
 	return Action;
 	}
 	

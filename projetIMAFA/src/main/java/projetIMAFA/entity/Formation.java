@@ -37,7 +37,7 @@ public class Formation {
 	
 	
 	@ManyToOne
-    private ResponsableRH responsablerh;
+    private Utilisateur responsablerh;
 
 
 	public int getId() {
@@ -110,12 +110,12 @@ public class Formation {
 	}
 
 
-	public ResponsableRH getResponsablerh() {
+	public Utilisateur getResponsablerh() {
 		return responsablerh;
 	}
 
 
-	public void setResponsablerh(ResponsableRH responsablerh) {
+	public void setResponsablerh(Utilisateur responsablerh) {
 		this.responsablerh = responsablerh;
 	}
 
