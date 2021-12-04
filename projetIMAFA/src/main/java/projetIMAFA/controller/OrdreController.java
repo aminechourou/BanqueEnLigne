@@ -35,233 +35,208 @@ import projetIMAFA.repo.ObligationRepository;
 
 @Controller
 public class OrdreController {
-	@Autowired
-	IOrdreService ordreService ;
+@Autowired
+IOrdreService ordreService ;
 
-	/*@Autowired
-	CompteTitreRepository compteTitreRepository;*/
-
-
-	
-	@Autowired
-	ComptetitreService compteTitreRepository;
-	
-
-	@Autowired
-	IActionService actionService;
-
-	@Autowired
-	IObligationService obligationService;
-
-	@Autowired
-	ISicavService sicavService;
-	
-	@Autowired
-	CompteTitreRepository compteTitreRepository;
-
-	@PostMapping("/add-Action")
-	@ResponseBody
-	public Action addAction(@RequestBody Action u) {
-
-		Action Action = actionService.addAction(u);
-		Ordre ordre = new Ordre();
-		Date today = new Date();
-		ordre.setDateOrdre(today);
-		ordre.setIdpf(u.getAction_ID());
-		if(u.getOperation()==1)
-		{
-			ordre.setType(TypeOrdre.Achat);
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s-u.getVolume()*u.getClose();
-
-		}
-		else{
-			ordre.setType(TypeOrdre.Vente);	
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s+u.getVolume()*u.getClose();
-		}
-		ordre.setTypepf(TypeProduitFin.Action);
-		ordreService.addOrdre(ordre);
-
-
-		return Action;
-	}
+/*@Autowired
+CompteTitreRepository compteTitreRepository;*/
 
 
 
-	/// add obligation
-
-	@PostMapping("/add-Obligation")
-	@ResponseBody
-	public Obligation addObligation(@RequestBody Obligation u) {
-		Obligation Obligation = obligationService.addObligation(u);
-		Ordre ordre = new Ordre();
-		Date today = new Date();
-		ordre.setDateOrdre(today);
-		ordre.setIdpf(u.getObligation_ID());
-		if(u.getOperation()==1)
-		{
-			ordre.setType(TypeOrdre.Achat);
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s-u.getVolume()*u.getClose();
-
-		}
-		else{
-			ordre.setType(TypeOrdre.Vente);	
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s+u.getVolume()*u.getClose();
-		}
-		ordre.setTypepf(TypeProduitFin.Obligation);
-		ordreService.addOrdre(ordre);
+@Autowired
+ComptetitreService compteTitreRepository;
 
 
-		return Obligation;
-	}
+@Autowired
+IActionService actionService;
+
+@Autowired
+IObligationService obligationService;
+
+@Autowired
+ISicavService sicavService;
+
+//@Autowired
+//CompteTitreRepository compteTitreRepository;
+
+@PostMapping("/add-Action")
+@ResponseBody
+public Action addAction(@RequestBody Action u) {
+
+Action Action = actionService.addAction(u);
+Ordre ordre = new Ordre();
+Date today = new Date();
+ordre.setDateOrdre(today);
+ordre.setIdpf(u.getAction_ID());
+if(u.getOperation()==1)
+{
+ordre.setType(TypeOrdre.Achat);
+//float s = ordre.getCompteTitre().getSolde();
+//s=s-u.getVolume()*u.getClose();
+
+}
+else{
+ordre.setType(TypeOrdre.Vente);
+//float s = ordre.getCompteTitre().getSolde();
+//s=s+u.getVolume()*u.getClose();
+}
+ordre.setTypepf(TypeProduitFin.Action);
+ordreService.addOrdre(ordre);
 
 
-	////sicavv
-	@PostMapping("/add-Sicav")
-	@ResponseBody
-	public Sicav addSicav(@RequestBody Sicav u) {
-		Sicav Sicav = sicavService.addSicav(u);
-		Ordre ordre = new Ordre();
-		Date today = new Date();
-		ordre.setDateOrdre(today);
-		ordre.setIdpf(u.getSicav_ID());
-		if(u.getOperation()==1)
-		{
-			ordre.setType(TypeOrdre.Achat);
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s-u.getVolume()*u.getClose();
-
-		}
-		else{
-			ordre.setType(TypeOrdre.Vente);	
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s+u.getVolume()*u.getClose();
-		}
-		ordre.setTypepf(TypeProduitFin.Sicav);
-		ordreService.addOrdre(ordre);
-
-
-		return Sicav;
-
-	Action Action = actionService.addAction(u);
-	Ordre ordre = new Ordre();
-	Date today = new Date();
-	ordre.setDateOrdre(today);
-	ordre.setIdpf(u.getAction_ID());
-	CompteTitre compteTitre = compteTitreRepository.retrieveComptetitre(u.getNum_compte());
-	ordre.setCompteTitre(compteTitre);
-	if(u.getOperation()==1)
-	{
-	ordre.setType(TypeOrdre.Achat);
-	ordre.setTypepf(TypeProduitFin.Action);
-	ordreService.addOrdre(ordre);
-	float s = ordre.getCompteTitre().getSolde();
-    s=s-u.getVolume()*u.getClose();
-	ordre.getCompteTitre().setSolde(s);
-	
-	}
-	else{
-	ordre.setType(TypeOrdre.Vente);
-	ordre.setTypepf(TypeProduitFin.Action);
-	ordreService.addOrdre(ordre);
-	float s = ordre.getCompteTitre().getSolde();
-	s=s+u.getVolume()*u.getClose();
-	ordre.getCompteTitre().setSolde(s);
-	}
-	return Action;
-	}
-	
-	@GetMapping("/Action")
-	public List<Action> getAllActions() {
-		List<Action> list = actionService.retrieveAllActions();
-		return list;
-	}
+return Action;
+}
 
 
 
-	@GetMapping("/Obligation")
-	public List<Obligation> getAllObligations() {
-		List<Obligation> list = obligationService.retrieveAllObligations();
-		return list;
-	}
+/// add obligation
 
-	@GetMapping("/Sicav")
-	public List<Sicav> getAllSicavs() {
-		List<Sicav> list = sicavService.retrieveAllSicavs();
-		return list;
-	}
+@PostMapping("/add-Obligation")
+@ResponseBody
+public Obligation addObligation(@RequestBody Obligation u) {
+Obligation Obligation = obligationService.addObligation(u);
+Ordre ordre = new Ordre();
+Date today = new Date();
+ordre.setDateOrdre(today);
+ordre.setIdpf(u.getObligation_ID());
+if(u.getOperation()==1)
+{
+ordre.setType(TypeOrdre.Achat);
+//float s = ordre.getCompteTitre().getSolde();
+//s=s-u.getVolume()*u.getClose();
 
-	@GetMapping("/Ordre")
-	public List<Ordre> getAllOrdre() {
-		List<Ordre> list = ordreService.retrieveAllOrdres();
-		return list;
-	}
-	
-	@GetMapping("/test/{idClient}")
-	public CompteTitre getIdCompteTitre(@PathVariable(value = "idClient")Integer idClient) {
+}
+else{
+ordre.setType(TypeOrdre.Vente);
+//float s = ordre.getCompteTitre().getSolde();
+//s=s+u.getVolume()*u.getClose();
+}
+ordre.setTypepf(TypeProduitFin.Obligation);
+ordreService.addOrdre(ordre);
 
-	return compteTitreRepository.getIdCompteTitre(idClient);
 
-	}
-	/*	
-	@PostMapping("/addOrdre")
-	public Ordre ajouterOrdre(@Valid @RequestBody Ordre ordre) {
+return Obligation;
+}
 
-		Date today = new Date();
-		ordre.setDateOrdre(today);
-		ordeRepository.save(ordre);
-		return ordre;
 
-	}
+////sicavv
+@PostMapping("/add-Sicav")
+@ResponseBody
+public Sicav addSicav(@RequestBody Sicav u) {
+Sicav Sicav = sicavService.addSicav(u);
+Ordre ordre = new Ordre();
+Date today = new Date();
+ordre.setDateOrdre(today);
+ordre.setIdpf(u.getSicav_ID());
+if(u.getOperation()==1)
+{
+ordre.setType(TypeOrdre.Achat);
+//float s = ordre.getCompteTitre().getSolde();
+//s=s-u.getVolume()*u.getClose();
 
-//	
-//	@PostMapping("/add/{idAction}/{tOrdre}/{idClient}")
-//	public Ordre ajouterOrdreAction(@PathVariable(value = "idAction") int idAction ,@PathVariable(value ="tOrdre") TypeOrdre tOrdre,
-//			@PathVariable(value = "idClient")int idClient) {
-//		
-//		Ordre ordre = new Ordre();
-//		Date today = new Date();
-//		ordre.setDateOrdre(today);
-//		ordre.setCompteTitre(compteTitreRepository.getIdCompteTitre(idClient));
-//		ordre.setIdpf(idAction);
-//		ordre.setType(tOrdre);
-//		ordre.setTypepf(TypeProduitFin.Action);
-//		ordeRepository.save(ordre);
-//		return ordre;
-//		
-//	}
-//	@PostMapping("/add/{idObligation}/{tOrdre}/{idClient}")
-//	public Ordre ajouterOrdreObligation(@PathVariable(value = "idObligation") int idObligation ,@PathVariable(value ="tOrdre") TypeOrdre tOrdre,
-//			@PathVariable(value = "idClient")int idClient) {
-//		
-//		Ordre ordre = new Ordre();
-//		Date today = new Date();
-//		ordre.setDateOrdre(today);
-//		ordre.setCompteTitre(compteTitreRepository.getIdCompteTitre(idClient));
-//		ordre.setIdpf(idObligation);
-//		ordre.setType(tOrdre);
-//		ordre.setTypepf(TypeProduitFin.Obligation);
-//		ordeRepository.save(ordre);
-//		return ordre;
-//		
-//	}
-//	
-//	@PostMapping("/add/{idSicav}/{tOrdre}/{idClient}")
-//	public Ordre ajouterOrdreSicav(@PathVariable(value = "idSicav") int idSicav ,@PathVariable(value ="tOrdre") TypeOrdre tOrdre,
-//			@PathVariable(value = "idClient")int idClient) {
-//		Ordre ordre = new Ordre();
-//		Date today = new Date();
-//		ordre.setDateOrdre(today);
-//		ordre.setCompteTitre(compteTitreRepository.getIdCompteTitre(idClient));
-//		ordre.setIdpf(idSicav);
-//		ordre.setType(tOrdre);
-//		ordre.setTypepf(TypeProduitFin.Sicav);
-//		ordeRepository.save(ordre);
-//		return ordre;
-//		
-//	}*/
-	//
+}
+else{
+ordre.setType(TypeOrdre.Vente);
+//float s = ordre.getCompteTitre().getSolde();
+//s=s+u.getVolume()*u.getClose();
+}
+ordre.setTypepf(TypeProduitFin.Sicav);
+ordreService.addOrdre(ordre);
+
+
+return Sicav;
+}
+
+
+@GetMapping("/Action")
+public List<Action> getAllActions() {
+List<Action> list = actionService.retrieveAllActions();
+return list;
+}
+
+
+
+@GetMapping("/Obligation")
+public List<Obligation> getAllObligations() {
+List<Obligation> list = obligationService.retrieveAllObligations();
+return list;
+}
+
+@GetMapping("/Sicav")
+public List<Sicav> getAllSicavs() {
+List<Sicav> list = sicavService.retrieveAllSicavs();
+return list;
+}
+
+@GetMapping("/Ordre")
+public List<Ordre> getAllOrdre() {
+List<Ordre> list = ordreService.retrieveAllOrdres();
+return list;
+}
+
+
+/*
+@PostMapping("/addOrdre")
+public Ordre ajouterOrdre(@Valid @RequestBody Ordre ordre) {
+
+Date today = new Date();
+ordre.setDateOrdre(today);
+ordeRepository.save(ordre);
+return ordre;
+
+}
+@GetMapping("/test/{idClient}")
+public CompteTitre getIdCompteTitre(@PathVariable(value = "idClient")Integer idClient) {
+
+return compteTitreRepository.getIdCompteTitre(idClient);
+
+}
+
+//
+// @PostMapping("/add/{idAction}/{tOrdre}/{idClient}")
+// public Ordre ajouterOrdreAction(@PathVariable(value = "idAction") int idAction ,@PathVariable(value ="tOrdre") TypeOrdre tOrdre,
+// @PathVariable(value = "idClient")int idClient) {
+//
+// Ordre ordre = new Ordre();
+// Date today = new Date();
+// ordre.setDateOrdre(today);
+// ordre.setCompteTitre(compteTitreRepository.getIdCompteTitre(idClient));
+// ordre.setIdpf(idAction);
+// ordre.setType(tOrdre);
+// ordre.setTypepf(TypeProduitFin.Action);
+// ordeRepository.save(ordre);
+// return ordre;
+//
+// }
+// @PostMapping("/add/{idObligation}/{tOrdre}/{idClient}")
+// public Ordre ajouterOrdreObligation(@PathVariable(value = "idObligation") int idObligation ,@PathVariable(value ="tOrdre") TypeOrdre tOrdre,
+// @PathVariable(value = "idClient")int idClient) {
+//
+// Ordre ordre = new Ordre();
+// Date today = new Date();
+// ordre.setDateOrdre(today);
+// ordre.setCompteTitre(compteTitreRepository.getIdCompteTitre(idClient));
+// ordre.setIdpf(idObligation);
+// ordre.setType(tOrdre);
+// ordre.setTypepf(TypeProduitFin.Obligation);
+// ordeRepository.save(ordre);
+// return ordre;
+//
+// }
+//
+// @PostMapping("/add/{idSicav}/{tOrdre}/{idClient}")
+// public Ordre ajouterOrdreSicav(@PathVariable(value = "idSicav") int idSicav ,@PathVariable(value ="tOrdre") TypeOrdre tOrdre,
+// @PathVariable(value = "idClient")int idClient) {
+// Ordre ordre = new Ordre();
+// Date today = new Date();
+// ordre.setDateOrdre(today);
+// ordre.setCompteTitre(compteTitreRepository.getIdCompteTitre(idClient));
+// ordre.setIdpf(idSicav);
+// ordre.setType(tOrdre);
+// ordre.setTypepf(TypeProduitFin.Sicav);
+// ordeRepository.save(ordre);
+// return ordre;
+//
+// }*/
+//
 }

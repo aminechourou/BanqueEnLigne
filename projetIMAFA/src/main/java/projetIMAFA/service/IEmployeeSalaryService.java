@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package projetIMAFA.service;
 
 import java.util.List;
@@ -16,3 +17,24 @@ public interface IEmployeeSalaryService {
 	void affecterSalaryToUser(int idp, int id);
 	List<?> BestEmployee();
 }
+=======
+package projetIMAFA.service;
+/*
+import java.util.List;
+
+import projetIMAFA.entity.EmployeeSalary;
+
+public interface IEmployeeSalaryService {
+
+	List<EmployeeSalary> retrieveAllSalaries();
+	EmployeeSalary addSalary(EmployeeSalary s) ;
+	void deleteSalary(String id);
+	EmployeeSalary updateSalary(EmployeeSalary s);
+	EmployeeSalary retrieveSalary(String id) ;
+	List<EmployeeSalary> fichedepaie(int User_ID);
+	public int salary();
+	void affecterSalaryToUser(int idp, int id);
+	List<?> BestEmployee();
+}
+*/
+>>>>>>> branch 'master' of https://github.com/aminechourou/BanqueEnLigne.git
