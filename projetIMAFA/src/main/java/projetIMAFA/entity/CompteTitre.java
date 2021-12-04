@@ -40,15 +40,6 @@ public class CompteTitre {
 	@Column(name="rib")
 	private String rib;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	List<Obligation> obligations;
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-	List<Sicav> sicavs;
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-	List<Action> actions;
-	
 	@ManyToOne
 	Utilisateur utilisateur;
 	
@@ -72,32 +63,6 @@ public class CompteTitre {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
-	}
-
-	public List<Sicav> getSicavs() {
-		return sicavs;
-	}
-
-	public void setSicavs(List<Sicav> sicavs) {
-		this.sicavs = sicavs;
-	}
-	
-	
-
-	public List<Action> getActions() {
-		return actions;
-	}
-
-	public void setActions(List<Action> actions) {
-		this.actions = actions;
-	}
-
-	public List<Obligation> getObligations() {
-		return obligations;
-	}
-
-	public void setObligations(List<Obligation> obligations) {
-		this.obligations = obligations;
 	}
 
 	public int getId() {
