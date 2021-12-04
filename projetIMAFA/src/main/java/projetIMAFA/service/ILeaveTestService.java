@@ -1,10 +1,10 @@
 package projetIMAFA.service;
-/*
+
 import java.util.List;
 
-import tn.esprit.spring.entity.LeaveTest;
-import tn.esprit.spring.entity.Leave_reason;
-import tn.esprit.spring.entity.Type_Leave;
+import projetIMAFA.entity.LeaveTest;
+import projetIMAFA.entity.Leave_reason;
+import projetIMAFA.entity.Type_Leave;
 
 public interface ILeaveTestService {
 	List<LeaveTest> retrieveAllLeaves();
@@ -22,4 +22,3 @@ public interface ILeaveTestService {
 	
 	
 }
-*/

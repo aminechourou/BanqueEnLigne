@@ -1,4 +1,4 @@
-/*package projetIMAFA.repo;
+package projetIMAFA.repo;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import tn.esprit.onlinebank.model.CompteTitre;
+import projetIMAFA.entity.CompteTitre;
 
 @Repository
 public interface CompteTitreRepository extends JpaRepository<CompteTitre, Integer> {
@@ -22,4 +22,3 @@ public interface CompteTitreRepository extends JpaRepository<CompteTitre, Intege
 	CompteTitre getIdCompteTitre(@Param("idClient") Integer idClient);
 
 }
-*/

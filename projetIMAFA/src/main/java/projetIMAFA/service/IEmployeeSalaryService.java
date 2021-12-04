@@ -2,7 +2,7 @@ package projetIMAFA.service;
 /*
 import java.util.List;
 
-import tn.esprit.spring.entity.EmployeeSalary;
+import projetIMAFA.entity.EmployeeSalary;
 
 public interface IEmployeeSalaryService {
 

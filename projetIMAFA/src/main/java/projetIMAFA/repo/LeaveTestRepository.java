@@ -1,4 +1,4 @@
-/*package projetIMAFA.repo;
+package projetIMAFA.repo;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import projetIMAFA.service.*;
+import projetIMAFA.entity.LeaveTest;
 import projetIMAFA.entity.Leave_reason;
 import projetIMAFA.entity.Type_Leave;
 
@@ -32,4 +33,3 @@ public interface LeaveTestRepository extends CrudRepository<LeaveTest,Integer>{
 	@Query("select count (u) , YEAR(u.Start_date) , MONTH(u.Start_date) from LeaveTest u group by YEAR(u.Start_date), MONTH(u.Start_date) ")
 	public List<?> statmonthh();
 }
-*/

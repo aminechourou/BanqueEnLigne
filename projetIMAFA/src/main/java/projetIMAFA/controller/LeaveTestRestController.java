@@ -1,5 +1,5 @@
 package projetIMAFA.controller;
-/*
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +26,17 @@ public class LeaveTestRestController {
 	@Autowired
 	ILeaveTestService leaveTestService;
 
-	@Autowired
+	/*@Autowired
 	TwillioService twillioService;
-	
+	*/
 	@Autowired
 	UserService userService;
 	
-	@Value("${app.twillio.fromPhoneNo}")
+	/*@Value("${app.twillio.fromPhoneNo}")
 	private String from;
 
 	@Value("${app.twillio.toPhoneNo}")
-	private String to;
+	private String to;*/
 
 
 	@GetMapping("/leaves")
@@ -104,7 +104,7 @@ public class LeaveTestRestController {
 	public void affecterUserToLeave(@PathVariable("Leave_ID") int idl,@PathVariable("User_ID") int id) {
 		leaveTestService.affecterUserALeave(idl, id);
 		String body = "\n" + "The employee whose id =" +id+ "took a leave.";
-		twillioService.sendSms(to, from, body);
+		//twillioService.sendSms(to, from, body);
 	}
 	
 	@PostMapping("/duration")
@@ -126,4 +126,4 @@ public class LeaveTestRestController {
 		return leaveTestService.statmonthh();
 
 	}
-}*/
+}

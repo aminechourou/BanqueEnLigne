@@ -1,5 +1,5 @@
 package projetIMAFA.service;
-/*import java.util.List;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +55,7 @@ public class LeaveTestServiceImpl implements ILeaveTestService{
 			
 				l.info("in retrieveLeave id= "+id);
 				LeaveTest l = leaveTestRepository.findById(Integer.parseInt(id)).orElse(null);
-				l.info("Leave returned : "+l);
+				//l.info("Leave returned : "+l);
 				return l;
 				
 			}
@@ -111,4 +111,3 @@ public class LeaveTestServiceImpl implements ILeaveTestService{
 
 	}
 
-*/

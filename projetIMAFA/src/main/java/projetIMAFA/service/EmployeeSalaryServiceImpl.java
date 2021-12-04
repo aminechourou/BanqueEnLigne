@@ -1,27 +1,26 @@
 package projetIMAFA.service;
-
-/*import java.io.IOException;
+/*
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
-import javax.servlet.http.HttpServletResponse;*/
-
-/*import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;*/
-/*import org.apache.logging.log4j.LogManager;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;*/
+import org.springframework.util.ObjectUtils;
 
-/*import tn.esprit.spring.entity.Payment;*/
-/*import projetIMAFA.entity.*;
+import tn.esprit.spring.entity.Payment;
+import projetIMAFA.entity.*;
 import projetIMAFA.repo.EmployeeSalaryRepository;
 import projetIMAFA.repo.UserRepository;
-*/
+
 	
-	/*@Service
+	@Service
 	public class EmployeeSalaryServiceImpl implements IEmployeeSalaryService{
 		@Autowired
 		EmployeeSalaryRepository salaryRepository;
@@ -64,9 +63,10 @@ import projetIMAFA.repo.UserRepository;
 			return s;
 	
 		}
-		*/
+		
+		
 
-	/*	@Override
+		@Override
 		public List<EmployeeSalary> fichedepaie(int User_ID) {
 			 List<EmployeeSalary> fiches =salaryRepository.fichedepaie(User_ID);
 				return fiches;
@@ -117,6 +117,12 @@ import projetIMAFA.repo.UserRepository;
 		 return salaryRepository.BestEmployee();
 
 		 }
+
+		@Override
+		public List<EmployeeSalary> fichedepaie(int User_ID) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 
 	}
 	

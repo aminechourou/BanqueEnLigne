@@ -27,12 +27,11 @@ import projetIMAFA.entity.LeaveTest;
 import projetIMAFA.entity.Type_Leave;
 import projetIMAFA.service.EmployeeSalaryServiceImpl;
 import projetIMAFA.service.IEmployeeSalaryService;
-import projetIMAFA.service.ILeaveTestService;
-
 @RestController
 public class EmployeeSalaryRestController {
 		@Autowired
 		IEmployeeSalaryService salaryService;
+		@Autowired
 		EmployeeSalaryServiceImpl salaryServicee;
 		@GetMapping("/salaries")
 		@ResponseBody
@@ -89,7 +88,7 @@ public class EmployeeSalaryRestController {
 		return salaryService.BestEmployee();
 
 		}
-		
+	/*	
 		@GetMapping("/pdf-fiche")
 		public void FichedepaiePdf(HttpServletResponse response) throws DocumentException, IOException {
 		    response.setContentType("application/pdf");
