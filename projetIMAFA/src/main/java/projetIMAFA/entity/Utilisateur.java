@@ -2,6 +2,7 @@ package projetIMAFA.entity;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 
@@ -39,6 +41,19 @@ public class Utilisateur implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	
+	@OneToMany
+    private List<Formation> formations;
+	
+	
+	
+	public List<Formation> getFormations() {
+		return formations;
+	}
+
+	public void setFormations(List<Formation> formations) {
+		this.formations = formations;
+	}
 
 	public int getId() {
 		return id;

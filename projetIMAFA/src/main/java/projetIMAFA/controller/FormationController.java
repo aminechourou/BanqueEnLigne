@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import projetIMAFA.Exception.ResourceNotFoundException;
@@ -26,14 +27,14 @@ import projetIMAFA.repo.FormationRepository;
 
 
 @Controller
-@RequestMapping("/formation")
 public class FormationController {
 
 	@Autowired
 	FormationRepository formationRepository;
 	
 
-	@GetMapping("/all")
+	@GetMapping("/allf")
+	@ResponseBody
 	public List<Formation> getAllFormation() {
 		return formationRepository.findAll();
 	}

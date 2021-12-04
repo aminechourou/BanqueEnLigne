@@ -2,6 +2,7 @@ package projetIMAFA.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -24,6 +25,7 @@ import projetIMAFA.entity.TypeProduitFin;
 import projetIMAFA.repo.ActionRepository;
 import projetIMAFA.repo.CompteTitreRepository;
 import projetIMAFA.repo.SicavRepository;
+import projetIMAFA.service.ComptetitreService;
 import projetIMAFA.service.IActionService;
 import projetIMAFA.service.IObligationService;
 import projetIMAFA.service.IOrdreService;
@@ -35,8 +37,15 @@ import projetIMAFA.repo.ObligationRepository;
 public class OrdreController {
 	@Autowired
 	IOrdreService ordreService ;
+
 	/*@Autowired
 	CompteTitreRepository compteTitreRepository;*/
+
+
+	
+	@Autowired
+	ComptetitreService compteTitreRepository;
+	
 
 	@Autowired
 	IActionService actionService;
@@ -53,6 +62,7 @@ public class OrdreController {
 	@PostMapping("/add-Action")
 	@ResponseBody
 	public Action addAction(@RequestBody Action u) {
+
 		Action Action = actionService.addAction(u);
 		Ordre ordre = new Ordre();
 		Date today = new Date();
@@ -135,6 +145,33 @@ public class OrdreController {
 
 
 		return Sicav;
+
+	Action Action = actionService.addAction(u);
+	Ordre ordre = new Ordre();
+	Date today = new Date();
+	ordre.setDateOrdre(today);
+	ordre.setIdpf(u.getAction_ID());
+	CompteTitre compteTitre = compteTitreRepository.retrieveComptetitre(u.getNum_compte());
+	ordre.setCompteTitre(compteTitre);
+	if(u.getOperation()==1)
+	{
+	ordre.setType(TypeOrdre.Achat);
+	ordre.setTypepf(TypeProduitFin.Action);
+	ordreService.addOrdre(ordre);
+	float s = ordre.getCompteTitre().getSolde();
+    s=s-u.getVolume()*u.getClose();
+	ordre.getCompteTitre().setSolde(s);
+	
+	}
+	else{
+	ordre.setType(TypeOrdre.Vente);
+	ordre.setTypepf(TypeProduitFin.Action);
+	ordreService.addOrdre(ordre);
+	float s = ordre.getCompteTitre().getSolde();
+	s=s+u.getVolume()*u.getClose();
+	ordre.getCompteTitre().setSolde(s);
+	}
+	return Action;
 	}
 	
 	@GetMapping("/Action")

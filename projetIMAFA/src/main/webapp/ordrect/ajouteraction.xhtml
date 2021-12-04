@@ -207,8 +207,19 @@ button.ui-button {
 			</td>
 		</tr>
 		
-		<tr>
-		
+		<tr>	
+			<td><h:outputText value="Ticker" style="font-weight:bold"></h:outputText></td>
+			<td>
+			<h5 class="p-mt-0"></h5>
+   <p:selectOneMenu required="true" effect="fold" editable="true"
+											value="#{OrdreController.libelled}">
+											<f:selectItem itemLabel="Select ticker"
+												itemValue="" />
+											<f:selectItems value="#{OrdreController.datalib}" />
+										</p:selectOneMenu>
+			</td>
+		</tr>
+		<tr>	
 			<td><h:outputText value="Ticker" style="font-weight:bold"></h:outputText></td>
 			<td>
 			<h5 class="p-mt-0"></h5>
@@ -237,6 +248,34 @@ button.ui-button {
         <p:inputText widgetVar="editor1" value="#{OrdreController.high}" height="100" secure='false' />
 			</td>
 		</tr>
+		<tr>
+			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
+			
+			<td>
+				<h5 class="p-mt-0"></h5>	
+			
+        <p:inputText widgetVar="editor1" value="#{OrdreController.high}" height="100" secure='false' />
+			</td>
+		</tr>
+		<tr>
+			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
+			
+			<td>
+				<h5 class="p-mt-0"></h5>	
+			
+        <p:inputText widgetVar="editor1" value="#{OrdreController.high}" height="100" secure='false' />
+			</td>
+		</tr>
+		<tr>
+			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
+			
+			<td>
+				<h5 class="p-mt-0"></h5>	
+			
+        <p:inputText widgetVar="editor1" value="#{OrdreController.high}" height="100" secure='false' />
+			</td>
+		</tr>
+		
 	</table>
 	<br />
 	<br />
