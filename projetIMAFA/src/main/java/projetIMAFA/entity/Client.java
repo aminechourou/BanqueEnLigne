@@ -20,7 +20,7 @@ public class Client extends Utilisateur {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+//hello hello
 	@Column(name="cin")
 	private String cin;
 	
