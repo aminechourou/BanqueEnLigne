@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,115 +36,22 @@ import projetIMAFA.repo.ObligationRepository;
 public class OrdreController {
 	@Autowired
 	IOrdreService ordreService ;
-
-	/*@Autowired
-	CompteTitreRepository compteTitreRepository;*/
-
-
 	
 	@Autowired
 	ComptetitreService compteTitreRepository;
 	
-
 	@Autowired
 	IActionService actionService;
 
 	@Autowired
 	IObligationService obligationService;
-
+	
 	@Autowired
 	ISicavService sicavService;
 	
-	@Autowired
-	CompteTitreRepository compteTitreRepository;
-
 	@PostMapping("/add-Action")
 	@ResponseBody
 	public Action addAction(@RequestBody Action u) {
-
-		Action Action = actionService.addAction(u);
-		Ordre ordre = new Ordre();
-		Date today = new Date();
-		ordre.setDateOrdre(today);
-		ordre.setIdpf(u.getAction_ID());
-		if(u.getOperation()==1)
-		{
-			ordre.setType(TypeOrdre.Achat);
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s-u.getVolume()*u.getClose();
-
-		}
-		else{
-			ordre.setType(TypeOrdre.Vente);	
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s+u.getVolume()*u.getClose();
-		}
-		ordre.setTypepf(TypeProduitFin.Action);
-		ordreService.addOrdre(ordre);
-
-
-		return Action;
-	}
-
-
-
-	/// add obligation
-
-	@PostMapping("/add-Obligation")
-	@ResponseBody
-	public Obligation addObligation(@RequestBody Obligation u) {
-		Obligation Obligation = obligationService.addObligation(u);
-		Ordre ordre = new Ordre();
-		Date today = new Date();
-		ordre.setDateOrdre(today);
-		ordre.setIdpf(u.getObligation_ID());
-		if(u.getOperation()==1)
-		{
-			ordre.setType(TypeOrdre.Achat);
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s-u.getVolume()*u.getClose();
-
-		}
-		else{
-			ordre.setType(TypeOrdre.Vente);	
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s+u.getVolume()*u.getClose();
-		}
-		ordre.setTypepf(TypeProduitFin.Obligation);
-		ordreService.addOrdre(ordre);
-
-
-		return Obligation;
-	}
-
-
-	////sicavv
-	@PostMapping("/add-Sicav")
-	@ResponseBody
-	public Sicav addSicav(@RequestBody Sicav u) {
-		Sicav Sicav = sicavService.addSicav(u);
-		Ordre ordre = new Ordre();
-		Date today = new Date();
-		ordre.setDateOrdre(today);
-		ordre.setIdpf(u.getSicav_ID());
-		if(u.getOperation()==1)
-		{
-			ordre.setType(TypeOrdre.Achat);
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s-u.getVolume()*u.getClose();
-
-		}
-		else{
-			ordre.setType(TypeOrdre.Vente);	
-			//float s = ordre.getCompteTitre().getSolde();
-			//s=s+u.getVolume()*u.getClose();
-		}
-		ordre.setTypepf(TypeProduitFin.Sicav);
-		ordreService.addOrdre(ordre);
-
-
-		return Sicav;
-
 	Action Action = actionService.addAction(u);
 	Ordre ordre = new Ordre();
 	Date today = new Date();
@@ -179,44 +85,41 @@ public class OrdreController {
 		List<Action> list = actionService.retrieveAllActions();
 		return list;
 	}
-
-
-
+	
 	@GetMapping("/Obligation")
 	public List<Obligation> getAllObligations() {
 		List<Obligation> list = obligationService.retrieveAllObligations();
 		return list;
 	}
-
+	
 	@GetMapping("/Sicav")
 	public List<Sicav> getAllSicavs() {
 		List<Sicav> list = sicavService.retrieveAllSicavs();
 		return list;
 	}
-
+	
 	@GetMapping("/Ordre")
 	public List<Ordre> getAllOrdre() {
 		List<Ordre> list = ordreService.retrieveAllOrdres();
 		return list;
 	}
-	
-	@GetMapping("/test/{idClient}")
-	public CompteTitre getIdCompteTitre(@PathVariable(value = "idClient")Integer idClient) {
-
-	return compteTitreRepository.getIdCompteTitre(idClient);
-
-	}
-	/*	
+/*	
 	@PostMapping("/addOrdre")
 	public Ordre ajouterOrdre(@Valid @RequestBody Ordre ordre) {
-
+		
 		Date today = new Date();
 		ordre.setDateOrdre(today);
 		ordeRepository.save(ordre);
 		return ordre;
-
+		
 	}
-
+//	
+//	/*@GetMapping("/test/{idClient}")
+//	public CompteTitre getIdCompteTitre(@PathVariable(value = "idClient")Integer idClient) {
+//		
+//		return compteTitreRepository.getIdCompteTitre(idClient);
+//		
+//	}
 //	
 //	@PostMapping("/add/{idAction}/{tOrdre}/{idClient}")
 //	public Ordre ajouterOrdreAction(@PathVariable(value = "idAction") int idAction ,@PathVariable(value ="tOrdre") TypeOrdre tOrdre,
@@ -263,5 +166,5 @@ public class OrdreController {
 //		return ordre;
 //		
 //	}*/
-	//
+//
 }
