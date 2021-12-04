@@ -1,13 +1,13 @@
-<<<<<<< HEAD
-package projetIMAFA.service;
 
+package projetIMAFA.service;
+/*
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-/*import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;*/
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-/*import tn.esprit.spring.entity.Payment;*/
+import tn.esprit.spring.entity.Payment;
 import projetIMAFA.entity.*;
 import projetIMAFA.repo.EmployeeSalaryRepository;
 import projetIMAFA.repo.UserRepository;
@@ -92,7 +92,7 @@ import projetIMAFA.repo.UserRepository;
 			          if(csvPrinter != null)
 			              csvPrinter.close();
 			                   }
-			       */
+			       
 		
 		@Override
 		public void affecterSalaryToUser(int idp, int id) {
@@ -127,9 +127,9 @@ import projetIMAFA.repo.UserRepository;
 	}
 	
 	
-=======
+
 package projetIMAFA.service;
-/*
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -257,4 +257,4 @@ import projetIMAFA.repo.UserRepository;
 	}
 	
 	*/
->>>>>>> branch 'master' of https://github.com/aminechourou/BanqueEnLigne.git
+
