@@ -1,4 +1,4 @@
-/*package projetIMAFA.entity;
+package projetIMAFA.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -6,10 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import projetIMAFA.entity.*;
 
-public class EmployeeSalary {*/
-	/**
-	 * 
-	 *//*
+public class EmployeeSalary {
+
 	private static final long serialVersionUID = 1L;
 
 		@Id
@@ -108,4 +106,3 @@ public class EmployeeSalary {*/
 
 		
 }
-*/

@@ -68,7 +68,7 @@ public class Ordre implements Serializable {
 		this.idpf = idpf;
 	}
 
-	/*@ManyToOne
+	@ManyToOne
 	CompteTitre compteTitre;
 
 	public CompteTitre getCompteTitre() {
@@ -78,7 +78,7 @@ public class Ordre implements Serializable {
 	public void setCompteTitre(CompteTitre compteTitre) {
 		this.compteTitre = compteTitre;
 	}
-*/
+
 	public int getId() {
 		return id;
 	}

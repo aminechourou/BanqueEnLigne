@@ -1,6 +1,6 @@
 package projetIMAFA.entity;
 
-/*import java.io.Serializable;
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -21,9 +21,7 @@ import projetIMAFA.entity.User;
 
 public class LeaveTest implements Serializable{
  
-	/**
-	 * 
-	 */ /*
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -151,11 +149,10 @@ public class LeaveTest implements Serializable{
 		End_date = end_date;
 	}
 
-*/
 	/*public void info(String string) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 
 
@@ -163,4 +160,4 @@ public class LeaveTest implements Serializable{
 	
 	
 }
-*/
+

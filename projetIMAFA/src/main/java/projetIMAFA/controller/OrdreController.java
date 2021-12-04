@@ -55,12 +55,19 @@ public class OrdreController {
 	if(u.getOperation()==1)
 	{
 	ordre.setType(TypeOrdre.Achat);
+	float s = ordre.getCompteTitre().getSolde();
+	s=s-u.getVolume()*u.getClose();
+	
 	}
 	else{
 	ordre.setType(TypeOrdre.Vente);	
+	float s = ordre.getCompteTitre().getSolde();
+	s=s+u.getVolume()*u.getClose();
 	}
 	ordre.setTypepf(TypeProduitFin.Action);
 	ordreService.addOrdre(ordre);
+	
+
 	return Action;
 	}
 	
