@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import projetIMAFA.entity.Sicav;
-import projetIMAFA.entity.User;
+import projetIMAFA.entity.*;
 
 @Repository
 public interface SicavRepository extends CrudRepository<Sicav, Integer> {

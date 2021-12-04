@@ -18,7 +18,6 @@ import projetIMAFA.entity.LeaveTest;
 import projetIMAFA.entity.Leave_reason;
 import projetIMAFA.entity.Type_Leave;
 import projetIMAFA.service.ILeaveTestService;
-import projetIMAFA.service.UserService;
 import projetIMAFA.service.ILeaveTestService;
 
 @RestController
@@ -28,7 +27,7 @@ public class LeaveTestRestController {
 
 	/*@Autowired
 	TwillioService twillioService;
-	*/
+
 	@Autowired
 	UserService userService;
 	

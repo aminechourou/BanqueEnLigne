@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import projetIMAFA.entity.Action;
-import projetIMAFA.entity.User;
+import projetIMAFA.entity.*;
 
 @Repository
 public interface ActionRepository extends CrudRepository<Action, Integer> {

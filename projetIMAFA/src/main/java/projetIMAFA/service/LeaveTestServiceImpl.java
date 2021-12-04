@@ -11,7 +11,7 @@ import org.springframework.util.ObjectUtils;
 import projetIMAFA.entity.LeaveTest;
 import projetIMAFA.entity.Leave_reason;
 import projetIMAFA.entity.Type_Leave;
-import projetIMAFA.entity.User;
+import projetIMAFA.entity.*;
 import projetIMAFA.repo.LeaveTestRepository;
 import projetIMAFA.repo.UserRepository;
 
@@ -82,11 +82,11 @@ public class LeaveTestServiceImpl implements ILeaveTestService{
 			
 			@Override
 			public void affecterUserALeave(int idl, int id) {
-			LeaveTest leave = leaveTestRepository.findById(idl).get();
-			User user = userRepository.findById(id).get();
+			/*LeaveTest leave = leaveTestRepository.findById(idl).get();
+			Utilisateur user = userRepository.findById(id).get();
 			if (!ObjectUtils.isEmpty(leave) && !ObjectUtils.isEmpty(user))
 				leave.setUser(user);
-			userRepository.save(user);
+			userRepository.save(user);*/
 
 			}
 			

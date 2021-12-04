@@ -3,6 +3,7 @@ package projetIMAFA.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,17 +40,17 @@ public class CompteTitre {
 	@Column(name="rib")
 	private String rib;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	List<Obligation> obligations;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	List<Sicav> sicavs;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	List<Action> actions;
 	
 	@ManyToOne
-	Client client;
+	Utilisateur utilisateur;
 	
 	@OneToMany
 	List<Ordre> ordres;
@@ -63,12 +64,14 @@ public class CompteTitre {
 		this.ordres = ordres;
 	}
 
-	public Client getClient() {
-		return client;
+
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public List<Sicav> getSicavs() {

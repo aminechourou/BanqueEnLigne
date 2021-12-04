@@ -2,7 +2,9 @@ package projetIMAFA.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,8 +12,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 @Entity
 public class Action implements Serializable {
@@ -55,7 +59,10 @@ private long volume;
 @Column(name="variation")
 private String variation;
 /**/
-private int Num_compte;
+
+@ManyToMany(cascade = CascadeType.ALL)
+List<CompteTitre> comptestitre;
+
 public int getAction_ID() {
 	return action_ID;
 }
@@ -75,12 +82,15 @@ public void setOperation(int operation) {
 	this.operation = operation;
 }
 
-public int getNum_compte() {
-	return Num_compte;
+
+public List<CompteTitre> getComptestitre() {
+	return comptestitre;
 }
-public void setNum_compte(int num_compte) {
-	Num_compte = num_compte;
+
+public void setComptestitre(List<CompteTitre> comptestitre) {
+	this.comptestitre = comptestitre;
 }
+
 public static long getSerialversionuid() {
 	return serialVersionUID;
 }
@@ -142,16 +152,24 @@ public void setVariation(String variation) {
 	this.variation = variation;
 }
 
+
+
 @Override
 public String toString() {
 	return "Action [action_ID=" + action_ID + ", date=" + date + ", operation=" + operation + ", isin=" + isin
 			+ ", ticker=" + ticker + ", open=" + open + ", high=" + high + ", low=" + low + ", yield=" + yield
-			+ ", close=" + close + ", volume=" + volume + ", variation=" + variation + ", Num_compte=" + Num_compte
-			+ "]";
+			+ ", close=" + close + ", volume=" + volume + ", variation=" + variation + ", comptestitre=" + comptestitre
+			+ ", getAction_ID()=" + getAction_ID() + ", getDate()=" + getDate() + ", getOperation()=" + getOperation()
+			+ ", getComptestitre()=" + getComptestitre() + ", getIsin()=" + getIsin() + ", getTicker()=" + getTicker()
+			+ ", getOpen()=" + getOpen() + ", getHigh()=" + getHigh() + ", getLow()=" + getLow() + ", getYield()="
+			+ getYield() + ", getClose()=" + getClose() + ", getVolume()=" + getVolume() + ", getVariation()="
+			+ getVariation() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+			+ super.toString() + "]";
 }
 
+
 public Action(int action_ID, Date date, int operation, String isin, String ticker, float open, float high, float low,
-		float yield, float close, long volume, String variation, int num_compte) {
+		float yield, float close, long volume, String variation, List<projetIMAFA.entity.CompteTitre> comptestitre) {
 	super();
 	this.action_ID = action_ID;
 	this.date = date;
@@ -165,10 +183,11 @@ public Action(int action_ID, Date date, int operation, String isin, String ticke
 	this.close = close;
 	this.volume = volume;
 	this.variation = variation;
-	Num_compte = num_compte;
+	this.comptestitre = comptestitre;
 }
+
 public Action(Date date, int operation, String isin, String ticker, float open, float high, float low,
-		float yield, float close, long volume, String variation, int num_compte) {
+		float yield, float close, long volume, String variation, List<projetIMAFA.entity.CompteTitre> comptestitre) {
 	super();
 	this.date = date;
 	this.operation = operation;
@@ -181,7 +200,7 @@ public Action(Date date, int operation, String isin, String ticker, float open, 
 	this.close = close;
 	this.volume = volume;
 	this.variation = variation;
-	Num_compte = num_compte;
+	this.comptestitre = comptestitre;
 }
 
 public Action() {

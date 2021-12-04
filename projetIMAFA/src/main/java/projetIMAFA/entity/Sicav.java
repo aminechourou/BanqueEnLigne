@@ -2,13 +2,16 @@ package projetIMAFA.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -30,6 +33,9 @@ public class Sicav implements Serializable {
 	private String libelle;
 	private int cours;
 	private int quantite;
+	@ManyToMany(cascade = CascadeType.ALL)
+	List<CompteTitre> comptestitre;
+	
 	public int getSicav_ID() {
 		return sicav_ID;
 	}
@@ -75,13 +81,14 @@ public class Sicav implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	@Override
-	public String toString() {
-		return "Sicav [sicav_ID=" + sicav_ID + ", date=" + date + ", operation=" + operation + ", codetitre="
-				+ codetitre + ", libelle=" + libelle + ", cours=" + cours + ", quantite=" + quantite + "]";
+	public List<CompteTitre> getComptestitre() {
+		return comptestitre;
 	}
-	public Sicav(int sicav_ID, Date date, int operation, String codetitre, String libelle, int cours,
-			int quantite) {
+	public void setComptestitre(List<CompteTitre> comptestitre) {
+		this.comptestitre = comptestitre;
+	}
+	public Sicav(int sicav_ID, Date date, int operation, String codetitre, String libelle, int cours, int quantite,
+			List<CompteTitre> comptestitre) {
 		super();
 		this.sicav_ID = sicav_ID;
 		this.date = date;
@@ -90,6 +97,22 @@ public class Sicav implements Serializable {
 		this.libelle = libelle;
 		this.cours = cours;
 		this.quantite = quantite;
+		this.comptestitre = comptestitre;
 	}
+	public Sicav(Date date, int operation, String codetitre, String libelle, int cours, int quantite,
+			List<CompteTitre> comptestitre) {
+		super();
+		this.date = date;
+		this.operation = operation;
+		this.codetitre = codetitre;
+		this.libelle = libelle;
+		this.cours = cours;
+		this.quantite = quantite;
+		this.comptestitre = comptestitre;
+	}
+	public Sicav() {
+		super();
+	}
+	
 	
 }

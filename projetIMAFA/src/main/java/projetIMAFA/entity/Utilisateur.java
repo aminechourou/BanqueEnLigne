@@ -2,6 +2,7 @@ package projetIMAFA.entity;
 
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -42,10 +43,26 @@ public class Utilisateur implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
+	@Column(name="cin")
+	private String cin;
+	
+	@Column(name="rue")
+	private String rue;
+	
+	@Column(name="ville")
+	private String ville;
+	
+	@Column(name="codePostal")
+	private String codePostal;
+	
+	@Column(name="dateNaissance")
+	private Date dateNaissance;
+	
 	@OneToMany
-    private List<Formation> formations;
+    private List<Formation> formations;	
 	
-	
+	@OneToMany
+    private List<CompteTitre> comptestitres ;
 	
 	public List<Formation> getFormations() {
 		return formations;
@@ -96,6 +113,54 @@ public class Utilisateur implements Serializable {
 	}
 	
 
+
+	public String getCin() {
+		return cin;
+	}
+
+	public void setCin(String cin) {
+		this.cin = cin;
+	}
+
+	public String getRue() {
+		return rue;
+	}
+
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+
+	public List<CompteTitre> getComptestitres() {
+		return comptestitres;
+	}
+
+	public void setComptestitres(List<CompteTitre> comptestitres) {
+		this.comptestitres = comptestitres;
+	}
 
 	public Role getRole() {
 		return role;

@@ -80,7 +80,7 @@ public class OrdreControllerJSF {
 	private List<String> datalib;
 	
 	public String addaction()
-	{
+	{/*
 		Date currentUtilDate = new Date();
 		int i=0;
 		if(operation.equals("Achat"))
@@ -94,8 +94,8 @@ public class OrdreControllerJSF {
 		}
 		else{
 		ordreService.addOrdre(new Ordre(TypeOrdre.Vente, TypeProduitFin.Action,a.getAction_ID(),currentUtilDate));	
-		}
-		return "ajouteraction.jsf?faces-redirect=true";
+		}*/
+		return "ajouteraction.jsf?faces-redirect=true"; 
 	}
 
 	public IOrdreService getOrdreService() {
