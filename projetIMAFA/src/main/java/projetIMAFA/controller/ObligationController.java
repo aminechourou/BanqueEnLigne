@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import projetIMAFA.entity.Action;
 import projetIMAFA.entity.Obligation;
+import projetIMAFA.service.IActionService;
 import projetIMAFA.service.IObligationService;
 
 
@@ -29,7 +31,8 @@ public class ObligationController {
 	@Autowired
 	IObligationService obligationService;
 	
-
+	@Autowired
+	IActionService actionService;
 	
 	
 	@GetMapping("/obligations")
@@ -39,6 +42,13 @@ public class ObligationController {
 	return list;
 	}
 	
+	@GetMapping("/actions")
+	@ResponseBody
+	public List<Action> getAllActions() {
+	List<Action> list = actionService.retrieveAllActions();
+	return list;
+	}
+
 	@GetMapping("/register/retrieve-obligation/{obligation-id}")
 	@ResponseBody
 	public Obligation retrieveObligation(@PathVariable("obligation-id") String Id) {

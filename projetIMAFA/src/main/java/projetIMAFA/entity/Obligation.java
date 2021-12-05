@@ -12,8 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Obligation implements Serializable {
@@ -31,8 +34,10 @@ private String nomentreprise;
 private int maturite;
 private int quantite;
 private float taux;
-@ManyToMany(cascade = CascadeType.ALL)
-List<CompteTitre> comptestitre;
+@JsonIgnore
+@ManyToOne
+CompteTitre compteTitre;
+
 public Date getDate_emission() {
 	return date_emission;
 }
@@ -86,15 +91,22 @@ public static long getSerialversionuid() {
 	return serialVersionUID;
 }
 
-public List<CompteTitre> getComptestitre() {
-	return comptestitre;
+
+public CompteTitre getCompteTitre() {
+	return compteTitre;
 }
-public void setComptestitre(List<CompteTitre> comptestitre) {
-	this.comptestitre = comptestitre;
+public void setCompteTitre(CompteTitre compteTitre) {
+	this.compteTitre = compteTitre;
+}
+@Override
+public String toString() {
+	return "Obligation [obligation_ID=" + obligation_ID + ", date_emission=" + date_emission + ", operation="
+			+ operation + ", codetitre=" + codetitre + ", nomentreprise=" + nomentreprise + ", maturite=" + maturite
+			+ ", quantite=" + quantite + ", taux=" + taux + ", compteTitre=" + compteTitre + "]";
 }
 
 public Obligation(int obligation_ID, Date date_emission, int operation, String codetitre, String nomentreprise,
-		int maturite, int quantite, float taux, List<CompteTitre> comptestitre) {
+		int maturite, int quantite, float taux, CompteTitre compteTitre) {
 	super();
 	this.obligation_ID = obligation_ID;
 	this.date_emission = date_emission;
@@ -104,10 +116,11 @@ public Obligation(int obligation_ID, Date date_emission, int operation, String c
 	this.maturite = maturite;
 	this.quantite = quantite;
 	this.taux = taux;
-	this.comptestitre = comptestitre;
+	this.compteTitre = compteTitre;
 }
+
 public Obligation(Date date_emission, int operation, String codetitre, String nomentreprise,
-		int maturite, int quantite, float taux, List<CompteTitre> comptestitre) {
+		int maturite, int quantite, float taux, CompteTitre compteTitre) {
 	super();
 	this.date_emission = date_emission;
 	this.operation = operation;
@@ -116,8 +129,9 @@ public Obligation(Date date_emission, int operation, String codetitre, String no
 	this.maturite = maturite;
 	this.quantite = quantite;
 	this.taux = taux;
-	this.comptestitre = comptestitre;
+	this.compteTitre = compteTitre;
 }
+
 public Obligation() {
 	super();
 }

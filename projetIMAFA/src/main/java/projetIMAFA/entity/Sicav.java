@@ -12,8 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Sicav implements Serializable {
@@ -33,8 +36,9 @@ public class Sicav implements Serializable {
 	private String libelle;
 	private int cours;
 	private int quantite;
-	@ManyToMany(cascade = CascadeType.ALL)
-	List<CompteTitre> comptestitre;
+	@JsonIgnore
+	@ManyToOne
+	CompteTitre compteTitre;
 	
 	public int getSicav_ID() {
 		return sicav_ID;
@@ -81,14 +85,9 @@ public class Sicav implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public List<CompteTitre> getComptestitre() {
-		return comptestitre;
-	}
-	public void setComptestitre(List<CompteTitre> comptestitre) {
-		this.comptestitre = comptestitre;
-	}
+
 	public Sicav(int sicav_ID, Date date, int operation, String codetitre, String libelle, int cours, int quantite,
-			List<CompteTitre> comptestitre) {
+			CompteTitre compteTitre) {
 		super();
 		this.sicav_ID = sicav_ID;
 		this.date = date;
@@ -97,10 +96,10 @@ public class Sicav implements Serializable {
 		this.libelle = libelle;
 		this.cours = cours;
 		this.quantite = quantite;
-		this.comptestitre = comptestitre;
+		this.compteTitre = compteTitre;
 	}
 	public Sicav(Date date, int operation, String codetitre, String libelle, int cours, int quantite,
-			List<CompteTitre> comptestitre) {
+			CompteTitre compteTitre) {
 		super();
 		this.date = date;
 		this.operation = operation;
@@ -108,7 +107,13 @@ public class Sicav implements Serializable {
 		this.libelle = libelle;
 		this.cours = cours;
 		this.quantite = quantite;
-		this.comptestitre = comptestitre;
+		this.compteTitre = compteTitre;
+	}
+	@Override
+	public String toString() {
+		return "Sicav [sicav_ID=" + sicav_ID + ", date=" + date + ", operation=" + operation + ", codetitre="
+				+ codetitre + ", libelle=" + libelle + ", cours=" + cours + ", quantite=" + quantite + ", compteTitre="
+				+ compteTitre + "]";
 	}
 	public Sicav() {
 		super();

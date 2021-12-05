@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class CompteTitre {
 	
@@ -42,10 +44,42 @@ public class CompteTitre {
 	
 	@ManyToOne
 	Utilisateur utilisateur;
-	
+	@JsonIgnore
 	@OneToMany
-	List<Ordre> ordres;
-	
+	List<Ordre> ordres;	
+	@JsonIgnore
+	@OneToMany
+	List<Action> actions;	
+	@JsonIgnore
+	@OneToMany
+	List<Obligation> obligations;	
+	@JsonIgnore
+	@OneToMany
+	List<Sicav> sicavs;	
+
+	public List<Action> getActions() {
+		return actions;
+	}
+
+	public void setActions(List<Action> actions) {
+		this.actions = actions;
+	}
+
+	public List<Obligation> getObligations() {
+		return obligations;
+	}
+
+	public void setObligations(List<Obligation> obligations) {
+		this.obligations = obligations;
+	}
+
+	public List<Sicav> getSicavs() {
+		return sicavs;
+	}
+
+	public void setSicavs(List<Sicav> sicavs) {
+		this.sicavs = sicavs;
+	}
 
 	public List<Ordre> getOrdres() {
 		return ordres;
@@ -109,7 +143,35 @@ public class CompteTitre {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	public CompteTitre(int id, Date dateCreation, String status, float solde, String rib, Utilisateur utilisateur,
+			List<Ordre> ordres, List<Action> actions, List<Obligation> obligations, List<Sicav> sicavs) {
+		super();
+		this.id = id;
+		this.dateCreation = dateCreation;
+		this.status = status;
+		this.solde = solde;
+		this.rib = rib;
+		this.utilisateur = utilisateur;
+		this.ordres = ordres;
+		this.actions = actions;
+		this.obligations = obligations;
+		this.sicavs = sicavs;
+	}
+
+	public CompteTitre(Date dateCreation, String status, float solde, String rib, Utilisateur utilisateur,
+			List<Ordre> ordres, List<Action> actions, List<Obligation> obligations, List<Sicav> sicavs) {
+		super();
+		this.dateCreation = dateCreation;
+		this.status = status;
+		this.solde = solde;
+		this.rib = rib;
+		this.utilisateur = utilisateur;
+		this.ordres = ordres;
+		this.actions = actions;
+		this.obligations = obligations;
+		this.sicavs = sicavs;
+	}
 	
 	
 	
