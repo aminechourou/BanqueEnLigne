@@ -118,6 +118,12 @@ public class Sicav implements Serializable {
 	public Sicav() {
 		super();
 	}
+	public CompteTitre getCompteTitre() {
+		return compteTitre;
+	}
+	public void setCompteTitre(CompteTitre compteTitre) {
+		this.compteTitre = compteTitre;
+	}
 	
 	
 }

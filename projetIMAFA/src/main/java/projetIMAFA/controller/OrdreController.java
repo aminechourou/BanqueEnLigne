@@ -35,148 +35,154 @@ import projetIMAFA.repo.ObligationRepository;
 
 @Controller
 public class OrdreController {
-@Autowired
-IOrdreService ordreService ;
+	@Autowired
+	IOrdreService ordreService ;
 
-/*@Autowired
+	/*@Autowired
 CompteTitreRepository compteTitreRepository;*/
 
 
 
-@Autowired
-ComptetitreService compteTitreRepository;
+	@Autowired
+	ComptetitreService compteTitreRepository;
 
 
-@Autowired
-IActionService actionService;
+	@Autowired
+	IActionService actionService;
 
-@Autowired
-IObligationService obligationService;
+	@Autowired
+	IObligationService obligationService;
 
-@Autowired
-ISicavService sicavService;
+	@Autowired
+	ISicavService sicavService;
 
-//@Autowired
-//CompteTitreRepository compteTitreRepository;
+	//@Autowired
+	//CompteTitreRepository compteTitreRepository;
 
-@PostMapping("/add-Action/{idcompte}")
-@ResponseBody
-public Action addAction(@RequestBody Action u,@PathVariable(value = "idcompte") int idcompte) {
-CompteTitre compte = compteTitreRepository.retrieveComptetitre(idcompte);
-u.setCompteTitre(compte);
-Action Action = actionService.addAction(u);
-Ordre ordre = new Ordre();
-Date today = new Date();
-ordre.setDateOrdre(today);
-ordre.setIdpf(u.getAction_ID());
-if(u.getOperation()==1)
-{
-ordre.setType(TypeOrdre.Achat);
-//float s = ordre.getCompteTitre().getSolde();
-//s=s-u.getVolume()*u.getClose();
+	@PostMapping("/add-Action/{idcompte}")
+	@ResponseBody
+	public Action addAction(@RequestBody Action u,@PathVariable(value = "idcompte") int idcompte) {
+		CompteTitre compte = compteTitreRepository.retrieveComptetitre(idcompte);
+		u.setCompteTitre(compte);
+		Action Action = actionService.addAction(u);
+		Ordre ordre = new Ordre();
+		Date today = new Date();
+		ordre.setDateOrdre(today);
+		ordre.setIdpf(u.getAction_ID());
+		if(u.getOperation()==1)
+		{
+			ordre.setType(TypeOrdre.Achat);
+			//float s = ordre.getCompteTitre().getSolde();
+			//s=s-u.getVolume()*u.getClose();
 
-}
-else{
-ordre.setType(TypeOrdre.Vente);
-//float s = ordre.getCompteTitre().getSolde();
-//s=s+u.getVolume()*u.getClose();
-}
-ordre.setTypepf(TypeProduitFin.Action);
-ordreService.addOrdre(ordre);
-
-
-return Action;
-}
+		}
+		else{
+			ordre.setType(TypeOrdre.Vente);
+			//float s = ordre.getCompteTitre().getSolde();
+			//s=s+u.getVolume()*u.getClose();
+		}
+		ordre.setTypepf(TypeProduitFin.Action);
+		ordreService.addOrdre(ordre);
 
 
-
-/// add obligation
-
-@PostMapping("/add-Obligation")
-@ResponseBody
-public Obligation addObligation(@RequestBody Obligation u) {
-Obligation Obligation = obligationService.addObligation(u);
-Ordre ordre = new Ordre();
-Date today = new Date();
-ordre.setDateOrdre(today);
-ordre.setIdpf(u.getObligation_ID());
-if(u.getOperation()==1)
-{
-ordre.setType(TypeOrdre.Achat);
-//float s = ordre.getCompteTitre().getSolde();
-//s=s-u.getVolume()*u.getClose();
-
-}
-else{
-ordre.setType(TypeOrdre.Vente);
-//float s = ordre.getCompteTitre().getSolde();
-//s=s+u.getVolume()*u.getClose();
-}
-ordre.setTypepf(TypeProduitFin.Obligation);
-ordreService.addOrdre(ordre);
-
-
-return Obligation;
-}
-
-
-////sicavv
-@PostMapping("/add-Sicav")
-@ResponseBody
-public Sicav addSicav(@RequestBody Sicav u) {
-Sicav Sicav = sicavService.addSicav(u);
-Ordre ordre = new Ordre();
-Date today = new Date();
-ordre.setDateOrdre(today);
-ordre.setIdpf(u.getSicav_ID());
-if(u.getOperation()==1)
-{
-ordre.setType(TypeOrdre.Achat);
-//float s = ordre.getCompteTitre().getSolde();
-//s=s-u.getVolume()*u.getClose();
-
-}
-else{
-ordre.setType(TypeOrdre.Vente);
-//float s = ordre.getCompteTitre().getSolde();
-//s=s+u.getVolume()*u.getClose();
-}
-ordre.setTypepf(TypeProduitFin.Sicav);
-ordreService.addOrdre(ordre);
-
-
-return Sicav;
-}
-
-
-@GetMapping("/Action")
-public List<Action> getAllActions() {
-List<Action> list = actionService.retrieveAllActions();
-return list;
-}
+		return Action;
+	}
 
 
 
-@GetMapping("/Obligation")
-public List<Obligation> getAllObligations() {
-List<Obligation> list = obligationService.retrieveAllObligations();
-return list;
-}
+	/// add obligation
 
-@GetMapping("/Sicav")
-public List<Sicav> getAllSicavs() {
-List<Sicav> list = sicavService.retrieveAllSicavs();
-return list;
-}
+	@PostMapping("/add-Obligation/{idcompte}")
+	@ResponseBody
+	public Obligation addObligation(@RequestBody Obligation u,@PathVariable(value = "idcompte") int idcompte) {
 
-@GetMapping("/Ordre")
-public List<Ordre> getAllOrdre() {
-List<Ordre> list = ordreService.retrieveAllOrdres();
-return list;
-}
+		CompteTitre compte = compteTitreRepository.retrieveComptetitre(idcompte);
+		u.setCompteTitre(compte);
+		Obligation Obligation = obligationService.addObligation(u);
+		Ordre ordre = new Ordre();
+		Date today = new Date();
+		ordre.setDateOrdre(today);
+		ordre.setIdpf(u.getObligation_ID());
+		if(u.getOperation()==1)
+		{
+			ordre.setType(TypeOrdre.Achat);
+			//float s = ordre.getCompteTitre().getSolde();
+			//s=s-u.getVolume()*u.getClose();
+
+		}
+		else{
+			ordre.setType(TypeOrdre.Vente);
+			//float s = ordre.getCompteTitre().getSolde();
+			//s=s+u.getVolume()*u.getClose();
+		}
+		ordre.setTypepf(TypeProduitFin.Obligation);
+		ordreService.addOrdre(ordre);
 
 
-/*
+		return Obligation;
+	}
+
+
+	////sicavv
+	@PostMapping("/add-Sicav/{idcompte}")
+	@ResponseBody
+	public Sicav addSicav(@RequestBody Sicav u,@PathVariable(value = "idcompte") int idcompte) {
+
+		CompteTitre compte = compteTitreRepository.retrieveComptetitre(idcompte);
+		u.setCompteTitre(compte);
+		Sicav Sicav = sicavService.addSicav(u);
+		Ordre ordre = new Ordre();
+		Date today = new Date();
+		ordre.setDateOrdre(today);
+		ordre.setIdpf(u.getSicav_ID());
+		if(u.getOperation()==1)
+		{
+			ordre.setType(TypeOrdre.Achat);
+			//float s = ordre.getCompteTitre().getSolde();
+			//s=s-u.getVolume()*u.getClose();
+
+		}
+		else{
+			ordre.setType(TypeOrdre.Vente);
+			//float s = ordre.getCompteTitre().getSolde();
+			//s=s+u.getVolume()*u.getClose();
+		}
+		ordre.setTypepf(TypeProduitFin.Sicav);
+		ordreService.addOrdre(ordre);
+
+
+		return Sicav;
+	}
+
+
+	@GetMapping("/Action")
+	public List<Action> getAllActions() {
+		List<Action> list = actionService.retrieveAllActions();
+		return list;
+	}
+
+
+
+	@GetMapping("/Obligation")
+	public List<Obligation> getAllObligations() {
+		List<Obligation> list = obligationService.retrieveAllObligations();
+		return list;
+	}
+
+	@GetMapping("/Sicav")
+	public List<Sicav> getAllSicavs() {
+		List<Sicav> list = sicavService.retrieveAllSicavs();
+		return list;
+	}
+
+	@GetMapping("/Ordre")
+	public List<Ordre> getAllOrdre() {
+		List<Ordre> list = ordreService.retrieveAllOrdres();
+		return list;
+	}
+
+
+	/*
 @PostMapping("/addOrdre")
 public Ordre ajouterOrdre(@Valid @RequestBody Ordre ordre) {
 
@@ -239,5 +245,5 @@ return compteTitreRepository.getIdCompteTitre(idClient);
 // return ordre;
 //
 // }*/
-//
+	//
 }
