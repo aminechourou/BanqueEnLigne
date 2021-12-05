@@ -156,6 +156,7 @@ CompteTitreRepository compteTitreRepository;*/
 
 
 	@GetMapping("/Action")
+	@ResponseBody
 	public List<Action> getAllActions() {
 		List<Action> list = actionService.retrieveAllActions();
 		return list;
@@ -164,18 +165,21 @@ CompteTitreRepository compteTitreRepository;*/
 
 
 	@GetMapping("/Obligation")
+	@ResponseBody
 	public List<Obligation> getAllObligations() {
 		List<Obligation> list = obligationService.retrieveAllObligations();
 		return list;
 	}
 
 	@GetMapping("/Sicav")
+	@ResponseBody
 	public List<Sicav> getAllSicavs() {
 		List<Sicav> list = sicavService.retrieveAllSicavs();
 		return list;
 	}
 
 	@GetMapping("/Ordre")
+	@ResponseBody
 	public List<Ordre> getAllOrdre() {
 		List<Ordre> list = ordreService.retrieveAllOrdres();
 		return list;
