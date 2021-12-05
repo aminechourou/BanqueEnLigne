@@ -1,5 +1,5 @@
 package projetIMAFA.repo;
-import java.util.List;
+/*import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -33,3 +33,4 @@ public interface LeaveTestRepository extends CrudRepository<LeaveTest,Integer>{
 	@Query("select count (u) , YEAR(u.Start_date) , MONTH(u.Start_date) from LeaveTest u group by YEAR(u.Start_date), MONTH(u.Start_date) ")
 	public List<?> statmonthh();
 }
+*/

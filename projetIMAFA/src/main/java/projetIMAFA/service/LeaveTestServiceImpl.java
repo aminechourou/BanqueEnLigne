@@ -1,6 +1,6 @@
 
 package projetIMAFA.service;
-import java.util.List;
+/*import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -82,11 +82,11 @@ public class LeaveTestServiceImpl implements ILeaveTestService{
 			
 			@Override
 			public void affecterUserALeave(int idl, int id) {
-			/*LeaveTest leave = leaveTestRepository.findById(idl).get();
+			LeaveTest leave = leaveTestRepository.findById(idl).get();
 			Utilisateur user = userRepository.findById(id).get();
 			if (!ObjectUtils.isEmpty(leave) && !ObjectUtils.isEmpty(user))
 				leave.setUser(user);
-			userRepository.save(user);*/
+			userRepository.save(user);
 
 			}
 			
@@ -111,3 +111,4 @@ public class LeaveTestServiceImpl implements ILeaveTestService{
 			    }
 
 	}
+	*/

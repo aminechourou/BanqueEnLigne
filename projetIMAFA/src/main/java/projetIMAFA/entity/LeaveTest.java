@@ -1,4 +1,4 @@
-package projetIMAFA.entity;
+/*package projetIMAFA.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 import projetIMAFA.entity.Leave_reason;
 import projetIMAFA.entity.Type_Leave;
-import projetIMAFA.entity.Utilisateur;
+import projetIMAFA.entity.User;
 
 @Entity
 
@@ -67,6 +67,9 @@ public class LeaveTest implements Serializable{
 	public void setStart_date(Date start_date) {
 		Start_date = start_date;
 	}
+	public LeaveTest() {
+		super();
+	}
 	public Date getEnd_date() {
 		return End_date;
 	}
@@ -88,7 +91,7 @@ public class LeaveTest implements Serializable{
 	public String toString() {
 		return "LeaveTest [Leave_ID=" + Leave_ID + ", type_leave=" + type_leave + ", leave_reason=" + leave_reason
 				+ ", Leave_Duration=" + Leave_Duration + ", Start_date=" + Start_date + ", End_date=" + End_date
-				+ ", Utilisateur=" + Utilisateur + "]";
+				+ ", user=" + user + "]";
 	}
 	public LeaveTest(int leave_Duration, Date start_date) {
 		super();
@@ -97,60 +100,59 @@ public class LeaveTest implements Serializable{
 	}
 
 	@ManyToOne
-	Utilisateur Utilisateur;
+	User user;
 	public LeaveTest(Type_Leave type_leave, Leave_reason leave_reason, int leave_Duration) {
 		super();
 		this.type_leave = type_leave;
 		this.leave_reason = leave_reason;
 		Leave_Duration = leave_Duration;
 	}
-	public Utilisateur getUtilisateur() {
-		return Utilisateur;
+	public User getUser() {
+		return user;
 	}
-	public void setUtilisateur(Utilisateur Utilisateur) {
-		this.Utilisateur = Utilisateur;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public LeaveTest(int leave_ID, Type_Leave type_leave, Leave_reason leave_reason, int leave_Duration,
-			Date start_date, Date end_date, projetIMAFA.entity.Utilisateur utilisateur) {
+	
+	
+	public LeaveTest(Type_Leave type_leave, Leave_reason leave_reason, Date start_date,
+			Date end_date) {
+		super();
+		this.type_leave = type_leave;
+		this.leave_reason = leave_reason;
+		Start_date = start_date;
+		End_date = end_date;
+	}
+	
+	
+	public LeaveTest(int leave_ID,Date start_date, Date end_date,Type_Leave type_leave, Leave_reason leave_reason ) {
 		super();
 		Leave_ID = leave_ID;
 		this.type_leave = type_leave;
 		this.leave_reason = leave_reason;
-		Leave_Duration = leave_Duration;
 		Start_date = start_date;
 		End_date = end_date;
-		Utilisateur = utilisateur;
+	}
+	public LeaveTest(int leave_ID, Date start_date, Date end_date) {
+		super();
+		Leave_ID = leave_ID;
+		Start_date = start_date;
+		End_date = end_date;
 	}
 	public LeaveTest(Type_Leave type_leave, Leave_reason leave_reason, int leave_Duration, Date start_date,
-			Date end_date, projetIMAFA.entity.Utilisateur utilisateur) {
+			Date end_date) {
 		super();
 		this.type_leave = type_leave;
 		this.leave_reason = leave_reason;
 		Leave_Duration = leave_Duration;
 		Start_date = start_date;
 		End_date = end_date;
-		Utilisateur = utilisateur;
 	}
-	public int getLeave_ID() {
-		return Leave_ID;
-	}
-	public void setLeave_ID(int leave_ID) {
-		Leave_ID = leave_ID;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	public LeaveTest() {
-		super();
-	}
-	
-	
-
 
 	/*public void info(String string) {
 		// TODO Auto-generated method stub
 		
-	}*/
+	}
 
 
 
@@ -158,4 +160,5 @@ public class LeaveTest implements Serializable{
 	
 	
 }
+*/
 
