@@ -59,10 +59,11 @@ ISicavService sicavService;
 //@Autowired
 //CompteTitreRepository compteTitreRepository;
 
-@PostMapping("/add-Action")
+@PostMapping("/add-Action/{idcompte}")
 @ResponseBody
-public Action addAction(@RequestBody Action u) {
-
+public Action addAction(@RequestBody Action u,@PathVariable(value = "idcompte") int idcompte) {
+CompteTitre compte = compteTitreRepository.retrieveComptetitre(idcompte);
+u.setCompteTitre(compte);
 Action Action = actionService.addAction(u);
 Ordre ordre = new Ordre();
 Date today = new Date();
