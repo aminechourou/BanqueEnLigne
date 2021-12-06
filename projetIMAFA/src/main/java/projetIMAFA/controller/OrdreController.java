@@ -82,6 +82,7 @@ CompteTitreRepository compteTitreRepository;*/
 			//s=s+u.getVolume()*u.getClose();
 		}
 		ordre.setTypepf(TypeProduitFin.Action);
+		ordre.setCompteTitre(compte);
 		ordreService.addOrdre(ordre);
 
 
@@ -116,6 +117,7 @@ CompteTitreRepository compteTitreRepository;*/
 			//s=s+u.getVolume()*u.getClose();
 		}
 		ordre.setTypepf(TypeProduitFin.Obligation);
+		ordre.setCompteTitre(compte);
 		ordreService.addOrdre(ordre);
 
 
@@ -148,6 +150,7 @@ CompteTitreRepository compteTitreRepository;*/
 			//s=s+u.getVolume()*u.getClose();
 		}
 		ordre.setTypepf(TypeProduitFin.Sicav);
+		ordre.setCompteTitre(compte);
 		ordreService.addOrdre(ordre);
 
 
