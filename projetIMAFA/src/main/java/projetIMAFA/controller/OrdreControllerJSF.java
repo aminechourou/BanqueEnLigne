@@ -18,10 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import projetIMAFA.entity.Action;
+import projetIMAFA.entity.CompteTitre;
 import projetIMAFA.entity.Data_action;
 import projetIMAFA.entity.Ordre;
 import projetIMAFA.entity.TypeOrdre;
 import projetIMAFA.entity.TypeProduitFin;
+import projetIMAFA.repo.DataRepository;
+import projetIMAFA.service.ComptetitreService;
 import projetIMAFA.service.IActionService;
 import projetIMAFA.service.IDataService;
 import projetIMAFA.service.IObligationService;
@@ -41,6 +44,9 @@ public class OrdreControllerJSF {
 	
 	@Autowired
 	IActionService actionService;
+	
+	@Autowired
+	ComptetitreService compteTitreRepository;
 
 	@Autowired
 	IObligationService obligationService;
@@ -68,34 +74,29 @@ public class OrdreControllerJSF {
 	private float close;
 	private long volume;
 	private String variation;
+	private List<Action> actions;
 	
 	/** data_action **/	
 	private Date dated;
 	private float opend;
 	private float highd;
+	private int id;
 	private float lowd;
 	private float closed;
 	private long volumed;	
 	private String libelled;	
 	private List<String> datalib;
+	private List<Data_action> datas;
 	
-	public String addaction()
-	{/*
+	public String addaction(int id)
+	{
+		Data_action da=dataService.getData(id);
 		Date currentUtilDate = new Date();
-		int i=0;
-		if(operation.equals("Achat"))
-		{i=1;}
-		else{i=0;}
-		
-		Action a=actionService.addAction(new Action(currentUtilDate,i,isin,ticker,open,high,low,yield,close,volume,variation,0));
-		if(i==1)
-		{
+		Action a;
+		CompteTitre compte = compteTitreRepository.retrieveComptetitre(1);
+		a=actionService.addAction(new Action(currentUtilDate,1,da.getLibelled(),da.getLibelled(),da.getOpend(),da.getHighd(),da.getLowd(),15,da.getClosed(),da.getVolumed(),"11",compte));
 		ordreService.addOrdre(new Ordre(TypeOrdre.Achat, TypeProduitFin.Action,a.getAction_ID(),currentUtilDate));
-		}
-		else{
-		ordreService.addOrdre(new Ordre(TypeOrdre.Vente, TypeProduitFin.Action,a.getAction_ID(),currentUtilDate));	
-		}*/
-		return "ajouteraction.jsf?faces-redirect=true"; 
+		return "afficheraction.jsf?faces-redirect=true"; 
 	}
 
 	public IOrdreService getOrdreService() {
@@ -322,6 +323,35 @@ public class OrdreControllerJSF {
 	public void setDatalib(List<String> datalib) {
 		this.datalib = datalib;
 	}
-	
+
+	public List<Action> getActions() {
+		actions =actionService.retrieveAllActions();
+		return actions;
+	}
+
+	public void setActions(List<Action> actions) {
+		
+		this.actions = actions;
+	}
+
+	public List<Data_action> getDatas() {
+		datas=dataService.affdatas();
+		System.out.print(datas);
+		return datas;
+	}
+
+	public void setDatas(List<Data_action> datas) {
+		this.datas = datas;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 
 }

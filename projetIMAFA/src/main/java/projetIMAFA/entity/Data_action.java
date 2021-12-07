@@ -21,26 +21,103 @@ public class Data_action implements Serializable {
     private int id;
 	
 	@Temporal(TemporalType.DATE)
-	private Date date;
+	private Date dated;
 	
-	@Column(name="open")
-	private float open;
+	@Column(name="opend")
+	private float opend;
 
-	@Column(name="high")
-	private float high;
+	@Column(name="highd")
+	private float highd;
 
-	@Column(name="low")
-	private float low;
+	@Column(name="lowd")
+	private float lowd;
 
-	@Column(name="close")
-	private float close;
+	@Column(name="closed")
+	private float closed;
 	
-	@Column(name="adjclose")
-	private float adjclose;
+	@Column(name="adjclosed")
+	private float adjclosed;
 	
-	@Column(name="volume")
-	private long volume;
+	@Column(name="volumed")
+	private long volumed;
 
-	@Column(name="libelle")
-	private String libelle;
+	@Column(name="libelled")
+	private String libelled;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getDated() {
+		return dated;
+	}
+
+	public void setDated(Date dated) {
+		this.dated = dated;
+	}
+
+	public float getOpend() {
+		return opend;
+	}
+
+	public void setOpend(float opend) {
+		this.opend = opend;
+	}
+
+	public float getHighd() {
+		return highd;
+	}
+
+	public void setHighd(float highd) {
+		this.highd = highd;
+	}
+
+	public float getLowd() {
+		return lowd;
+	}
+
+	public void setLowd(float lowd) {
+		this.lowd = lowd;
+	}
+
+	public float getClosed() {
+		return closed;
+	}
+
+	public void setClosed(float closed) {
+		this.closed = closed;
+	}
+
+	public float getAdjclosed() {
+		return adjclosed;
+	}
+
+	public void setAdjclosed(float adjclosed) {
+		this.adjclosed = adjclosed;
+	}
+
+	public long getVolumed() {
+		return volumed;
+	}
+
+	public void setVolumed(long volumed) {
+		this.volumed = volumed;
+	}
+
+	public String getLibelled() {
+		return libelled;
+	}
+
+	public void setLibelled(String libelled) {
+		this.libelled = libelled;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

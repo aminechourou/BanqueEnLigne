@@ -177,29 +177,68 @@ button.ui-button {
 		</div>
 	</header>
 	   <center>
-    <h:form id="form">
-        <div class="p-mt-3 p-mb-5">
-            <p:inputText id="template" value="{dtColumnsView.columnTemplate}" size="50" styleClass="p-mr-2"/>
-            <p:commandButton update="customers" action="{dtColumnsView.updateColumns}" value="Update"
-                             process="@parent" icon="pi pi-refresh"
-                             oncomplete="PF('customersTable').clearFilters()"/>
-        </div>
+	   <div class="card">
+	<h:form>
+		<h:dataTable value="#{OrdreController.datas}"
+			var="data" border="1">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Numero de reclamation" />
+				</f:facet>
+				<h:outputText value="#{data.libelled}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Date occurence" />
+				</f:facet>
+				<h:outputText value="#{data.dated}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Date Reclamation" />
+				</f:facet>
+				<h:outputText value="#{data.volumed}" />
+			</h:column>
 
-        <p:dataTable id="customers" var="customer" value="{dtColumnsView.customers}" widgetVar="customersTable"
-                     filteredValue="#{OrdreController.datalib}">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Type Reclamation" />
+				</f:facet>
+				<h:outputText value="#{data.highd}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Description Reclamation" />
+				</f:facet>
+				<h:outputText value="#{data.lowd}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Description Reclamation" />
+				</f:facet>
+				<h:outputText value="#{data.closed}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Description Reclamation" />
+				</f:facet>
+				<h:outputText value="#{data.volumed}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Achat" />
+				</f:facet>
+				<h:commandButton value="Acheter action"
+					action="#{OrdreController.addaction(data.id)}" />
+			</h:column>
+		
+			
+			
 
-            <p:columns value="{dtColumnsView.columns}" var="column" headerText="{column.header}" field="{column.property}">
-                <f:facet name="filter">
-                   <!-- <p:datePicker selectionMode="range" onchange="PF('customersTable').filter()" rendered="{column.type eq 'date'}"/>  --> 
-                    <p:selectOneMenu onchange="PF('customersTable').filter()" rendered="{column.type eq 'enum'}">
-                        <f:selectItem itemValue="{null}" itemLabel=""/>
-                        <f:selectItems value="{column.klazz.enumConstants}" />
-                    </p:selectOneMenu>
-                </f:facet>
-            </p:columns>
-
-        </p:dataTable>
-    </h:form>
+		</h:dataTable>
+		
+	</h:form>
+	</div>
 	</center>
 	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">

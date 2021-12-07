@@ -10,6 +10,8 @@ public interface IDataService {
 	 void deleteData_action(String id);
 	 Data_action updateData_action(Data_action a);
 	 Data_action retrieveData_action(String id);
+	 Data_action getData(int id);
 	 List<String> afflib();
 	 List<Data_action> retrieveData_actionsByLibelle(String libelle);
+	 List<Data_action> affdatas();
 }

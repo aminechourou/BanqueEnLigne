@@ -63,4 +63,16 @@ public class DataService implements IDataService {
 		 List<String> u =dataRepository.afflib();
 		 return u;
 	}
+
+	@Override
+	public List<Data_action> affdatas() {
+		 List<Data_action> u =dataRepository.affdatas();
+		 return u;
+	}
+
+	@Override
+	public Data_action getData(int id) {
+		Data_action da = dataRepository.getData(id);
+		return da;
+	}
 }
