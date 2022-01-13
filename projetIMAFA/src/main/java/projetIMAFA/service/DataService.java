@@ -75,4 +75,18 @@ public class DataService implements IDataService {
 		Data_action da = dataRepository.getData(id);
 		return da;
 	}
+
+	@Override
+	public List<String> getActionsbydate() {
+     List<String> d = dataRepository.getActionsbydate();
+     return d;
+	}
+
+	@Override
+	public List<Float> getClosebydate() {
+     List<Float> d = dataRepository.getClosebydate();
+     return d;
+	}
+
+
 }

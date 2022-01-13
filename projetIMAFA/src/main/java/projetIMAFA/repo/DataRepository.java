@@ -17,4 +17,9 @@ public interface DataRepository extends CrudRepository<Data_action, Integer>  {
 	List<Data_action> affdatas();
 	@Query("SELECT d FROM Data_action d WHERE d.id= ?1")
 	Data_action getData(Integer idd);
+	@Query("SELECT d.dated FROM Data_action d GROUP BY d.libelled")
+	 List<String> getActionsbydate();
+	@Query("SELECT d.closed FROM Data_action d GROUP BY d.dated")
+	 List<Float> getClosebydate();
+
 }

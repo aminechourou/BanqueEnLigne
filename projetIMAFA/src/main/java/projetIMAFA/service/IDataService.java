@@ -14,4 +14,6 @@ public interface IDataService {
 	 List<String> afflib();
 	 List<Data_action> retrieveData_actionsByLibelle(String libelle);
 	 List<Data_action> affdatas();
+	 List<String> getActionsbydate();
+	 List<Float> getClosebydate();
 }

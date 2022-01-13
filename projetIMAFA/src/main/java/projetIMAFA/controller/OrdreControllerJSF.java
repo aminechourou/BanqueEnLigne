@@ -3,6 +3,9 @@ package projetIMAFA.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,12 +14,21 @@ import javax.persistence.TemporalType;
 import javax.xml.crypto.Data;
 
 import org.ocpsoft.rewrite.el.ELBeanName;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.Getter;
+import lombok.Setter;
 import projetIMAFA.entity.Action;
 import projetIMAFA.entity.CompteTitre;
 import projetIMAFA.entity.Data_action;
@@ -61,7 +73,7 @@ public class OrdreControllerJSF {
 	private TypeProduitFin typepf;
 	private int idpf;
 	private Date dateOrdre;
-	
+    private int idsd;
 	/** action **/
 	private Date date;
 	private String operation;	
@@ -87,6 +99,61 @@ public class OrdreControllerJSF {
 	private String libelled;	
 	private List<String> datalib;
 	private List<Data_action> datas;
+	private LineChartModel  linemodel;
+	
+
+	@PostConstruct
+	public void init() {
+		/*Data_action da=dataService.getData(id);
+		System.out.print(da);
+       linemodel= new LineChartModel();     
+        for(int i=0;i<dataService.afflibe(da.getLibelled()) .size();i++){
+        	LineChartSeries series1 = new LineChartSeries();
+        	 series1.setLabel(da.getLibelled());
+        	series1.set(da.getLibelled(),dataService.afflibe(da.getLibelled()) .get(i));
+        	System.out.print(dataService.afflibe(da.getLibelled()) .get(i));
+        	linemodel.addSeries(series1);
+        }
+        
+
+        linemodel.setTitle("Users per date");
+        linemodel.setLegendPosition("e");
+        linemodel.setShowPointLabels(true);
+        linemodel.getAxes().put(AxisType.X, new CategoryAxis("Dates"));
+        Axis yyAxis = linemodel.getAxis(AxisType.Y);
+        yyAxis.setLabel("Users");*/
+        //yyAxis.setMin(0);
+        //yyAxis.setMax(10);
+	      linemodel = new LineChartModel();
+	      LineChartSeries s = new LineChartSeries();
+	      s.setLabel("Population");
+
+	      s.set(1, 5.20);
+	      s.set(2, 19.63);
+	      s.set(3, 59.01);
+	      s.set(4, 139.76);
+	      s.set(5, 300.4);
+	      s.set(6, 630);
+
+	      linemodel.addSeries(s);
+	      linemodel.setLegendPosition("e");
+	      Axis y = linemodel.getAxis(AxisType.Y);
+	      y.setMin(0.5);
+	      y.setMax(700);
+	      y.setLabel("Millions");
+
+	      Axis x = linemodel.getAxis(AxisType.X);
+	      x.setMin(0);
+	      x.setMax(7);
+	      x.setTickInterval("1");
+	      x.setLabel("Number of Years");
+	}
+	
+	public String affaction(int id)
+	{
+		this.setId(id);
+		return "stataction.jsf?faces-redirect=true"; 
+	}
 	
 	public String addaction(int id)
 	{
@@ -350,6 +417,22 @@ public class OrdreControllerJSF {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public LineChartModel getLinemodel() {
+		return linemodel;
+	}
+
+	public void setLinemodel(LineChartModel linemodel) {
+		this.linemodel = linemodel;
+	}
+
+	public int getIdsd() {
+		return idsd;
+	}
+
+	public void setIdsd(int idsd) {
+		this.idsd = idsd;
 	}
 
 

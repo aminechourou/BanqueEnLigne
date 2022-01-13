@@ -3,7 +3,7 @@
 
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a4j="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions"
@@ -176,64 +176,96 @@ button.ui-button {
 			</div>
 		</div>
 	</header>
-	   <center>
-	   <div class="card">
-	<h:form>
-		<h:dataTable value="#{OrdreController.datas}"
-			var="data" border="1">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Libelle" />
-				</f:facet>
-				<h:commandButton value="#{data.libelled}" action="#{OrdreController.affaction(data.id)}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Date" />
-				</f:facet>
-				<h:outputText value="#{data.dated}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Volume" />
-				</f:facet>
-				<h:outputText value="#{data.volumed}" />
-			</h:column>
+<center>
 
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="High" />
-				</f:facet>
-				<h:outputText value="#{data.highd}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Low" />
-				</f:facet>
-				<h:outputText value="#{data.lowd}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Close" />
-				</f:facet>
-				<h:outputText value="#{data.closed}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Achat" />
-				</f:facet>
-				<h:commandButton value="Acheter action"
-					action="#{OrdreController.addaction(data.id)}" />
-			</h:column>
-		
+<div class="card">
+<h:form id="contactform" >
+	<table>
+		<tr>
+			<td><h:outputText value="Ajouter le salaire d'un employé" style="font-weight:bold"></h:outputText></td>
 			
-			
+			<td>
+				
+        <div class="ui-fluid p-grid p-formgrid">
+            <div class="p-field p-col-12 p-md-4">
+            
+            </div>
+            </div>
+				
+				
+				
+         </td>
+				
+		</tr>
 
-		</h:dataTable>
+		<tr>
+			<td><h:outputText value="ISIN" style="font-weight:bold"></h:outputText></td>
+			<td>
+					
+					<h5 class="p-mt-0"></h5>
+        <p:inputText widgetVar="editor1" value="#{SalaryController.month}" height="100" secure='false' />
+			</td>
+		</tr>
 		
-	</h:form>
-	</div>
-	</center>
+		<tr>	
+			<td><h:outputText value="Ticker" style="font-weight:bold"></h:outputText></td>
+			<td>
+			<h5 class="p-mt-0"></h5>
+   <h:selectOneMenu required="true" value="#{SalaryController.cin}">
+											<f:selectItem itemLabel="Selectionner un employé"
+												itemValue="" />
+											<f:selectItems value="#{SalaryController.cins}" />
+										</h:selectOneMenu>
+			</td>
+		</tr>
+		<tr>
+			<td><h:outputText value="OPEN" style="font-weight:bold"></h:outputText></td>
+			<td>
+				<h5 class="p-mt-0"></h5>	
+		
+        <p:inputText widgetVar="editor1" value="#{SalaryController.year}" height="100" secure='false' />
+			</td>
+		</tr>
+		<tr>
+			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
+			
+			<td>
+				<h5 class="p-mt-0"></h5>	
+			
+        <p:inputText widgetVar="editor1" value="#{SalaryController.work_hours}" height="100" secure='false' />
+			</td>
+		</tr>
+		<tr>
+			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
+			
+			<td>
+				<h5 class="p-mt-0"></h5>	
+			
+        <p:inputText widgetVar="editor1" value="#{SalaryController.extra_hours}" height="100" secure='false' />
+			</td>
+		</tr>
+		<tr>
+			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
+			
+			<td>
+				<h5 class="p-mt-0"></h5>	
+			
+        <p:inputText widgetVar="editor1" value="#{SalaryController.salary}" height="100" secure='false' />
+			</td>
+		</tr>		
+	</table>
+	<br />
+	<br />
+	<br />
+	<br />
+	
+    <h:commandButton action="{ReclamationSinistreControllerJSF.addSalaryy()}"  class="send" style="float:center;"/>
+
+
+</h:form>
+</div>
+
+</center>
 	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 			<div class="row row-pb-md">
