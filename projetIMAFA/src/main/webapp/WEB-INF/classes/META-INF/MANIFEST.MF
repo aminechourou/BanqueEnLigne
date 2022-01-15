@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: projetIMAFA
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: ASUS
+Built-By: wadie
 Implementation-Vendor-Id: projetIMAFA
-Build-Jdk: 1.8.0_121
+Build-Jdk: 1.8.0_211
 Implementation-URL: https://spring.io/projects/spring-boot/projetIMAFA
 Created-By: Maven Integration for Eclipse
 

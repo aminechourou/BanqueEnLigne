@@ -43,7 +43,7 @@ public class CompteTitre {
 	private String rib;
 	
 	@ManyToOne
-	Utilisateur utilisateur;
+	User user;
 	@JsonIgnore
 	@OneToMany
 	List<Ordre> ordres;	
@@ -91,13 +91,6 @@ public class CompteTitre {
 
 
 
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
-	}
-
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
-	}
 
 	public int getId() {
 		return id;
@@ -144,7 +137,7 @@ public class CompteTitre {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CompteTitre(int id, Date dateCreation, String status, float solde, String rib, Utilisateur utilisateur,
+	public CompteTitre(int id, Date dateCreation, String status, float solde, String rib, User User,
 			List<Ordre> ordres, List<Action> actions, List<Obligation> obligations, List<Sicav> sicavs) {
 		super();
 		this.id = id;
@@ -152,21 +145,21 @@ public class CompteTitre {
 		this.status = status;
 		this.solde = solde;
 		this.rib = rib;
-		this.utilisateur = utilisateur;
+		this.user = User;
 		this.ordres = ordres;
 		this.actions = actions;
 		this.obligations = obligations;
 		this.sicavs = sicavs;
 	}
 
-	public CompteTitre(Date dateCreation, String status, float solde, String rib, Utilisateur utilisateur,
+	public CompteTitre(Date dateCreation, String status, float solde, String rib, User User,
 			List<Ordre> ordres, List<Action> actions, List<Obligation> obligations, List<Sicav> sicavs) {
 		super();
 		this.dateCreation = dateCreation;
 		this.status = status;
 		this.solde = solde;
 		this.rib = rib;
-		this.utilisateur = utilisateur;
+		this.user = User;
 		this.ordres = ordres;
 		this.actions = actions;
 		this.obligations = obligations;

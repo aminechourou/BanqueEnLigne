@@ -10,14 +10,15 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import projetIMAFA.entity.*;
+import projetIMAFA.entity.Role_User;
+import projetIMAFA.entity.User;
 
 
 
 @Repository
-public interface UserRepository extends CrudRepository<Utilisateur, Integer>{
-/*	@Query("SELECT u FROM User u WHERE u.Role_User= ?1")
-	List<Utilisateur> retrieveUsersByRole(Role_User role);
+public interface UserRepository extends CrudRepository<User, Integer>{
+	@Query("SELECT u FROM User u WHERE u.Role_User= ?1")
+	List<User> retrieveUsersByRole(Role_User role);
 	
 	@Modifying
 	@Transactional
@@ -25,16 +26,16 @@ public interface UserRepository extends CrudRepository<Utilisateur, Integer>{
 	void verifiedaccount(Integer id);
 	
 	@Query("SELECT u FROM User u WHERE u.Hiring_date between ?1 and ?2")
-	List<Utilisateur> retrieveUsersByDate(Date d1,Date d2);
+	List<User> retrieveUsersByDate(Date d1,Date d2);
 	
 	@Query("SELECT u FROM User u WHERE u.Email=?1 AND u.Password=?2")
-	Utilisateur login(String email,String password);
+	User login(String email,String password);
 	
 	@Query("SELECT u FROM User u WHERE u.Email= ?1")
-	Utilisateur getcode(String email);
+	User getcode(String email);
 	
 	@Query("SELECT u FROM User u WHERE u.random= ?1")
-	Utilisateur getRandom(Integer random);
+	User getRandom(Integer random);
 	
 	@Query("SELECT COUNT(u),u.Hiring_date FROM User u GROUP BY u.Hiring_date")
 	 List<Object> getUserbydate();
@@ -50,5 +51,5 @@ public interface UserRepository extends CrudRepository<Utilisateur, Integer>{
 	@Transactional
 	@Query("update User u set u.random=?1 where u.random = ?2")
 	void upRandom(Integer random,Integer random1);
-*/
+
 }

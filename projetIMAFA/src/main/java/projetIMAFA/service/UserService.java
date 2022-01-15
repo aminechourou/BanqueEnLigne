@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-/*
+
 import javax.servlet.http.Part;
 
 import org.apache.logging.log4j.LogManager;
@@ -15,209 +15,137 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import projetIMAFA.entity.*;
+import projetIMAFA.entity.Role_User;
+import projetIMAFA.entity.User;
 import projetIMAFA.repo.UserRepository;
 
 
 
 @Service
-public class UtilisateurService implements IUtilisateurService {
+public class UserService implements IUserService {
 	@Autowired
-	UserRepository UtilisateurRepository;
-	private static final Logger l = LogManager.getLogger(UtilisateurService.class);
+	UserRepository userRepository;
+	private static final Logger l = LogManager.getLogger(UserService.class);
 
-	public List<Utilisateur> retrieveAllUsers() {
-		List<Utilisateur> Utilisateurs = (List<Utilisateur>) UtilisateurRepository.findAll();
-		for(Utilisateur Utilisateur : Utilisateurs)
+	public List<User> retrieveAllUsers() {
+		List<User> users = (List<User>) userRepository.findAll();
+		for(User user : users)
 		{
-			l.info("Utilisateur ++ :"+Utilisateur);
+			l.info("user ++ :"+user);
 		}
-		return Utilisateurs;
+		return users;
 		
 	}
 
-	public Utilisateur addUtilisateur(Utilisateur u) {
-		Utilisateur UtilisateurSaved = null;
-		UtilisateurSaved=UtilisateurRepository.save(u);
-		return UtilisateurSaved;
+	public User addUser(User u) {
+		User userSaved = null;
+		userSaved=userRepository.save(u);
+		return userSaved;
 		
 	}
 
-	public void deleteUtilisateur(String id) {
-		UtilisateurRepository.deleteById(Integer.parseInt(id));
+	public void deleteUser(String id) {
+		userRepository.deleteById(Integer.parseInt(id));
 		
 	}
 
-	public Utilisateur updateUtilisateur(Utilisateur u) {
-		Utilisateur UtilisateurAdded = UtilisateurRepository.save(u);
-		return UtilisateurAdded;
+	public User updateUser(User u) {
+		User userAdded = userRepository.save(u);
+		return userAdded;
 	}
 
-	public Utilisateur retrieveUtilisateur(String id) {
+	public User retrieveUser(String id) {
 	
-		l.info("in retrieveUtilisateur id= "+id);
-		Utilisateur u = UtilisateurRepository.findById(Integer.parseInt(id)).orElse(null);
-		l.info("Utilisateur returned : "+u);
+		l.info("in retrieveUser id= "+id);
+		User u = userRepository.findById(Integer.parseInt(id)).orElse(null);
+		l.info("user returned : "+u);
 		return u;
 		
 	}
 	
-	public List<Utilisateur> retrieveUtilisateursByRole(Role_Utilisateur role)
+	public List<User> retrieveUsersByRole(Role_User role)
 	{
-		List<Utilisateur> Utilisateurs = (List<Utilisateur>) UtilisateurRepository.retrieveUtilisateursByRole(role);
-		for(Utilisateur Utilisateur : Utilisateurs)
+		List<User> users = (List<User>) userRepository.retrieveUsersByRole(role);
+		for(User user : users)
 		{
-			l.info("Utilisateur ++ :"+Utilisateur);
+			l.info("user ++ :"+user);
 		}
-		return Utilisateurs;	
+		return users;	
 	}
 	
 	public void verifie_account(String id)
 	{
-		UtilisateurRepository.verifiedaccount(Integer.parseInt(id));
+		userRepository.verifiedaccount(Integer.parseInt(id));
 		
 	}
 	
-	public List<Utilisateur> retrieveUtilisateursByDate(String d1,String d2) throws ParseException
+	public List<User> retrieveUsersByDate(String d1,String d2) throws ParseException
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date d11 = dateFormat.parse(d1);
 		Date d22 = dateFormat.parse(d2);
-		List<Utilisateur> Utilisateurs = (List<Utilisateur>) UtilisateurRepository.retrieveUtilisateursByDate(d11,d22);
-		for(Utilisateur Utilisateur : Utilisateurs)
+		List<User> users = (List<User>) userRepository.retrieveUsersByDate(d11,d22);
+		for(User user : users)
 		{
-			l.info("Utilisateur ++ :"+Utilisateur);
+			l.info("user ++ :"+user);
 		}
-		return Utilisateurs;	
+		return users;	
 	}
 	
-	public Utilisateur login(String email,String password)
+	public User login(String email,String password)
 	{
-		Utilisateur u=UtilisateurRepository.login(email, password);
+		User u=userRepository.login(email, password);
 		System.out.println(u);
         return u;
 		
 	}
 	
-	 public List<Object> getUtilisateurbydate()
+	 public List<Object> getUserbydate()
 	 {
-		 List<Object> u =UtilisateurRepository.getUtilisateurbydate();
+		 List<Object> u =userRepository.getUserbydate();
 		 return u;
 	 }
-	 public List<Object> getUtilisateurbyarea()
+	 public List<Object> getUserbyarea()
 	 {
-		 List<Object> u =UtilisateurRepository.getUtilisateurbyarea();
+		 List<Object> u =userRepository.getUserbyarea();
 		 return u; 
 	 }
 
 	
-	public Utilisateur getcode(String email)
+	public User getcode(String email)
 	{
-		Utilisateur u=UtilisateurRepository.getcode(email);
+		User u=userRepository.getcode(email);
         return u;
 		
 		
 	}
-	public Utilisateur getRandom(String random)
+	public User getRandom(String random)
 	{
-		Utilisateur u=UtilisateurRepository.getRandom(Integer.parseInt(random));
+		User u=userRepository.getRandom(Integer.parseInt(random));
         return u;
 		
 		
 	}
 	public void upMdp(String random,String mdp)
 	{
-		UtilisateurRepository.upMdp(Integer.parseInt(random), mdp);
+		userRepository.upMdp(Integer.parseInt(random), mdp);
 
 	}
 	public void upRandom(Integer random,String random1)
 	{
-		UtilisateurRepository.upRandom(random, Integer.parseInt(random1));
+		userRepository.upRandom(random, Integer.parseInt(random1));
 
 	}
 	
 	public void uploadFile(Part file) throws IllegalStateException, IOException
 	{
-    ((MultipartFile) file).transferTo(new File("C:Utilisateurs\\ASUS\\git\\pidev\\pidev\\src\\main\\webapp\\template\\images"+file.getName()));
+    ((MultipartFile) file).transferTo(new File("C:Users\\ASUS\\git\\pidev\\pidev\\src\\main\\webapp\\template\\images"+file.getName()));
 
 	}
 	
 	/**********************************************************************/
-	/*public void del(int id){
-		UtilisateurRepository.deleteById(id);
-	}
-
-	@Override
-	public List<Utilisateur> retrieveAllUtilisateurs() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Utilisateur addUtilisateur(Utilisateur u) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteUtilisateur(String id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Utilisateur updateUtilisateur(Utilisateur u) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Utilisateur retrieveUser(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Utilisateur> retrieveUsersByRole(Role_User role) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Utilisateur> retrieveUsersByDate(String d1, String d2) throws ParseException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Utilisateur login(String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Utilisateur getcode(String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Utilisateur getRandom(String random) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object> getUtilisateurbydate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object> getUtilisateurbyarea() {
-		// TODO Auto-generated method stub
-		return null;
+	public void del(int id){
+		userRepository.deleteById(id);
 	}
 
 }
-*/

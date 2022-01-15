@@ -63,7 +63,7 @@ public class EmployeeSalary {
 		@Override
 		public String toString() {
 			return "EmployeeSalary [Salary_ID=" + Salary_ID + ", Month=" + Month + ", Year=" + Year + ", Work_hours="
-					+ Work_hours + ", Extra_hours=" + Extra_hours + ", salary=" + salary + ", Utilisateur=" + Utilisateur + "]";
+					+ Work_hours + ", Extra_hours=" + Extra_hours + ", salary=" + salary + ", User=" + User + "]";
 		}
 		public EmployeeSalary(int salary_ID, int month, int year, int work_hours, int extra_hours, float salary) {
 			super();
@@ -88,22 +88,22 @@ public class EmployeeSalary {
 		}
 		
 		@OneToOne
-		private Utilisateur Utilisateur;
+		private User User;
 		
-		public Utilisateur getUtilisateur() {
-			return Utilisateur;
+		public User getUser() {
+			return User;
 		}
-		public void setUtilisateur(Utilisateur Utilisateur) {
-			this.Utilisateur = Utilisateur;
+		public void setUser(User User) {
+			this.User = User;
 		}
-		public EmployeeSalary(int month, int year, int work_hours, int extra_hours, float salary, Utilisateur Utilisateur) {
+		public EmployeeSalary(int month, int year, int work_hours, int extra_hours, float salary, User User) {
 			super();
 			Month = month;
 			Year = year;
 			Work_hours = work_hours;
 			Extra_hours = extra_hours;
 			this.salary = salary;
-			this.Utilisateur = Utilisateur;
+			this.User = User;
 		}
 
 		

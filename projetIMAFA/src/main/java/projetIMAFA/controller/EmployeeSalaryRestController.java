@@ -1,5 +1,5 @@
 package projetIMAFA.controller;
-
+/*
 import java.io.IOException;
 
 import java.text.DateFormat;
@@ -213,7 +213,7 @@ public class EmployeeSalaryRestController {
 		public void downloadUsersCSV(@Context HttpServletResponse httpServletResponse) throws IOException{
 			salaryServicee.generateCsvResponse(httpServletResponse);
 		}*/
-
+/*
 	@GetMapping(value ="/bestEmployee")
 	public List<?> getBestEmployee() {
 
@@ -266,5 +266,5 @@ public class EmployeeSalaryRestController {
 
 
 }
-
+*/
 
