@@ -65,7 +65,8 @@ import projetIMAFA.repo.UserRepository;
 		
 		public List<Integer> Employeecin()
 		{
-			return salaryRepository.Employeecin();
+			//return salaryRepository.Employeecin();
+			return null ;
 		}
 
 
@@ -74,9 +75,9 @@ import projetIMAFA.repo.UserRepository;
 		@Override
 		public void affecterSalaryToUser(int idp, int id) {
 		EmployeeSalary employeeSalary = salaryRepository.findById(idp).get();
-		Utilisateur user = userRepository.findById(id).get();
+		User user = userRepository.findById(id).get();
 		if (!ObjectUtils.isEmpty(employeeSalary) && !ObjectUtils.isEmpty(user))
-			employeeSalary.setUtilisateur(user);
+			employeeSalary.setUser(user);
 			userRepository.save(user);
 		}
 		
