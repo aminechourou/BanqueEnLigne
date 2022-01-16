@@ -1,40 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-
-
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://java.sun.com/jsf/html"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:a4j="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-
-
-<head>
+	<head>
+<title>Add Employee Salary</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Run</title>
-
 	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 	<meta name="author" content="freehtml5.co" />
-
-	<!-- 
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FreeHTML5.co
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
-
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
+		<meta property="og:title" content=""/>
 
 	<meta name="twitter:title" content="" />
 	<meta name="twitter:image" content="" />
@@ -63,59 +39,24 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
-<h:head>
-
-
-	<script type="text/javascript">
-            function show(str){
-                document.getElementById('sh2').style.display = 'none';
-      //         document.getElementById('sh2').getElementsByName('g2').value=""
-
-                document.getElementById('sh1').style.display = 'block';
-
-
-            }
-            function show2(sign){
-    //            document.getElementById('g1').value=0
-       //         document.getElementById('sh1').getElementsByName('g1').value=""
-
-                document.getElementById('sh2').style.display = 'block';
-
-                document.getElementById('sh1').style.display = 'none';
-
-
-            }
-           
-          
-        </script>
-	<script> 
-        function displayRadioValue() { 
-            var ele = document.getElementsByName('r1');  
-            var a 
-           if(ele[1].checked){
-             a = ele[1].value ; }
-           else {  a = ele[2].value ;}
-      
-            document.getElementById("formId:a").value = a;
-        } 
-    </script>
-	<style type="text/css">
-button.ui-button {
-	margin-right: .5rem;
-}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/coin-slider.css" />
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/cufon-titillium-250.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/coin-slider.min.js"></script>
+    <style type="text/css">
+    button.ui-button {
+        margin-right: .5rem;
+    }
 </style>
-</h:head>
+	</head>
 
 
-</head>
-
-
-<body>
-		
-	<div class="fh5co-loader"></div>
-	
-	<div id="page">
+	<body>
+		<div id="page">
 	<nav class="fh5co-nav" role="navigation">
 		<div class="top">
 			<div class="container">
@@ -135,7 +76,7 @@ button.ui-button {
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-2">
-						<div id="fh5co-logo"><a href="index.html">Run<span>.</span></a></div>
+						<div id="fh5co-logo"><a href="login.jsf">Bank<span>.</span></a></div>
 					</div>
 					<div class="col-xs-10 text-right menu-1">
 						<ul>
@@ -152,7 +93,7 @@ button.ui-button {
 								</ul>
 							</li>
 							<li><a href="contact.html">Contact</a></li>
-							<li class="btn-cta"><a href="#"><span>Login</span></a></li>
+							<li class="btn-cta"><a href="#"><span>Logout</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -161,111 +102,133 @@ button.ui-button {
 		</div>
 	</nav>
 
+
+
 	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/img_bg_1.jpg);" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
+	
+	</header>
+	
+	
+	
+	
+
+		<div class="header">
+			<div class="header_resize">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+				<br />
+					<h2>
+				Add Employee Salary
+					</h2>
+</div></div>
+				<div align="center">
+					<h:panelGroup columns="2">
+						<h:form id="form">
+							<table>
+								<tr>
+									<td><h:outputText value="Month"></h:outputText></td>
+									<td><h:inputText id="num" required="true"  class="form-control"
+											requiredMessage="enter number of months" value="#{SalaryController.month}">
+											<f:validateLength for="num" minimum="1" maximum="2" /></h:inputText>
+																					<table>
+											<tr>
+												<td><h:message for="num" style="color:red" /></td>
+											</tr>
+										</table></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Year"></h:outputText></td>
+									<td><h:inputText id="postal" required="true"  class="form-control"
+											requiredMessage="enter the year"
+											value="#{SalaryController.year}">
+
+											<f:validateLength for="postal" minimum="4" maximum="4" />
+										</h:inputText>
+										<table>
+											<tr>
+												<td><h:message for="postal" style="color:red" /></td>
+											</tr>
+										</table></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Work_hours"></h:outputText></td>
+									<td><h:inputText id="postale" required="true"  class="form-control"
+											requiredMessage="enter the work_hours"
+											value="#{SalaryController.work_hours}">
+
+											<f:validateLength for="postale" />
+										</h:inputText>
+										<table>
+											<tr>
+												<td><h:message for="postale" style="color:red" /></td>
+											</tr>
+										</table></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Extra_hours"></h:outputText></td>
+									<td><h:inputText id="postalee" required="true"  class="form-control"
+											requiredMessage="enter the extra_hours"
+											value="#{SalaryController.extra_hours}">
+
+											<f:validateLength for="postalee" />
+										</h:inputText>
+										<table>
+											<tr>
+												<td><h:message for="postalee" style="color:red" /></td>
+											</tr>
+										</table></td>
+								</tr>
+								<tr>
+									<td><h:outputText value="Employee"></h:outputText></td>
+									<td><h:selectOneMenu id="geo" required="true"   class="form-control"
+											requiredMessage="choose your geographical_area"
+											value="#{SalaryController.cin}">
+											<f:selectItem itemLabel="Select Employee"
+												itemValue="#{null}" />
+											<f:selectItems value="#{SalaryController.cins}" />
+										</h:selectOneMenu>
+										<table>
+											<tr>
+												<td><h:message for="geo" style="color:red" /></td>
+											</tr>
+										</table></td>
+								</tr>
+								
+									<tr>
+									<td>
+									<div align="center"></div>
+									<h:commandButton id="btn"
+											action="#{SalaryController.addSalaryy()}" class="btn btn-primary" style="float:center;"/></td></tr>
+											<tr><td><h:message for="btn" style="color:green" /></td></tr>
+								
+							</table>
+						</h:form>
+					</h:panelGroup>
+				</div>
+
+			</div>
+
+		</div>
+
+	
+
+<div id="fh5co-started">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Working hard is <strong>rewarding</strong></h1>
-							<p><a href="#" class="btn btn-primary btn-lg with-arrow">View Our Work</a></p>
-						</div>
-					</div>
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Lets Get Started</h2>
+					<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+				</div>
+			</div>
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<p><a href="#" class="btn btn-default btn-lg">Get in Touch</a></p>
 				</div>
 			</div>
 		</div>
-	</header>
-<center>
+	</div>
 
-<div class="card">
-<h:form id="contactform" >
-	<table>
-		<tr>
-			<td><h:outputText value="Ajouter le salaire d'un employé" style="font-weight:bold"></h:outputText></td>
-			
-			<td>
-				
-        <div class="ui-fluid p-grid p-formgrid">
-            <div class="p-field p-col-12 p-md-4">
-            
-            </div>
-            </div>
-				
-				
-				
-         </td>
-				
-		</tr>
-
-		<tr>
-			<td><h:outputText value="ISIN" style="font-weight:bold"></h:outputText></td>
-			<td>
-					
-					<h5 class="p-mt-0"></h5>
-        <p:inputText widgetVar="editor1" value="#{SalaryController.month}" height="100" secure='false' />
-			</td>
-		</tr>
-		
-		<tr>	
-			<td><h:outputText value="Ticker" style="font-weight:bold"></h:outputText></td>
-			<td>
-			<h5 class="p-mt-0"></h5>
-   <h:selectOneMenu required="true" value="#{SalaryController.cin}">
-											<f:selectItem itemLabel="Selectionner un employé"
-												itemValue="" />
-											<f:selectItems value="#{SalaryController.cins}" />
-										</h:selectOneMenu>
-			</td>
-		</tr>
-		<tr>
-			<td><h:outputText value="OPEN" style="font-weight:bold"></h:outputText></td>
-			<td>
-				<h5 class="p-mt-0"></h5>	
-		
-        <p:inputText widgetVar="editor1" value="#{SalaryController.year}" height="100" secure='false' />
-			</td>
-		</tr>
-		<tr>
-			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
-			
-			<td>
-				<h5 class="p-mt-0"></h5>	
-			
-        <p:inputText widgetVar="editor1" value="#{SalaryController.work_hours}" height="100" secure='false' />
-			</td>
-		</tr>
-		<tr>
-			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
-			
-			<td>
-				<h5 class="p-mt-0"></h5>	
-			
-        <p:inputText widgetVar="editor1" value="#{SalaryController.extra_hours}" height="100" secure='false' />
-			</td>
-		</tr>
-		<tr>
-			<td><h:outputText value="HIGH" style="font-weight:bold"></h:outputText></td>
-			
-			<td>
-				<h5 class="p-mt-0"></h5>	
-			
-        <p:inputText widgetVar="editor1" value="#{SalaryController.salary}" height="100" secure='false' />
-			</td>
-		</tr>		
-	</table>
-	<br />
-	<br />
-	<br />
-	<br />
-	
-    <h:commandButton action="{ReclamationSinistreControllerJSF.addSalaryy()}"  class="send" style="float:center;"/>
-
-
-</h:form>
-</div>
-
-</center>
 	<footer id="fh5co-footer" role="contentinfo">
 		<div class="container">
 			<div class="row row-pb-md">
@@ -308,25 +271,27 @@ button.ui-button {
 			<div class="row copyright">
 				<div class="col-md-12 text-center">
 					<p>
-						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
+						<small class="block"> 2016 Free HTML5. All Rights Reserved.</small> 
 						<small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
 					</p>
-					<p>
+					
 						<ul class="fh5co-social-icons">
 							<li><a href="#"><i class="icon-twitter"></i></a></li>
 							<li><a href="#"><i class="icon-facebook"></i></a></li>
 							<li><a href="#"><i class="icon-linkedin"></i></a></li>
 							<li><a href="#"><i class="icon-dribbble"></i></a></li>
 						</ul>
-					</p>
+					
 				</div>
 			</div>
 
 		</div>
 	</footer>
-	</div>
+	
+	
+</div>
 
-	<div class="gototop js-top">
+<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
 	
@@ -344,6 +309,5 @@ button.ui-button {
 	<script src="js/owl.carousel.min.js"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
-
 	</body>
-</html>
+</ui:composition>
