@@ -12,9 +12,9 @@ public interface IEmployeeSalaryService {
 	EmployeeSalary updateSalary(EmployeeSalary s);
 	EmployeeSalary retrieveSalary(String id) ;
 	List<EmployeeSalary> fichedepaie(int User_ID);
-	public int salary();
+	public void salary();
 	void affecterSalaryToUser(int idp, int id);
 	List<?> BestEmployee();
-	public List<Integer> Employeecin();
+	public List<Long> Employeecin();
 
 }

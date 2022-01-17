@@ -124,6 +124,33 @@ public class Formation {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
+	public Formation(int id, String titre, String description, Date dateDebut, Date dateFin, String domaine,
+			String etat, User responsablerh) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.description = description;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.domaine = domaine;
+		this.etat = etat;
+		this.responsablerh = responsablerh;
+	}
+
+
+	public Formation(String titre, String description, Date dateDebut, Date dateFin, String domaine, String etat,
+			User responsablerh) {
+		super();
+		this.titre = titre;
+		this.description = description;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.domaine = domaine;
+		this.etat = etat;
+		this.responsablerh = responsablerh;
+	}
 	
 	
 	

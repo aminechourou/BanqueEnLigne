@@ -65,7 +65,10 @@ public class EmployeeSalary {
 			return "EmployeeSalary [Salary_ID=" + Salary_ID + ", Month=" + Month + ", Year=" + Year + ", Work_hours="
 					+ Work_hours + ", Extra_hours=" + Extra_hours + ", salary=" + salary + ", User=" + User + "]";
 		}
-		public EmployeeSalary(int salary_ID, int month, int year, int work_hours, int extra_hours, float salary) {
+
+		
+		public EmployeeSalary(int salary_ID, int month, int year, int work_hours, int extra_hours, float salary,
+				projetIMAFA.entity.User user) {
 			super();
 			Salary_ID = salary_ID;
 			Month = month;
@@ -73,8 +76,8 @@ public class EmployeeSalary {
 			Work_hours = work_hours;
 			Extra_hours = extra_hours;
 			this.salary = salary;
+			User = user;
 		}
-		
 		public EmployeeSalary(int month, int year, int work_hours, int extra_hours, float salary) {
 			super();
 			Month = month;

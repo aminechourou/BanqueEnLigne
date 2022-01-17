@@ -1,11 +1,18 @@
 package projetIMAFA.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,61 +28,174 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import projetIMAFA.Exception.ResourceNotFoundException;
+import projetIMAFA.entity.EmployeeSalary;
 import projetIMAFA.entity.Formation;
-
+import projetIMAFA.entity.User;
 import projetIMAFA.repo.FormationRepository;
+import projetIMAFA.service.FormationService;
+import projetIMAFA.service.UserService;
 
 
-@Controller
+@Transactional
+@Controller(value = "FormationController") // Name of the bean in Spring IoC
+@ELBeanName(value = "FormationController") // Name of the bean used by JSF
 public class FormationController {
 
 	@Autowired
 	FormationRepository formationRepository;
-	
 
-	@GetMapping("/allf")
-	@ResponseBody
-	public List<Formation> getAllFormation() {
-		return formationRepository.findAll();
-	}
-	
-	@PostMapping("/add")
-	public Formation createFormation(@Valid @RequestBody Formation formation) {
-		return formationRepository.save(formation);
-	}
-	
-	@DeleteMapping("/delete/{id}")
-	public Map<String, Boolean> deleteFormation(@PathVariable(value = "id") Integer FormationId)
-			throws ResourceNotFoundException {
-		Formation formation = formationRepository.findById(FormationId)
-				.orElseThrow(() -> new ResourceNotFoundException("Formation not found for this id :: " + FormationId));
+	@Autowired
+	FormationService formationService;
+	@Autowired
+	UserService userService;
 
-		formationRepository.delete(formation);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("Formation deleted : ", Boolean.TRUE);
-		return response;
-	}
-	
-	@GetMapping("/formation/{id}")
-	public ResponseEntity<Formation> getFormationById(@PathVariable(value = "id") Integer FormationId)
-			throws ResourceNotFoundException {
-		Formation formation = formationRepository.findById(FormationId)
-				.orElseThrow(() -> new ResourceNotFoundException("Formation not found for this id :: " + FormationId));
-		return ResponseEntity.ok().body(formation);
-	}
-	
-	@PutMapping("/formation/{id}")
-	public ResponseEntity<Formation> updateFormation(@PathVariable(value = "id") Integer FormationId,
-			@Valid @RequestBody Formation formationDetails) throws ResourceNotFoundException {
-		Formation formation = formationRepository.findById(FormationId)
-				.orElseThrow(() -> new ResourceNotFoundException("Formation not found for this id :: " + FormationId));
+	private int id;
+	private String titre;
+	private String description;
+	private Date dateDebut;
+	private Date dateFin;
+	private String domaine;
+	private String etat;
+	private List<String> names;
+	private String name;
+	private Integer FormationIdToBeUpdated;
+	private List<Formation> formations;
 
-		formation.setTitre(formationDetails.getTitre());
-		formation.setEtat(formationDetails.getEtat());
-		formation.setDomaine(formationDetails.getDomaine());
-		formation.setDescription(formationDetails.getDescription());
-		final Formation updatedFormation = formationRepository.save(formation);
-		return ResponseEntity.ok(updatedFormation);
+	public void addFormation() throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
+		User u=userService.getName(name);	
+		if(dateDebut.compareTo(dateFin)<0)
+		{
+			//formationService.addFormation(new Formation(titre,description,dateDebut,dateFin,domaine,"actif",u)) ;	
+		}
+		else {
+		formationService.addFormation(new Formation(titre,description,dateDebut,dateFin,domaine,"actif",u)) ;
+		}
+	}
+
+	public String updateSalary()throws ParseException {
+		User u=userService.getName(name);	
+		formationService.updateFormation(new Formation(FormationIdToBeUpdated,titre,description,dateDebut,dateFin,domaine,"actif",u) );
+		//return("/amine/Hana/fichedepaie.jsf?faces-redirect=true");
+		return("/ordrect/afficherformation.jsf?faces-redirect=true");
+
+	}
+	
+	public void deleteSalary(String salaryId)
+	{
+		formationService.deleteFormation(salaryId);
+	}
+	
+	public String displaySalaries(Formation empl)
+	{
+
+		this.setTitre(empl.getTitre());
+		this.setDescription(empl.getDescription());
+		this.setDomaine(empl.getDomaine());
+		this.setDateDebut(empl.getDateDebut());
+		this.setName(empl.getResponsablerh().getFirst_name());	
+		this.setDateFin(empl.getDateFin());
+		this.setFormationIdToBeUpdated(empl.getId());
+		return("/ordrect/updateformation.jsf?faces-redirect=true");
+
+	}
+
+	public FormationRepository getFormationRepository() {
+		return formationRepository;
+	}
+
+	public void setFormationRepository(FormationRepository formationRepository) {
+		this.formationRepository = formationRepository;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getDateDebut() {
+		return dateDebut;
+	}
+
+	public void setDateDebut(Date dateDebut) {
+		this.dateDebut = dateDebut;
+	}
+
+	public Date getDateFin() {
+		return dateFin;
+	}
+
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
+	}
+
+	public String getDomaine() {
+		return domaine;
+	}
+
+	public void setDomaine(String domaine) {
+		this.domaine = domaine;
+	}
+
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
+	public List<String> getNames() {
+		return formationService.Employeecin();
+	}
+
+	public void setNames(List<String> names) {
+		this.names = names;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getFormationIdToBeUpdated() {
+		return FormationIdToBeUpdated;
+	}
+
+	public void setFormationIdToBeUpdated(Integer formationIdToBeUpdated) {
+		FormationIdToBeUpdated = formationIdToBeUpdated;
+	}
+
+	public List<Formation> getFormations() {
+		List<Formation> list = formationService.retrieveAllFormations();
+		return list;
+	}
+
+	public void setFormations(List<Formation> formations) {
+		this.formations = formations;
 	}
 	
 	

@@ -63,10 +63,10 @@ import projetIMAFA.repo.UserRepository;
 	
 		}
 		
-		public List<Integer> Employeecin()
+		public List<Long> Employeecin()
 		{
-			//return salaryRepository.Employeecin();
-			return null ;
+			return salaryRepository.Employeecin();
+			
 		}
 
 
@@ -81,9 +81,9 @@ import projetIMAFA.repo.UserRepository;
 			userRepository.save(user);
 		}
 		
-		 public int salary()
+		 public void salary()
 		    {
-		    	return salaryRepository.salary();
+		    	salaryRepository.salary();
 		    }
 		 
 		 

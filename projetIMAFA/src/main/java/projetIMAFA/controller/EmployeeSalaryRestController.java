@@ -1,5 +1,5 @@
 package projetIMAFA.controller;
-/*
+
 import java.io.IOException;
 
 import java.text.DateFormat;
@@ -31,6 +31,10 @@ import projetIMAFA.service.*;
 @Controller(value = "SalaryController") // Name of the bean in Spring IoC
 @ELBeanName(value = "SalaryController") // Name of the bean used by JSF
 public class EmployeeSalaryRestController {
+	
+	@Autowired
+	IUserService userService;
+
 	private int Salary_ID;
 	private int Month;
 	private int Year;	
@@ -40,8 +44,8 @@ public class EmployeeSalaryRestController {
 	private EmployeeSalary salaryy;
 	private Integer SalaryIdToBeUpdated;
 	private List<EmployeeSalary> salaries;
-	private List<Integer> cins;
-	private Integer cin;
+	private List<Long> cins;
+	private Long cin;
 	
 	public Integer getSalaryIdToBeUpdated() {
 		return SalaryIdToBeUpdated;
@@ -151,8 +155,6 @@ public class EmployeeSalaryRestController {
 	IEmployeeSalaryService salaryService;
 	EmployeeSalaryServiceImpl salaryServicee;
 
-	@GetMapping("/salaries")
-	@ResponseBody
 	public List<EmployeeSalary> getSalaries() {
 		List<EmployeeSalary> list = salaryService.retrieveAllSalaries();
 		return list;
@@ -175,7 +177,8 @@ public class EmployeeSalaryRestController {
 	}
 	
 	public void addSalaryy() throws ParseException {
-		salaryService.addSalary(new EmployeeSalary(Month,Year,Work_hours,Extra_hours,salary) );
+		User u=userService.getCin(cin);	
+		salaryService.addSalary(new EmployeeSalary(Month,Year,Work_hours,Extra_hours,salary,u) );
 		salaryService.salary();
 		
 	}
@@ -209,11 +212,11 @@ public class EmployeeSalaryRestController {
 		salaryService.affecterSalaryToUser(idp, id);
 	}
 
-	/*@GetMapping("/users-csv")
+/*	@GetMapping("/users-csv")
 		public void downloadUsersCSV(@Context HttpServletResponse httpServletResponse) throws IOException{
 			salaryServicee.generateCsvResponse(httpServletResponse);
 		}*/
-/*
+
 	@GetMapping(value ="/bestEmployee")
 	public List<?> getBestEmployee() {
 
@@ -224,11 +227,11 @@ public class EmployeeSalaryRestController {
 
 	
 	public String updateSalary()throws ParseException {
-		
-		salaryService.updateSalary(new EmployeeSalary(SalaryIdToBeUpdated ,Month,Year,Work_hours,Extra_hours) );
+		User u=userService.getCin(cin);	
+		salaryService.updateSalary(new EmployeeSalary(SalaryIdToBeUpdated ,Month,Year,Work_hours,Extra_hours,salary,u) );
 		salaryService.salary();
-		return("/amine/Hana/fichedepaie.jsf?faces-redirect=true");
-
+		//return("/amine/Hana/fichedepaie.jsf?faces-redirect=true");
+		return("/ordrect/afficheremployeesalary.jsf?faces-redirect=true");
 
 	}
 	public String displaySalaries(EmployeeSalary empl)
@@ -238,33 +241,33 @@ public class EmployeeSalaryRestController {
 		this.setYear(empl.getYear());
 		this.setWork_hours(empl.getWork_hours());
 		this.setExtra_hours(empl.getExtra_hours());
-		
+		this.setCin(empl.getUser().getCIN());	
 		this.setSalaryIdToBeUpdated(empl.getSalary_ID());
-		return("/amine/Hana/UpdateSalary.jsf?faces-redirect=true");
+		return("/ordrect/updatesalary.jsf?faces-redirect=true");
 
 	}
 
 
-	public List<Integer> getCins() {
+	public List<Long> getCins() {
 		return salaryService.Employeecin();
 	}
 
 
-	public void setCins(List<Integer> cins) {
+	public void setCins(List<Long> cins) {
 		this.cins = cins;
 	}
 
 
-	public Integer getCin() {
+	public Long getCin() {
 		return cin;
 	}
 
 
-	public void setCin(Integer cin) {
+	public void setCin(Long cin) {
 		this.cin = cin;
 	}
 
 
 }
-*/
+
 

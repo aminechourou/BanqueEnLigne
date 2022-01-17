@@ -37,6 +37,11 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 	@Query("SELECT u FROM User u WHERE u.random= ?1")
 	User getRandom(Integer random);
 	
+	@Query("SELECT u FROM User u WHERE u.CIN= ?1")
+	User getCin(Long cin);
+	@Query("SELECT u FROM User u WHERE u.First_name= ?1")
+	User getName(String cin);
+	
 	@Query("SELECT COUNT(u),u.Hiring_date FROM User u GROUP BY u.Hiring_date")
 	 List<Object> getUserbydate();
 	@Query("SELECT COUNT(u),u.Geographical_area FROM User u GROUP BY u.Geographical_area")

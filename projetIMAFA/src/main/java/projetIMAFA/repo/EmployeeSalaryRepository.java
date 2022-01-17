@@ -19,13 +19,13 @@ public interface EmployeeSalaryRepository extends JpaRepository<EmployeeSalary,I
 	@Query("select Max(u.Work_hours+u.Extra_hours), u.Salary_ID from EmployeeSalary u")  
 	public List<?> BestEmployee();
 	
-	/*@Query("SELECT u.cin FROM user u ")  
-	public List<Integer> Employeecin();
-*/
+	@Query("SELECT u.CIN FROM User u WHERE u.Role_User <> 'ROLE_CLIENT' ")  
+	public List<Long> Employeecin();
+	
 	@Transactional
 	@Modifying
 	@Query(value="UPDATE employee_salary set salary=(work_hours*15)+(extra_hours*20)",nativeQuery=true)
-	public int salary();
+	public void salary();
 
 }
 

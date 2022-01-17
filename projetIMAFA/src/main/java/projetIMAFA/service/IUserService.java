@@ -14,7 +14,8 @@ import projetIMAFA.entity.User;
 
 
 public interface IUserService {
-
+	 User getName(String cin);
+	 User getCin(Long cin);
 	 List<User> retrieveAllUsers();
 	 User addUser(User u);
 	 void deleteUser(String id);

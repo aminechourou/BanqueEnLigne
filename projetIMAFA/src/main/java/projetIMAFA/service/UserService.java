@@ -147,5 +147,15 @@ public class UserService implements IUserService {
 	public void del(int id){
 		userRepository.deleteById(id);
 	}
+	@Override
+	public User getName(String cin) {
+		return userRepository.getName(cin);	
+	}
+
+	@Override
+	public User getCin(Long cin) {
+
+	return userRepository.getCin(cin);
+	}
 
 }
