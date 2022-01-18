@@ -27,13 +27,13 @@ private static final long serialVersionUID = 1L;
 
 private int obligation_ID;
 @Temporal(TemporalType.DATE)
-private Date date_emission;
+private Date date_emission; 
 private int operation;	
-private String codetitre;
-private String nomentreprise;
-private int maturite;
-private int quantite;
-private float taux;
+private String codetitre; 
+private String nomentreprise; 
+private int maturite; //echeance
+private int quantite; //valeur nominale
+private float taux; 
 @JsonIgnore
 @ManyToOne
 CompteTitre compteTitre;

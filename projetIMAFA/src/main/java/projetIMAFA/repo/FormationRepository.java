@@ -11,7 +11,7 @@ import projetIMAFA.repo.FormationRepository;
 @Repository
 public interface FormationRepository extends JpaRepository < Formation ,Integer>{
 
-	@Query("SELECT u.First_name FROM User u WHERE u.Role_User = 'ROLE_RESPONSABLERH' ")  
+	@Query("SELECT u.First_name FROM User u WHERE u.Role_User <> 'ROLE_RESPONSABLERH'  ")  
 	public List<String> Employeecin();
 	
 }
