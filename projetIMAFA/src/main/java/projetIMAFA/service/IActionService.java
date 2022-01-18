@@ -11,4 +11,6 @@ public interface IActionService {
 	 Action updateAction(Action a);
 	 Action retrieveAction(String id);
 	 List<Action> retrieveActionsByLibelle(String libelle);
+	 List<Action> retrieveActionsByCompte(Integer id);
+	 float retrieveActionsWall(Integer id);
 }

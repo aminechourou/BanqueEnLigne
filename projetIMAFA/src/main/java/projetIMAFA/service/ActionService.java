@@ -112,4 +112,14 @@ public class ActionService implements IActionService {
 		return null;
 	}
 
+	@Override
+	public List<Action> retrieveActionsByCompte(Integer id) {
+     return actionRepository.retrieveActionsByCompte(id);
+	}
+
+	@Override
+	public float retrieveActionsWall(Integer id) {
+     return actionRepository.retrieveActionsWall(id);
+	}
+
 }

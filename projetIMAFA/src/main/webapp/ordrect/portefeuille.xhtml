@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<head>
-<title>Display Actions</title>
+<title>Wallet</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -119,62 +119,54 @@
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 				<br />
 					<h2>
-				Display Actions
+				My Wallet
 					</h2>
 </div></div>
 				<div align="center">
 					<h:panelGroup columns="2">
 	<h:form>
-		<h:dataTable value="#{OrdreController.datas}"
+						<h3>
+				<h:outputText value="Sell now and get: #{OrdreController.closew} $" />
+					</h3>
+		<h:dataTable value="#{OrdreController.actionss}"
 			var="data" border="1">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Libelle" />
 				</f:facet>
-				<h:commandButton value="#{data.libelled}" action="#{OrdreController.affaction(data.id)}" />
+				<h:outputText value="#{data.isin}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Date" />
 				</f:facet>
-				<h:outputText value="#{data.dated}" />
+				<h:outputText value="#{data.date}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Volume" />
 				</f:facet>
-				<h:outputText value="#{data.volumed}" />
+				<h:outputText value="#{data.volume}" />
 			</h:column>
 
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="High" />
 				</f:facet>
-				<h:outputText value="#{data.highd}" />
+				<h:outputText value="#{data.high}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Low" />
 				</f:facet>
-				<h:outputText value="#{data.lowd}" />
+				<h:outputText value="#{data.low}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Close" />
 				</f:facet>
-				<h:outputText value="#{data.closed}" />
+				<h:outputText value="#{data.close}" />
 			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Achat" />
-				</f:facet>
-				<h:commandButton value="Acheter action"
-					action="#{OrdreController.addaction(data.id)}" />
-			</h:column>
-		
-			
-			
-
 		</h:dataTable>
 		
 	</h:form>

@@ -14,7 +14,12 @@ import projetIMAFA.entity.*;
 
 @Repository
 public interface ActionRepository extends CrudRepository<Action, Integer> {
-	
+
+
+	@Query("SELECT a FROM Action a WHERE a.compteTitre.id= ?1")
+	List<Action> retrieveActionsByCompte(Integer id);
+	@Query("SELECT SUM(a.close) FROM Action a WHERE a.compteTitre.id= ?1")
+	float retrieveActionsWall(Integer id);
 	
 	/*@Query("SELECT a FROM Action a WHERE a.libelle= ?1")
 	List<Action> retrieveActionsByLibelle(String libelle);*/

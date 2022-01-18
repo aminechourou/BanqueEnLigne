@@ -32,6 +32,7 @@ import lombok.Setter;
 import projetIMAFA.entity.Action;
 import projetIMAFA.entity.CompteTitre;
 import projetIMAFA.entity.Data_action;
+import projetIMAFA.entity.Formation;
 import projetIMAFA.entity.Ordre;
 import projetIMAFA.entity.TypeOrdre;
 import projetIMAFA.entity.TypeProduitFin;
@@ -84,9 +85,11 @@ public class OrdreControllerJSF {
 	private float low;
 	private float yield;
 	private float close;
+	private float closew;
 	private long volume;
 	private String variation;
 	private List<Action> actions;
+	private List<Action> actionss;
 	
 	/** data_action **/	
 	private Date dated;
@@ -433,6 +436,24 @@ public class OrdreControllerJSF {
 
 	public void setIdsd(int idsd) {
 		this.idsd = idsd;
+	}
+
+	public List<Action> getActionss() {
+		actionss= actionService.retrieveActionsByCompte(1);
+		return actionss;
+	}
+	
+	public void setActionss(List<Action> actionss) {
+		this.actionss = actionss;
+	}
+
+	public float getClosew() {
+		closew = actionService.retrieveActionsWall(1);
+		return closew;
+	}
+
+	public void setClosew(float closew) {
+		this.closew = closew;
 	}
 
 
