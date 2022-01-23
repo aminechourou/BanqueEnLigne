@@ -93,12 +93,12 @@ CompteTitreRepository compteTitreRepository;*/
 
 	/// add obligation
 
-	@PostMapping("/add-Obligation/{idcompte}")
+	/*@PostMapping("/add-Obligation/{idcompte}")
 	@ResponseBody
 	public Obligation addObligation(@RequestBody Obligation u,@PathVariable(value = "idcompte") int idcompte) {
 
 		CompteTitre compte = compteTitreRepository.retrieveComptetitre(idcompte);
-		u.setCompteTitre(compte);
+		//u.setCompteTitre(compte);
 		Obligation Obligation = obligationService.addObligation(u);
 		Ordre ordre = new Ordre();
 		Date today = new Date();
@@ -123,7 +123,7 @@ CompteTitreRepository compteTitreRepository;*/
 
 		return Obligation;
 	}
-
+*/
 
 	////sicavv
 	@PostMapping("/add-Sicav/{idcompte}")

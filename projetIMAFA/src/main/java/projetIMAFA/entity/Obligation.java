@@ -28,15 +28,13 @@ private static final long serialVersionUID = 1L;
 private int obligation_ID;
 @Temporal(TemporalType.DATE)
 private Date date_emission; 
-private int operation;	
-private String codetitre; 
 private String nomentreprise; 
 private int maturite; //echeance
-private int quantite; //valeur nominale
-private float taux; 
-@JsonIgnore
-@ManyToOne
-CompteTitre compteTitre;
+private int valeurnominal; //valeur nominale
+private int quantite;
+private float tauxactuariel;
+private float tauxcoupon;
+
 
 public Date getDate_emission() {
 	return date_emission;
@@ -56,82 +54,74 @@ public int getMaturite() {
 public void setMaturite(int maturite) {
 	this.maturite = maturite;
 }
-public float getTaux() {
-	return taux;
-}
-public void setTaux(float taux) {
-	this.taux = taux;
-}
+
 public int getObligation_ID() {
 	return obligation_ID;
 }
 public void setObligation_ID(int obligation_ID) {
 	this.obligation_ID = obligation_ID;
 }
-public int getOperation() {
-	return operation;
-}
-public void setOperation(int operation) {
-	this.operation = operation;
-}
-public String getCodetitre() {
-	return codetitre;
-}
-public void setCodetitre(String codetitre) {
-	this.codetitre = codetitre;
-}
-public int getQuantite() {
-	return quantite;
-}
-public void setQuantite(int quantite) {
-	this.quantite = quantite;
-}
+
 
 public static long getSerialversionuid() {
 	return serialVersionUID;
 }
 
 
-public CompteTitre getCompteTitre() {
-	return compteTitre;
+public Obligation(Date date_emission, String nomentreprise, int maturite, int valeurnominal, int quantite,
+		float tauxactuariel, float tauxcoupon) {
+	super();
+	this.date_emission = date_emission;
+	this.nomentreprise = nomentreprise;
+	this.maturite = maturite;
+	this.valeurnominal = valeurnominal;
+	this.quantite = quantite;
+	this.tauxactuariel = tauxactuariel;
+	this.tauxcoupon = tauxcoupon;
 }
-public void setCompteTitre(CompteTitre compteTitre) {
-	this.compteTitre = compteTitre;
-}
-@Override
-public String toString() {
-	return "Obligation [obligation_ID=" + obligation_ID + ", date_emission=" + date_emission + ", operation="
-			+ operation + ", codetitre=" + codetitre + ", nomentreprise=" + nomentreprise + ", maturite=" + maturite
-			+ ", quantite=" + quantite + ", taux=" + taux + ", compteTitre=" + compteTitre + "]";
-}
-
-public Obligation(int obligation_ID, Date date_emission, int operation, String codetitre, String nomentreprise,
-		int maturite, int quantite, float taux, CompteTitre compteTitre) {
+public Obligation(int obligation_ID, Date date_emission, String nomentreprise, int maturite, int valeurnominal,
+		int quantite, float tauxactuariel, float tauxcoupon) {
 	super();
 	this.obligation_ID = obligation_ID;
 	this.date_emission = date_emission;
-	this.operation = operation;
-	this.codetitre = codetitre;
 	this.nomentreprise = nomentreprise;
 	this.maturite = maturite;
+	this.valeurnominal = valeurnominal;
 	this.quantite = quantite;
-	this.taux = taux;
-	this.compteTitre = compteTitre;
+	this.tauxactuariel = tauxactuariel;
+	this.tauxcoupon = tauxcoupon;
+}
+@Override
+public String toString() {
+	return "Obligation [obligation_ID=" + obligation_ID + ", date_emission=" + date_emission + ", nomentreprise="
+			+ nomentreprise + ", maturite=" + maturite + ", valeurnominal=" + valeurnominal + ", quantite=" + quantite
+			+ ", tauxactuariel=" + tauxactuariel + ", tauxcoupon=" + tauxcoupon + "]";
+}
+public float getTauxactuariel() {
+	return tauxactuariel;
+}
+public void setTauxactuariel(float tauxactuariel) {
+	this.tauxactuariel = tauxactuariel;
+}
+public float getTauxcoupon() {
+	return tauxcoupon;
+}
+public void setTauxcoupon(float tauxcoupon) {
+	this.tauxcoupon = tauxcoupon;
+}
+public int getValeurnominal() {
+	return valeurnominal;
+}
+public void setValeurnominal(int valeurnominal) {
+	this.valeurnominal = valeurnominal;
 }
 
-public Obligation(Date date_emission, int operation, String codetitre, String nomentreprise,
-		int maturite, int quantite, float taux, CompteTitre compteTitre) {
-	super();
-	this.date_emission = date_emission;
-	this.operation = operation;
-	this.codetitre = codetitre;
-	this.nomentreprise = nomentreprise;
-	this.maturite = maturite;
-	this.quantite = quantite;
-	this.taux = taux;
-	this.compteTitre = compteTitre;
+public int getQuantite() {
+	return quantite;
 }
-
+public void setQuantite(int quantite) {
+	this.quantite = quantite;
+}
 public Obligation() {
 	super();
 }

@@ -33,6 +33,7 @@ import projetIMAFA.entity.Action;
 import projetIMAFA.entity.CompteTitre;
 import projetIMAFA.entity.Data_action;
 import projetIMAFA.entity.Formation;
+import projetIMAFA.entity.Obligation;
 import projetIMAFA.entity.Ordre;
 import projetIMAFA.entity.TypeOrdre;
 import projetIMAFA.entity.TypeProduitFin;
@@ -41,6 +42,7 @@ import projetIMAFA.service.ComptetitreService;
 import projetIMAFA.service.IActionService;
 import projetIMAFA.service.IDataService;
 import projetIMAFA.service.IObligationService;
+import projetIMAFA.service.IObligationcService;
 import projetIMAFA.service.IOrdreService;
 import projetIMAFA.service.ISicavService;
 
@@ -57,6 +59,9 @@ public class OrdreControllerJSF {
 	
 	@Autowired
 	IActionService actionService;
+
+	@Autowired
+	IObligationcService obligationcService;
 	
 	@Autowired
 	ComptetitreService compteTitreRepository;
@@ -103,7 +108,23 @@ public class OrdreControllerJSF {
 	private List<String> datalib;
 	private List<Data_action> datas;
 	private LineChartModel  linemodel;
-	
+
+	/** Obligation **/
+	private int obligation_ID;
+	private Date date_emission; 
+	private String nomentreprise; 
+	private int maturite; //echeance
+	private int valeurnominal; //valeur nominale
+	private float tauxactuariel;
+	private float tauxcoupon;
+	private int quantite;
+	private List<Obligation> obligations;
+
+	/** Obligation client **/
+
+	private int obligationc_ID;	
+	private float montant_investi ;
+	private Date date_emissionc;
 
 	@PostConstruct
 	public void init() {
@@ -166,6 +187,16 @@ public class OrdreControllerJSF {
 		CompteTitre compte = compteTitreRepository.retrieveComptetitre(1);
 		a=actionService.addAction(new Action(currentUtilDate,1,da.getLibelled(),da.getLibelled(),da.getOpend(),da.getHighd(),da.getLowd(),15,da.getClosed(),da.getVolumed(),"11",compte));
 		ordreService.addOrdre(new Ordre(TypeOrdre.Achat, TypeProduitFin.Action,a.getAction_ID(),currentUtilDate));
+		return "afficheraction.jsf?faces-redirect=true"; 
+	}
+	
+	public String addobligation()
+	{
+		Date currentUtilDate = new Date();
+		Obligation a;
+		//CompteTitre compte = compteTitreRepository.retrieveComptetitre(1);
+		a=obligationService.addObligation(new Obligation(currentUtilDate,nomentreprise,maturite,valeurnominal,quantite,tauxactuariel,tauxcoupon));
+		ordreService.addOrdre(new Ordre(TypeOrdre.Achat, TypeProduitFin.Obligation,a.getObligation_ID(),currentUtilDate));
 		return "afficheraction.jsf?faces-redirect=true"; 
 	}
 
@@ -455,6 +486,103 @@ public class OrdreControllerJSF {
 	public void setClosew(float closew) {
 		this.closew = closew;
 	}
+
+	public int getObligation_ID() {
+		return obligation_ID;
+	}
+
+	public void setObligation_ID(int obligation_ID) {
+		this.obligation_ID = obligation_ID;
+	}
+
+	public Date getDate_emission() {
+		return date_emission;
+	}
+
+	public void setDate_emission(Date date_emission) {
+		this.date_emission = date_emission;
+	}
+
+	public String getNomentreprise() {
+		return nomentreprise;
+	}
+
+	public void setNomentreprise(String nomentreprise) {
+		this.nomentreprise = nomentreprise;
+	}
+
+	public int getMaturite() {
+		return maturite;
+	}
+
+	public void setMaturite(int maturite) {
+		this.maturite = maturite;
+	}
+
+	public int getValeurnominal() {
+		return valeurnominal;
+	}
+
+	public void setValeurnominal(int valeurnominal) {
+		this.valeurnominal = valeurnominal;
+	}
+
+	public float getTauxactuariel() {
+		return tauxactuariel;
+	}
+
+	public void setTauxactuariel(float tauxactuariel) {
+		this.tauxactuariel = tauxactuariel;
+	}
+
+	public float getTauxcoupon() {
+		return tauxcoupon;
+	}
+
+	public void setTauxcoupon(float tauxcoupon) {
+		this.tauxcoupon = tauxcoupon;
+	}
+
+	public List<Obligation> getObligations() {
+		return obligationService.retrieveAllObligations();
+	}
+
+	public void setObligations(List<Obligation> obligations) {
+		this.obligations = obligations;
+	}
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+
+	public int getObligationc_ID() {
+		return obligationc_ID;
+	}
+
+	public void setObligationc_ID(int obligationc_ID) {
+		this.obligationc_ID = obligationc_ID;
+	}
+
+	public float getMontant_investi() {
+		return montant_investi;
+	}
+
+	public void setMontant_investi(float montant_investi) {
+		this.montant_investi = montant_investi;
+	}
+
+	public Date getDate_emissionc() {
+		return date_emissionc;
+	}
+
+	public void setDate_emissionc(Date date_emissionc) {
+		this.date_emissionc = date_emissionc;
+	}
+
 
 
 

@@ -52,7 +52,7 @@ public class CompteTitre {
 	List<Action> actions;	
 	@JsonIgnore
 	@OneToMany
-	List<Obligation> obligations;	
+	List<Obligationc> obligations;	
 	@JsonIgnore
 	@OneToMany
 	List<Sicav> sicavs;	
@@ -65,11 +65,11 @@ public class CompteTitre {
 		this.actions = actions;
 	}
 
-	public List<Obligation> getObligations() {
+	public List<Obligationc> getObligations() {
 		return obligations;
 	}
 
-	public void setObligations(List<Obligation> obligations) {
+	public void setObligations(List<Obligationc> obligations) {
 		this.obligations = obligations;
 	}
 
@@ -138,7 +138,7 @@ public class CompteTitre {
 	}
 
 	public CompteTitre(int id, Date dateCreation, String status, float solde, String rib, User User,
-			List<Ordre> ordres, List<Action> actions, List<Obligation> obligations, List<Sicav> sicavs) {
+			List<Ordre> ordres, List<Action> actions, List<Obligationc> obligations, List<Sicav> sicavs) {
 		super();
 		this.id = id;
 		this.dateCreation = dateCreation;
@@ -153,7 +153,7 @@ public class CompteTitre {
 	}
 
 	public CompteTitre(Date dateCreation, String status, float solde, String rib, User User,
-			List<Ordre> ordres, List<Action> actions, List<Obligation> obligations, List<Sicav> sicavs) {
+			List<Ordre> ordres, List<Action> actions, List<Obligationc> obligations, List<Sicav> sicavs) {
 		super();
 		this.dateCreation = dateCreation;
 		this.status = status;
