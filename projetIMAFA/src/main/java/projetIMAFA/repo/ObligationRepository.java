@@ -17,6 +17,14 @@ public interface ObligationRepository extends CrudRepository<Obligation, Integer
 	
 	@Query("SELECT a FROM Obligation a WHERE a.nomentreprise= ?1")
 	List<Obligation> retrieveObligationsByNomentreprise(String nomentreprise);
+
+	@Query("SELECT a FROM Obligation a WHERE a.quantite <> 0")
+	List<Obligation> retrieveObligationsByQ();
+	
+	@Modifying
+	@Transactional
+	@Query("update Obligation u set u.quantite=?1 where u.obligation_ID = ?2")
+	void verifiequantite(Integer q,Integer id);
 	/*
 	@Modifying
 	@Transactional

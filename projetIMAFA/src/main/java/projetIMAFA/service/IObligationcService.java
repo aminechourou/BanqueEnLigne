@@ -2,6 +2,7 @@ package projetIMAFA.service;
 
 import java.util.List;
 
+import projetIMAFA.entity.Obligation;
 import projetIMAFA.entity.Obligationc;
 
 public interface IObligationcService {
@@ -11,4 +12,5 @@ public interface IObligationcService {
 	 void deleteObligationc(String id);
 	 Obligationc updateObligationc(Obligationc a);
 	 Obligationc retrieveObligationc(String id);
+	 List<Obligationc> compteObligation(int id);
 }

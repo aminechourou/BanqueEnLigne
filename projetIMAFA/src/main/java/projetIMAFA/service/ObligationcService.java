@@ -64,4 +64,9 @@ public class ObligationcService implements IObligationcService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Obligationc> compteObligation(int id) {
+    return ObligationRepository.compteObligation(id);
+	}
 }

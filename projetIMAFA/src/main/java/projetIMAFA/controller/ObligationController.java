@@ -49,12 +49,12 @@ public class ObligationController {
 	return list;
 	}
 
-	@GetMapping("/register/retrieve-obligation/{obligation-id}")
+	/*@GetMapping("/register/retrieve-obligation/{obligation-id}")
 	@ResponseBody
 	public Obligation retrieveObligation(@PathVariable("obligation-id") String Id) {
 	return obligationService.retrieveObligation(Id);
 	}
-		
+		*/
 	@PostMapping("/add-obligation")
 	@ResponseBody
 	public Obligation addObligation(@RequestBody Obligation u) {

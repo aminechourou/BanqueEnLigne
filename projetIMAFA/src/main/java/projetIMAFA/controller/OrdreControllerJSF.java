@@ -1,4 +1,15 @@
 package projetIMAFA.controller;
+import java.lang.Math;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
 
 import java.util.Date;
 import java.util.List;
@@ -25,15 +36,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-
 import lombok.Getter;
 import lombok.Setter;
 import projetIMAFA.entity.Action;
 import projetIMAFA.entity.CompteTitre;
 import projetIMAFA.entity.Data_action;
+import projetIMAFA.entity.EmployeeSalary;
 import projetIMAFA.entity.Formation;
 import projetIMAFA.entity.Obligation;
+import projetIMAFA.entity.Obligationc;
 import projetIMAFA.entity.Ordre;
 import projetIMAFA.entity.TypeOrdre;
 import projetIMAFA.entity.TypeProduitFin;
@@ -125,6 +136,7 @@ public class OrdreControllerJSF {
 	private int obligationc_ID;	
 	private float montant_investi ;
 	private Date date_emissionc;
+	private float montant_rembourse ;
 
 	@PostConstruct
 	public void init() {
@@ -189,6 +201,40 @@ public class OrdreControllerJSF {
 		ordreService.addOrdre(new Ordre(TypeOrdre.Achat, TypeProduitFin.Action,a.getAction_ID(),currentUtilDate));
 		return "afficheraction.jsf?faces-redirect=true"; 
 	}
+	public List<Obligationc> getObligationcs() {
+		
+		return obligationcService.compteObligation(1);
+		
+	}
+	public float redemption()
+	{
+		float redemption=0;
+		float coupon;
+		Date current = new Date();
+        List<Obligationc> oc = obligationcService.compteObligation(1);
+        for(Obligationc Obligationc : oc)
+		{
+        Obligation o = obligationService.retrieveObligation(Obligationc.getObligation().getObligation_ID());
+        coupon=(o.getTauxcoupon()/100)*o.getValeurnominal();
+        int y=current.getYear()-o.getDate_emission().getYear();
+        if(y==o.getMaturite())
+        {
+        
+            redemption +=(coupon*o.getMaturite())+o.getValeurnominal();
+        	
+        }
+        else
+        {
+           redemption+=(coupon*y);
+        }
+        if((Obligationc.getMontant_investi()/o.getValeurnominal())>1)
+        {
+        	int a=(int) (Obligationc.getMontant_investi()/o.getValeurnominal());
+        	redemption=redemption*a;
+        }
+		}       
+		return redemption; 
+	}
 	
 	public String addobligation()
 	{
@@ -199,7 +245,36 @@ public class OrdreControllerJSF {
 		ordreService.addOrdre(new Ordre(TypeOrdre.Achat, TypeProduitFin.Obligation,a.getObligation_ID(),currentUtilDate));
 		return "afficheraction.jsf?faces-redirect=true"; 
 	}
+	
+	public String displayObligation(Obligation empl)
+	{
 
+		this.setObligation_ID(empl.getObligation_ID());
+		this.setDate_emission(empl.getDate_emission());
+		this.setMaturite(empl.getMaturite());
+		this.setNomentreprise(empl.getNomentreprise());
+		this.setQuantite(empl.getQuantite());	
+		this.setValeurnominal(empl.getValeurnominal());
+		this.setTauxactuariel(empl.getTauxactuariel());
+		this.setTauxcoupon(empl.getTauxcoupon());
+		return("/ordrect/ajouterobligationc.jsf?faces-redirect=true");
+
+	}
+	
+	public String addobligationc()
+	{
+		Obligation da=obligationService.retrieveObligation(obligation_ID);
+		Date currentUtilDate = new Date();
+		CompteTitre compte = compteTitreRepository.retrieveComptetitre(1);
+		montant_rembourse=0;
+		int q1=0;
+		q1=(int) (montant_investi/da.getValeurnominal());
+		int q=0;
+		q=da.getQuantite()-q1;
+		obligationService.verifiequantite(q,obligation_ID);
+		obligationcService.addObligationc(new Obligationc(montant_investi,montant_rembourse,currentUtilDate,compte,da));
+		return "/ordrect/afficherobligation.jsf?faces-redirect=true"; 
+	}
 	public IOrdreService getOrdreService() {
 		return ordreService;
 	}
@@ -544,7 +619,7 @@ public class OrdreControllerJSF {
 	}
 
 	public List<Obligation> getObligations() {
-		return obligationService.retrieveAllObligations();
+		return obligationService.retrieveObligationsByQ();
 	}
 
 	public void setObligations(List<Obligation> obligations) {
@@ -583,6 +658,13 @@ public class OrdreControllerJSF {
 		this.date_emissionc = date_emissionc;
 	}
 
+	public float getMontant_rembourse() {
+		return montant_rembourse;
+	}
+
+	public void setMontant_rembourse(float montant_rembourse) {
+		this.montant_rembourse = montant_rembourse;
+	}
 
 
 

@@ -53,10 +53,10 @@ public class ObligationService implements IObligationService {
 		return ObligationAdded;
 	}
 
-	public Obligation retrieveObligation(String id) {
+	public Obligation retrieveObligation(int id) {
 	
 		l.info("in retrieveObligation id= "+id);
-		Obligation u = ObligationRepository.findById(Integer.parseInt(id)).orElse(null);
+		Obligation u = ObligationRepository.findById(id).orElse(null);
 		l.info("Obligation returned : "+u);
 		return u;
 		
@@ -105,6 +105,18 @@ public class ObligationService implements IObligationService {
 
 	public void del(int id){
 		ObligationRepository.deleteById(id);
+	}
+
+	@Override
+	public void verifiequantite(Integer q, Integer id) {
+		ObligationRepository.verifiequantite(q, id);
+		
+	}
+
+	@Override
+	public List<Obligation> retrieveObligationsByQ() {
+        return ObligationRepository.retrieveObligationsByQ();
+        
 	}
 
 }

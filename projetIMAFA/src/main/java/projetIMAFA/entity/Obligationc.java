@@ -21,6 +21,7 @@ private static final long serialVersionUID = 1L;
 private int obligationc_ID;	
 
 private float montant_investi ;
+private float montant_rembourse ;
 
 @Temporal(TemporalType.DATE)
 private Date date_emission;
@@ -65,7 +66,6 @@ public void setObligation(Obligation obligation) {
 	this.obligation = obligation;
 }
 
-
 public int getObligationc_ID() {
 	return obligationc_ID;
 }
@@ -78,27 +78,32 @@ public static long getSerialversionuid() {
 	return serialVersionUID;
 }
 
-@Override
-public String toString() {
-	return "Obligationc [obligationc_ID=" + obligationc_ID + ", montant_investi=" + montant_investi + ", date_emission="
-			+ date_emission + ", compteTitre=" + compteTitre + ", obligation=" + obligation + "]";
+public float getMontant_rembourse() {
+	return montant_rembourse;
 }
 
-public Obligationc(float montant_investi, Date date_emission, CompteTitre compteTitre, Obligation obligation) {
+public void setMontant_rembourse(float montant_rembourse) {
+	this.montant_rembourse = montant_rembourse;
+}
+
+
+
+public Obligationc(float montant_investi, float montant_rembourse, Date date_emission, CompteTitre compteTitre,
+		Obligation obligation) {
 	super();
 	this.montant_investi = montant_investi;
+	this.montant_rembourse = montant_rembourse;
 	this.date_emission = date_emission;
 	this.compteTitre = compteTitre;
 	this.obligation = obligation;
 }
 
-
-
-public Obligationc(int obligationc_ID, float montant_investi, Date date_emission, CompteTitre compteTitre,
-		Obligation obligation) {
+public Obligationc(int obligationc_ID, float montant_investi, float montant_rembourse, Date date_emission,
+		CompteTitre compteTitre, Obligation obligation) {
 	super();
 	this.obligationc_ID = obligationc_ID;
 	this.montant_investi = montant_investi;
+	this.montant_rembourse = montant_rembourse;
 	this.date_emission = date_emission;
 	this.compteTitre = compteTitre;
 	this.obligation = obligation;

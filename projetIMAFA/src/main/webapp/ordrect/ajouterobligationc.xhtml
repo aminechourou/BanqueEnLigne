@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<head>
-<title>Wallet</title>
+<title>Buy Obligation</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -119,88 +119,33 @@
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 				<br />
 					<h2>
-				My Wallet
+				Buy Obligation
 					</h2>
 </div></div>
 				<div align="center">
 					<h:panelGroup columns="2">
-	<h:form>
-						<h3>
-				<h:outputText value="Sell now and get: #{OrdreController.closew} $" />
-					</h3>
-		<h:dataTable value="#{OrdreController.actionss}"
-			var="data" border="1">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Libelle" />
-				</f:facet>
-				<h:outputText value="#{data.isin}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Date" />
-				</f:facet>
-				<h:outputText value="#{data.date}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Volume" />
-				</f:facet>
-				<h:outputText value="#{data.volume}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="High" />
-				</f:facet>
-				<h:outputText value="#{data.high}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Low" />
-				</f:facet>
-				<h:outputText value="#{data.low}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Close" />
-				</f:facet>
-				<h:outputText value="#{data.close}" />
-			</h:column>
-		</h:dataTable>
-<br></br>
-					<h3>
-				<h:outputText value="Redemption: #{OrdreController.redemption()} $" />
-					</h3>
-		<h:dataTable value="#{OrdreController.getObligationcs()}"
-			var="data" border="1">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Investment amount" />
-				</f:facet>
-				<h:outputText value="#{data.montant_investi}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Date emission" />
-				</f:facet>
-				<h:outputText value="#{data.date_emission}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Taux coupon" />
-				</f:facet>
-				<h:outputText value="#{data.obligation.tauxcoupon}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Company name" />
-				</f:facet>
-				<h:outputText value="#{data.obligation.nomentreprise}" />
-			</h:column>
-		</h:dataTable>
-		
-	</h:form>
+						<h:form id="form">
+							<table>
+								<tr>
+									<td><h:outputText value="Investment amount"></h:outputText></td>
+									<td><h:inputText id="num" required="true"  class="form-control"
+											requiredMessage="enter number of months" value="#{OrdreController.montant_investi}">
+											<f:validateLength for="num"  /></h:inputText>
+																					<table>
+											<tr>
+												<td><h:message for="num" style="color:red" /></td>
+											</tr>
+										</table></td>
+								</tr>								
+									<tr>
+									<td>
+									<div align="center"></div>
+									<h:commandButton id="btn"
+											action="#{OrdreController.addobligationc()}" class="btn btn-primary" style="float:center;"/></td></tr>
+											<tr><td><h:message for="btn" style="color:green" /></td></tr>
+								
+							</table>
+						</h:form>
 					</h:panelGroup>
 				</div>
 

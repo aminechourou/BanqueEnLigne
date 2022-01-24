@@ -10,5 +10,7 @@ public interface IObligationService {
 	 Obligation addObligation(Obligation a);
 	 void deleteObligation(String id);
 	 Obligation updateObligation(Obligation a);
-	 Obligation retrieveObligation(String id);
+	 Obligation retrieveObligation(int id);
+	 void verifiequantite(Integer q,Integer id);
+	 List<Obligation> retrieveObligationsByQ();
 }
