@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
@@ -30,6 +31,7 @@ import projetIMAFA.service.*;
 @Transactional
 @Controller(value = "SalaryController") // Name of the bean in Spring IoC
 @ELBeanName(value = "SalaryController") // Name of the bean used by JSF
+@SessionScoped
 public class EmployeeSalaryRestController {
 	
 	@Autowired

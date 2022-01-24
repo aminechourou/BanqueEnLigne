@@ -12,5 +12,6 @@ public interface IFormationService {
 	void deleteFormation(String id);
 	Formation updateFormation(Formation f);
 	Formation retrieveFormation(String id) ;
+	void place(Integer id);
 	List<String> Employeecin();
 }

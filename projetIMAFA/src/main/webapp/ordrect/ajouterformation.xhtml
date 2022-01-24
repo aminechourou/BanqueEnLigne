@@ -138,6 +138,17 @@
 										</table></td>
 								</tr>
 								<tr>
+									<td><h:outputText value="Place disponible"></h:outputText></td>
+									<td><h:inputText id="num1" required="true"  class="form-control"
+											requiredMessage="enter number of months" value="#{FormationController.place}">
+											<f:validateLength for="num1"  /></h:inputText>
+																					<table>
+											<tr>
+												<td><h:message for="num1" style="color:red" /></td>
+											</tr>
+										</table></td>
+								</tr>
+								<tr>
 									<td><h:outputText value="Description"></h:outputText></td>
 									<td><h:inputText id="postal" required="true"  class="form-control"
 											requiredMessage="enter the year"

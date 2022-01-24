@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import projetIMAFA.entity.EmployeeSalary;
 import projetIMAFA.entity.Formation;
+import projetIMAFA.entity.User;
 import projetIMAFA.repo.EmployeeSalaryRepository;
 import projetIMAFA.repo.FormationRepository;
 
@@ -51,13 +52,22 @@ public class FormationService implements IFormationService {
 
 	@Override
 	public Formation retrieveFormation(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		l.info("in retrieveUser id= "+id);
+		Formation u = formationRepository.findById(Integer.parseInt(id)).orElse(null);
+		l.info("user returned : "+u);
+		return u;
 	}
 
 	@Override
 	public List<String> Employeecin() {
 		return formationRepository.Employeecin();
 	}
+	
+	@Override
+	public void place(Integer id) {
+		formationRepository.place(id);
+		
+	}
+
 
 }

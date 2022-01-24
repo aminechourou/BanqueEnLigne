@@ -73,6 +73,8 @@ public class User  {
 private float salary ;
 @OneToMany
 private List<Formation> formations;	
+@OneToMany
+private List<Formationc> formationcs;	
 
 @OneToMany
 private List<CompteTitre> comptestitres ;
@@ -303,6 +305,12 @@ public void setSalary(float salary) {
 		Image = string;
 		this.random = k;
 		Role_User = client;
+	}
+	public List<Formationc> getFormationcs() {
+		return formationcs;
+	}
+	public void setFormationcs(List<Formationc> formationcs) {
+		this.formationcs = formationcs;
 	}
 	
 

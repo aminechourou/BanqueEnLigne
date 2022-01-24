@@ -122,76 +122,40 @@
 				Display Formations
 					</h2>
 </div></div>
-				<div align="center">
+
+				
 					<h:panelGroup columns="2">
 						<h:form>
-		<h:dataTable value="#{FormationController.formations}"
-			var="salary" border="1">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Title" />
-				</f:facet>
-				<h:outputText value="#{salary.titre}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Description" />
-				</f:facet>
-				<h:outputText value="#{salary.description}" />
-			</h:column>
 
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Start_date" />
-				</f:facet>
-				<h:outputText value="#{salary.dateDebut}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="End_date" />
-				</f:facet>
-				<h:outputText value="#{salary.dateFin}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Domain" />
-				</f:facet>
-				<h:outputText value="#{salary.domaine}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Place disponible" />
-				</f:facet>
-				<h:outputText value="#{salary.place}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Employee" />
-				</f:facet>
-				<h:outputText value="#{salary.responsablerh.first_name}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
+						<div class="project-content">
+	<ui:repeat var="salary" value="#{FormationController.formations}">
 
-				</f:facet>
-				<h:commandButton value="Modify"
-					action="#{FormationController.displaySalaries(salary)}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-				</f:facet>
-				<h:commandButton value="Delete"
-					action="#{FormationController.deleteSalary(salary.id)}" />
-			</h:column>
-		
+			<div class="col-forth">
+				<div class="project animate-box" style="background-image:url(images/project-8.jpg);">
+				<br></br>
+				<br></br>
+				<br></br>
+				<div align="center">
+						<h3 style="color:#ffffff ; font-size: 30px;"><h:outputText value="#{salary.titre}" /></h3>
+						<h4 style="color:#ffffff ;"><h:outputText value="#{salary.description}" /></h4>
+						<h2 style="color:#ffffff ;"><h:outputText value="#{salary.place} places" /></h2>
+					<h:commandButton action="#{FormationController.addFormationc(1,salary.id)}" value="inscription" class="btn btn-primary" style="float:center;"/>
+						<br></br>
+						<br></br>
+						<h5 style="color:#ffffff ;"><h:outputText value="Start_date: #{salary.dateDebut}" /><br></br> <h:outputText value="End_date: #{salary.dateFin}" /></h5>
+
+					</div>
+				</div>
+			</div>
 			
-			
+  
+        </ui:repeat>
 
-		</h:dataTable>
+</div>		
 		
 	</h:form>
 					</h:panelGroup>
-				</div>
+	
 
 			</div>
 

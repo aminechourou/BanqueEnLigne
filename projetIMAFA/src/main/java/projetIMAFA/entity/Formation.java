@@ -1,5 +1,6 @@
 package projetIMAFA.entity;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Formation {
@@ -32,13 +34,15 @@ public class Formation {
 	@Column(name="domaine")
 	private String domaine;
 	
-	@Column(name="etat")
-	private String etat;
+	@Column(name="place")
+	private Integer place;
 	
 	
 	@ManyToOne
     private User responsablerh;
-
+	
+	@OneToMany
+	private List<Formationc> formations;	
 
 	public int getId() {
 		return id;
@@ -99,17 +103,6 @@ public class Formation {
 		this.domaine = domaine;
 	}
 
-
-	public String getEtat() {
-		return etat;
-	}
-
-
-	public void setEtat(String etat) {
-		this.etat = etat;
-	}
-
-
 	public User getResponsablerh() {
 		return responsablerh;
 	}
@@ -126,21 +119,10 @@ public class Formation {
 	}
 
 
-	public Formation(int id, String titre, String description, Date dateDebut, Date dateFin, String domaine,
-			String etat, User responsablerh) {
-		super();
-		this.id = id;
-		this.titre = titre;
-		this.description = description;
-		this.dateDebut = dateDebut;
-		this.dateFin = dateFin;
-		this.domaine = domaine;
-		this.etat = etat;
-		this.responsablerh = responsablerh;
-	}
 
 
-	public Formation(String titre, String description, Date dateDebut, Date dateFin, String domaine, String etat,
+
+	public Formation(String titre, String description, Date dateDebut, Date dateFin, String domaine, Integer place,
 			User responsablerh) {
 		super();
 		this.titre = titre;
@@ -148,8 +130,42 @@ public class Formation {
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.domaine = domaine;
-		this.etat = etat;
+		this.place = place;
 		this.responsablerh = responsablerh;
+	}
+
+
+	public Formation(int id, String titre, String description, Date dateDebut, Date dateFin, String domaine,
+			Integer place, User responsablerh) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.description = description;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.domaine = domaine;
+		this.place = place;
+		this.responsablerh = responsablerh;
+	}
+
+
+	public List<Formationc> getFormations() {
+		return formations;
+	}
+
+
+	public void setFormations(List<Formationc> formations) {
+		this.formations = formations;
+	}
+
+
+	public Integer getPlace() {
+		return place;
+	}
+
+
+	public void setPlace(Integer place) {
+		this.place = place;
 	}
 	
 	

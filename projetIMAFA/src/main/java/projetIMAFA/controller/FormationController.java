@@ -30,9 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 import projetIMAFA.Exception.ResourceNotFoundException;
 import projetIMAFA.entity.EmployeeSalary;
 import projetIMAFA.entity.Formation;
+import projetIMAFA.entity.Formationc;
 import projetIMAFA.entity.User;
 import projetIMAFA.repo.FormationRepository;
 import projetIMAFA.service.FormationService;
+import projetIMAFA.service.FormationcService;
 import projetIMAFA.service.UserService;
 
 
@@ -46,6 +48,10 @@ public class FormationController {
 
 	@Autowired
 	FormationService formationService;
+
+	@Autowired
+	FormationcService formationcService;
+	
 	@Autowired
 	UserService userService;
 
@@ -55,28 +61,36 @@ public class FormationController {
 	private Date dateDebut;
 	private Date dateFin;
 	private String domaine;
-	private String etat;
+    private Integer place;
 	private List<String> names;
 	private String name;
 	private Integer FormationIdToBeUpdated;
 	private List<Formation> formations;
-
+	
 	public void addFormation() throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 		User u=userService.getName(name);	
 		if(dateDebut.compareTo(dateFin)<0)
 		{
-			//formationService.addFormation(new Formation(titre,description,dateDebut,dateFin,domaine,"actif",u)) ;	
+			formationService.addFormation(new Formation(titre,description,dateDebut,dateFin,domaine,place,u)) ;	
 		}
 		else {
-		formationService.addFormation(new Formation(titre,description,dateDebut,dateFin,domaine,"actif",u)) ;
+		formationService.addFormation(new Formation(titre,description,dateDebut,dateFin,domaine,place,u)) ;
 		}
+	}
+
+	public void addFormationc(Integer idu,Integer idf) throws ParseException {
+		
+		User u=userService.retrieveUser(Integer.toString(idu));
+		Formation f=formationService.retrieveFormation(Integer.toString(idf));
+		formationcService.addFormationc(new Formationc(u,f)) ;
+		formationService.place(idf);
 	}
 
 	public String updateSalary()throws ParseException {
 		User u=userService.getName(name);	
-		formationService.updateFormation(new Formation(FormationIdToBeUpdated,titre,description,dateDebut,dateFin,domaine,"actif",u) );
+		formationService.updateFormation(new Formation(FormationIdToBeUpdated,titre,description,dateDebut,dateFin,domaine,place,u) );
 		//return("/amine/Hana/fichedepaie.jsf?faces-redirect=true");
 		return("/ordrect/afficherformation.jsf?faces-redirect=true");
 
@@ -157,12 +171,14 @@ public class FormationController {
 		this.domaine = domaine;
 	}
 
-	public String getEtat() {
-		return etat;
+
+
+	public Integer getPlace() {
+		return place;
 	}
 
-	public void setEtat(String etat) {
-		this.etat = etat;
+	public void setPlace(Integer place) {
+		this.place = place;
 	}
 
 	public List<String> getNames() {
@@ -197,6 +213,8 @@ public class FormationController {
 	public void setFormations(List<Formation> formations) {
 		this.formations = formations;
 	}
+
+
 	
 	
 	
