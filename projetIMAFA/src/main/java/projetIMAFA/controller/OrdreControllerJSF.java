@@ -206,6 +206,20 @@ public class OrdreControllerJSF {
 		return obligationcService.compteObligation(1);
 		
 	}
+	
+	//X^k
+	public static float puissance(float x,int k)
+	{
+		int i;
+		float puis=1;
+		for(i=1;i<=k;i++)
+		{
+			puis=puis*x;
+			
+		}
+		return puis;
+	}
+	
 	public float redemption()
 	{
 		float redemption=0;
@@ -217,20 +231,31 @@ public class OrdreControllerJSF {
         Obligation o = obligationService.retrieveObligation(Obligationc.getObligation().getObligation_ID());
         coupon=(o.getTauxcoupon()/100)*o.getValeurnominal();
         int y=current.getYear()-o.getDate_emission().getYear();
+        if(y==0)
+        {
+        	redemption+=0;
+        }
+        else{
         if(y==o.getMaturite())
         {
-        
-            redemption +=(coupon*o.getMaturite())+o.getValeurnominal();
-        	
+           for(int i=1;i<=y;i++)
+           {
+            redemption +=(coupon*puissance((1+(o.getTauxactuariel()/100)),i))+o.getValeurnominal();
+           }
         }
         else
         {
-           redemption+=(coupon*y);
+            for(int i=1;i<=y;i++)
+            {
+             redemption+=coupon*puissance((1+(o.getTauxactuariel()/100)),i);
+            }
+           
         }
         if((Obligationc.getMontant_investi()/o.getValeurnominal())>1)
         {
         	int a=(int) (Obligationc.getMontant_investi()/o.getValeurnominal());
-        	redemption=redemption*a;
+        	redemption+=redemption*a;
+        }
         }
 		}       
 		return redemption; 
