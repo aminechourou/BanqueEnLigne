@@ -1,0 +1,188 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<div class="card">
+		<h:form>
+			<p:panel id="pnl" header="Statistics">
+				<div class="card">
+					<p:pieChart id="pie" model="#{loanapplicationcontroller.pieModel}"
+						style="width: 100%; height: 250px;" />
+					<h:form>
+						<p:growl id="growl" showDetail="true" />
+
+						<p:barChart model="#{loanapplicationcontroller.barModel2}"
+							style="width: 100%; height: 250px;">
+							<p:ajax event="itemSelect"
+								listener="#{loanapplicationcontroller.itemSelect}"
+								update="growl" />
+						</p:barChart>
+						<div class="card">
+							<p:chart type="line" model="#{loanapplicationcontroller.lineModel1}"
+								style="height:300px;" responsive="true" />
+						</div>
+					</h:form>
+				</div>
+			</p:panel>
+		</h:form>
+	</div>
+
+	<h:form id="form">
+
+		<div class="card crud-demo">
+			<p:growl id="message" showDetail="true" />
+
+			<p:dataTable id="dt-products" widgetVar="dtProducts"
+				var="loanapplication" value="#{loanapplicationcontroller.loanapps}"
+				reflow="true" styleClass="products-table" resizableColumns="true"
+				selection="#{crudView.selectedProducts}" rowKey="#{product.id}"
+				paginator="true" rows="10" rowSelectMode="add"
+				paginatorPosition="bottom"
+				emptyMessage="No customers found with given criteria"
+				filteredValue="#{loanapplicationcontroller.filtredloanapps}"
+				globalFilterFunction="#{loanapplicationcontroller.filter}">
+
+				<f:facet name="header">
+					<div class="products-table-header">
+						<span style="font-weight: bold">Loan Applications</span> <span
+							class="filter-container ui-input-icon-left"> <i
+							class="pi pi-search"></i> <p:inputText id="globalFilter"
+								onkeyup="PF('dtProducts').filter()" placeholder="Search" />
+						</span>
+
+					</div>
+				</f:facet>
+
+
+
+				<p:column headerText="ID" sortBy="#{loanapplication.id}">
+					<h:outputText value="#{loanapplication.id}" />
+				</p:column>
+
+				<p:column headerText="Age" sortBy="#{loanapplication.age}">
+					<h:outputText value="#{loanapplication.age}" />
+				</p:column>
+
+				<p:column headerText="Income"
+					sortBy="#{loanapplication.annualincome}" width="110">
+					<h:outputText value="#{loanapplication.annualincome}"
+						style="font-weight: 700">
+						<f:convertNumber currencySymbol="TND" type="currency" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Date" width="110"
+					sortBy="#{loanapplication.applicationdate}">
+					<h:outputText value="#{loanapplication.applicationdate}" />
+				</p:column>
+
+				<p:column headerText="Description" width="110"
+					sortBy="#{loanapplication.description}">
+					<h:outputText value="#{loanapplication.description}" />
+				</p:column>
+
+				<p:column headerText="Amount" width="110"
+					sortBy="#{loanapplication.loanamount}">
+					<h:outputText value="#{loanapplication.loanamount}"
+						style="font-weight: 700">
+
+						<f:convertNumber currencySymbol="TND" type="currency" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="E_Duration"
+					sortBy="#{loanapplication.emplduration}">
+					<h:outputText value="#{loanapplication.emplduration}" />
+				</p:column>
+				<p:column headerText="Ownership"
+					sortBy="#{loanapplication.homeownership}">
+					<h:outputText
+						styleClass="product-badge status-#{product.inventoryStatus.name().toLowerCase()}"
+						value="#{loanapplication.homeownership}" />
+				</p:column>
+				<p:column headerText="Period" sortBy="#{loanapplication.period}">
+					<h:outputText value="#{loanapplication.period}" />
+				</p:column>
+
+				<p:column headerText="Solvability"
+					sortBy="#{loanapplication.solvability}">
+					<p:progressBar value="#{loanapplication.solvability}"
+						displayOnly="true" style="height: .5rem" />
+					<h:outputText value="#{loanapplication.solvability}%" />
+				</p:column>
+
+				<p:column headerText="Status" sortBy="#{loanapplication.loanstatus}">
+					<h:outputText
+						styleClass="product-badge status-#{product.inventoryStatus.name().toLowerCase()}"
+						value="#{loanapplication.loanstatus}" />
+				</p:column>
+
+				<p:column>
+
+					<p:commandButton class="rounded-button ui-button-success"
+						icon="pi pi-check" process="@this"
+						oncomplete="PF('acceptLoanDialog').show()">
+						<f:setPropertyActionListener value="#{loanapplication}"
+							target="#{loanapplicationcontroller.selectedloanapp}" />
+					</p:commandButton>
+
+					<p:commandButton class="rounded-button ui-button-danger"
+						icon="pi pi-times" process="@this"
+						oncomplete="PF('refuseLoanDialog').show()">
+						<f:setPropertyActionListener value="#{loanapplication}"
+							target="#{loanapplicationcontroller.selectedloanapp}" />
+					</p:commandButton>
+					<br />
+
+					<p:commandButton class="ui-button-warning rounded-button"
+						icon="pi pi-trash" process="@this"
+						oncomplete="PF('deleteLoanDialog').show()">
+						<f:setPropertyActionListener value="#{loanapplication}"
+							target="#{loanapplicationcontroller.selectedloanapp}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+			<p:confirmDialog widgetVar="deleteLoanDialog" showEffect="fade"
+				width="300" message="Delete the Loan Application?" header="Confirm"
+				severity="warn" global="true">
+				<p:commandButton value="Yes" icon="pi pi-check" update="message"
+					actionListener="#{loanapplicationcontroller.deleteloanapp}"
+					process="@this" oncomplete="PF('deleteLoanDialog').hide()" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-button-secondary" icon="pi pi-times"
+					onclick="PF('deleteLoanDialog').hide()" />
+			</p:confirmDialog>
+
+			<p:confirmDialog widgetVar="acceptLoanDialog" showEffect="fade"
+				width="300" message="Accept the Loan Application?" header="Confirm"
+				severity="warn" global="true">
+				<p:commandButton value="Yes" icon="pi pi-check" update="message"
+					actionListener="#{loanapplicationcontroller.acceptloanapp}"
+					process="@this" oncomplete="PF('acceptLoanDialog').hide()" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-button-secondary" icon="pi pi-times"
+					onclick="PF('acceptLoanDialog').hide()" />
+			</p:confirmDialog>
+
+			<p:confirmDialog widgetVar="refuseLoanDialog" showEffect="fade"
+				width="300" message="Refuse the Loan Application?" header="Confirm"
+				severity="warn" global="true">
+				<p:commandButton value="Yes" icon="pi pi-check" update="message"
+					actionListener="#{loanapplicationcontroller.refuseloanapp}"
+					process="@this" oncomplete="PF('refuseLoanDialog').hide()" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-button-secondary" icon="pi pi-times"
+					onclick="PF('refusetLoanDialog').hide()" />
+			</p:confirmDialog>
+
+		</div>
+	</h:form>
+</h:body>
+</html>
