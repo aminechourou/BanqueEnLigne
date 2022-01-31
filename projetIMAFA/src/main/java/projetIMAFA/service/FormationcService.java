@@ -7,7 +7,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import projetIMAFA.entity.Formation;
 import projetIMAFA.entity.Formationc;
+import projetIMAFA.entity.User;
 import projetIMAFA.repo.FormationcRepository;
 
 @Service
@@ -51,6 +53,15 @@ public class FormationcService implements IFormationcService {
 	public Formationc retrieveFormationc(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int forclie(User idc, Formation idf) {
+		if(formationRepository.forclie( idc, idf).equals(null))
+		{
+			return 1;
+		}
+       return 0;
 	}
 
 }

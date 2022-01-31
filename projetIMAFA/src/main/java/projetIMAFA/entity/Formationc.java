@@ -57,4 +57,8 @@ public class Formationc {
 		this.formation = formation;
 	}
 	
+	public Formationc() {
+		super();
+	}
+	
 }

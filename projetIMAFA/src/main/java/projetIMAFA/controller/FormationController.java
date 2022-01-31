@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.transaction.Transactional;
@@ -35,6 +36,7 @@ import projetIMAFA.entity.User;
 import projetIMAFA.repo.FormationRepository;
 import projetIMAFA.service.FormationService;
 import projetIMAFA.service.FormationcService;
+import projetIMAFA.service.MailService;
 import projetIMAFA.service.UserService;
 
 
@@ -43,6 +45,9 @@ import projetIMAFA.service.UserService;
 @ELBeanName(value = "FormationController") // Name of the bean used by JSF
 public class FormationController {
 
+	@Autowired
+	MailService notificationService;
+	
 	@Autowired
 	FormationRepository formationRepository;
 
@@ -80,12 +85,15 @@ public class FormationController {
 		}
 	}
 
-	public void addFormationc(Integer idu,Integer idf) throws ParseException {
-		
-		User u=userService.retrieveUser(Integer.toString(idu));
-		Formation f=formationService.retrieveFormation(Integer.toString(idf));
-		formationcService.addFormationc(new Formationc(u,f)) ;
-		formationService.place(idf);
+	public void addFormationc(Integer idu,Integer idf) throws ParseException, MessagingException {
+	/*	if(formationcService.forclie(userService.retrieveUser(Integer.toString(idu)),formationService.retrieveFormation(Integer.toString(idf))))
+		{*/
+			User u=userService.retrieveUser(Integer.toString(idu));
+			Formation f=formationService.retrieveFormation(Integer.toString(idf));
+			formationcService.addFormationc(new Formationc(u,f)) ;
+			notificationService.sendEmailFormation(u, f);
+			formationService.place(idf);	
+
 	}
 
 	public String updateSalary()throws ParseException {
