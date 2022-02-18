@@ -1,4 +1,4 @@
-package projetIMAFA.service;
+/*package projetIMAFA.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,4 +47,4 @@ public class LoanServiceImpl implements LoanService {
 		return loanRepository.findByuserId(id);
 	}
 
-}
+}*/

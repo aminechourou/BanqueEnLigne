@@ -1,4 +1,4 @@
-package projetIMAFA.controller;
+/*package projetIMAFA.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,7 +27,7 @@ public class LoanController {
 	@Autowired
 	LoanServiceImpl loanServiceImpl;
 
-	private long id;
+	/*private long id;
 	private long userId;
 	private Money amount;
 	private double interest;
@@ -36,8 +36,6 @@ public class LoanController {
 	private boolean extended;
 
 	private List<Loan> loans;
-
-
 
 	public long getId() {
 		return id;
@@ -96,7 +94,9 @@ public class LoanController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", event.getObject().format(formatter)));
     }*/
-	public void onRowEdit(RowEditEvent<Loan> event) {
+	
+/*
+public void onRowEdit(RowEditEvent<Loan> event) {
 		Loan l = (Loan)event.getObject();
 		loanServiceImpl.addLoan(l);
 		
@@ -123,4 +123,4 @@ public class LoanController {
 
 	}
 
-}
+}*/

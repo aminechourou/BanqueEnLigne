@@ -1,4 +1,4 @@
-package projetIMAFA.controller;
+/*package projetIMAFA.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -551,4 +551,4 @@ public class LoanApplicationcontroller {
 	        yAxis.setMax(100);
 	    }
 
-}
+}*/

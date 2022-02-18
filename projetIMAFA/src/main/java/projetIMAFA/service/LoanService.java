@@ -1,4 +1,4 @@
-package projetIMAFA.service;
+/*package projetIMAFA.service;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,3 +22,4 @@ public List<Loan> getAllLoans();
 	public Optional<Loan> findByUserID(long id);
 
 }
+*/

@@ -102,6 +102,7 @@
 								</ul>
 							</li>
 							<li><a href="contact.html">Contact</a></li>
+							<li><h:outputText style="color: white" value="Solde= #{OrdreController.getCompte().solde}" /></li>
 							<li class="btn-cta"><a href="#"><span>Logout</span></a></li>
 						</ul>
 					</div>
@@ -185,6 +186,13 @@
 				</f:facet>
 				<h:commandButton value="Acheter obligation"
 					action="#{OrdreController.displayObligation(data)}" />
+			</h:column>
+						<h:column>
+				<f:facet name="header">
+					<h:outputText value="Simuler " />
+				</f:facet>
+				<h:commandButton value="Simuler obligation"
+					action="#{OrdreController.displayObligation1(data)}" />
 			</h:column>
 		</h:dataTable>
 		

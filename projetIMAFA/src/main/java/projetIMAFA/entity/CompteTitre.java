@@ -89,8 +89,13 @@ public class CompteTitre {
 		this.ordres = ordres;
 	}
 
+	public User getUser() {
+		return user;
+	}
 
-
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public int getId() {
 		return id;
@@ -152,18 +157,12 @@ public class CompteTitre {
 		this.sicavs = sicavs;
 	}
 
-	public CompteTitre(Date dateCreation, String status, float solde, String rib, User User,
-			List<Ordre> ordres, List<Action> actions, List<Obligationc> obligations, List<Sicav> sicavs) {
+	public CompteTitre(Date dateCreation, String status, float solde, String rib) {
 		super();
 		this.dateCreation = dateCreation;
 		this.status = status;
 		this.solde = solde;
 		this.rib = rib;
-		this.user = User;
-		this.ordres = ordres;
-		this.actions = actions;
-		this.obligations = obligations;
-		this.sicavs = sicavs;
 	}
 	
 	

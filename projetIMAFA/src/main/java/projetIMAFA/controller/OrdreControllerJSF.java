@@ -46,8 +46,10 @@ import projetIMAFA.entity.Formation;
 import projetIMAFA.entity.Obligation;
 import projetIMAFA.entity.Obligationc;
 import projetIMAFA.entity.Ordre;
+import projetIMAFA.entity.Sicav;
 import projetIMAFA.entity.TypeOrdre;
 import projetIMAFA.entity.TypeProduitFin;
+import projetIMAFA.entity.User;
 import projetIMAFA.repo.DataRepository;
 import projetIMAFA.service.ComptetitreService;
 import projetIMAFA.service.IActionService;
@@ -56,6 +58,7 @@ import projetIMAFA.service.IObligationService;
 import projetIMAFA.service.IObligationcService;
 import projetIMAFA.service.IOrdreService;
 import projetIMAFA.service.ISicavService;
+import projetIMAFA.service.TwilioService;
 
 
 @Transactional
@@ -73,6 +76,9 @@ public class OrdreControllerJSF {
 
 	@Autowired
 	IObligationcService obligationcService;
+	
+	@Autowired
+	TwilioService twilioService;
 	
 	@Autowired
 	ComptetitreService compteTitreRepository;
@@ -138,52 +144,6 @@ public class OrdreControllerJSF {
 	private Date date_emissionc;
 	private float montant_rembourse ;
 
-	@PostConstruct
-	public void init() {
-		/*Data_action da=dataService.getData(id);
-		System.out.print(da);
-       linemodel= new LineChartModel();     
-        for(int i=0;i<dataService.afflibe(da.getLibelled()) .size();i++){
-        	LineChartSeries series1 = new LineChartSeries();
-        	 series1.setLabel(da.getLibelled());
-        	series1.set(da.getLibelled(),dataService.afflibe(da.getLibelled()) .get(i));
-        	System.out.print(dataService.afflibe(da.getLibelled()) .get(i));
-        	linemodel.addSeries(series1);
-        }
-        
-
-        linemodel.setTitle("Users per date");
-        linemodel.setLegendPosition("e");
-        linemodel.setShowPointLabels(true);
-        linemodel.getAxes().put(AxisType.X, new CategoryAxis("Dates"));
-        Axis yyAxis = linemodel.getAxis(AxisType.Y);
-        yyAxis.setLabel("Users");*/
-        //yyAxis.setMin(0);
-        //yyAxis.setMax(10);
-	      linemodel = new LineChartModel();
-	      LineChartSeries s = new LineChartSeries();
-	      s.setLabel("Population");
-
-	      s.set(1, 5.20);
-	      s.set(2, 19.63);
-	      s.set(3, 59.01);
-	      s.set(4, 139.76);
-	      s.set(5, 300.4);
-	      s.set(6, 630);
-
-	      linemodel.addSeries(s);
-	      linemodel.setLegendPosition("e");
-	      Axis y = linemodel.getAxis(AxisType.Y);
-	      y.setMin(0.5);
-	      y.setMax(700);
-	      y.setLabel("Millions");
-
-	      Axis x = linemodel.getAxis(AxisType.X);
-	      x.setMin(0);
-	      x.setMax(7);
-	      x.setTickInterval("1");
-	      x.setLabel("Number of Years");
-	}
 	
 	public String affaction(int id)
 	{
@@ -197,9 +157,20 @@ public class OrdreControllerJSF {
 		Date currentUtilDate = new Date();
 		Action a;
 		CompteTitre compte = compteTitreRepository.retrieveComptetitre(1);
+		if(compte.getSolde()>=da.getClosed())
+		{
+		String body = "Vous avez achetez l'action: "+da.getLibelled();
+		twilioService.sendSms("+21699216983", "+19402512550", body);
 		a=actionService.addAction(new Action(currentUtilDate,1,da.getLibelled(),da.getLibelled(),da.getOpend(),da.getHighd(),da.getLowd(),15,da.getClosed(),da.getVolumed(),"11",compte));
 		ordreService.addOrdre(new Ordre(TypeOrdre.Achat, TypeProduitFin.Action,a.getAction_ID(),currentUtilDate));
+		compte.setSolde(compte.getSolde()-da.getClosed());
+	    CompteTitre c= new CompteTitre(compte.getDateCreation(),compte.getStatus(),compte.getSolde(),compte.getRib());
+	    compteTitreRepository.updateComptetitre(c);
 		return "afficheraction.jsf?faces-redirect=true"; 
+		}
+		else {
+		return "afficheraction.jsf?faces-redirect=true"; 	
+		}
 	}
 	public List<Obligationc> getObligationcs() {
 		
@@ -218,6 +189,22 @@ public class OrdreControllerJSF {
 			
 		}
 		return puis;
+	}
+
+	public float redemptiono()
+	{
+		float redemption=0;
+		float coupon;
+		Date current = new Date();
+        Obligation o=obligationService.retrieveObligation(obligation_ID);
+        coupon=(o.getTauxcoupon()/100)*o.getValeurnominal();
+        int y=current.getYear()-o.getDate_emission().getYear();
+           for(int i=1;i<=y+1;i++)
+           {
+            redemption +=(coupon*puissance((1+(o.getTauxactuariel()/100)),i));
+           }
+           redemption+=o.getValeurnominal()*(puissance((1+(o.getTauxactuariel()/100)),o.getMaturite()));
+		return redemption; 
 	}
 	
 	public float redemption()
@@ -270,6 +257,20 @@ public class OrdreControllerJSF {
 		ordreService.addOrdre(new Ordre(TypeOrdre.Achat, TypeProduitFin.Obligation,a.getObligation_ID(),currentUtilDate));
 		return "afficheraction.jsf?faces-redirect=true"; 
 	}
+	public String displayObligation1(Obligation empl)
+	{
+
+		this.setObligation_ID(empl.getObligation_ID());
+		this.setDate_emission(empl.getDate_emission());
+		this.setMaturite(empl.getMaturite());
+		this.setNomentreprise(empl.getNomentreprise());
+		this.setQuantite(empl.getQuantite());	
+		this.setValeurnominal(empl.getValeurnominal());
+		this.setTauxactuariel(empl.getTauxactuariel());
+		this.setTauxcoupon(empl.getTauxcoupon());
+		return("/ordrect/consulterob.jsf?faces-redirect=true");
+
+	}
 	
 	public String displayObligation(Obligation empl)
 	{
@@ -291,14 +292,23 @@ public class OrdreControllerJSF {
 		Obligation da=obligationService.retrieveObligation(obligation_ID);
 		Date currentUtilDate = new Date();
 		CompteTitre compte = compteTitreRepository.retrieveComptetitre(1);
+		if(compte.getSolde()>=da.getValeurnominal())
+		{
 		montant_rembourse=0;
 		int q1=0;
 		q1=(int) (montant_investi/da.getValeurnominal());
 		int q=0;
 		q=da.getQuantite()-q1;
 		obligationService.verifiequantite(q,obligation_ID);
+		compte.setSolde(compte.getSolde()-da.getValeurnominal()*q1);
+	    CompteTitre c= new CompteTitre(compte.getDateCreation(),compte.getStatus(),compte.getSolde(),compte.getRib());
+	    compteTitreRepository.updateComptetitre(c);
 		obligationcService.addObligationc(new Obligationc(montant_investi,montant_rembourse,currentUtilDate,compte,da));
 		return "/ordrect/afficherobligation.jsf?faces-redirect=true"; 
+		}
+		else {
+			return "/ordrect/afficherobligation.jsf?faces-redirect=true"; 	
+		}
 	}
 	public IOrdreService getOrdreService() {
 		return ordreService;
@@ -595,6 +605,10 @@ public class OrdreControllerJSF {
 		this.obligation_ID = obligation_ID;
 	}
 
+	public CompteTitre getCompte() {
+		return compteTitreRepository.retrieveComptetitre(1);
+	}
+	
 	public Date getDate_emission() {
 		return date_emission;
 	}

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import projetIMAFA.entity.Action;
 import projetIMAFA.entity.CompteTitre;
 import projetIMAFA.repo.CompteTitreRepository;
 
@@ -40,9 +41,8 @@ public class ComptetitreService implements IComptetitreService  {
 
 	@Override
 	public CompteTitre updateComptetitre(CompteTitre a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		CompteTitre ActionAdded = ComptetitreRepository.save(a);
+		return ActionAdded;	}
 
 	@Override
 	public CompteTitre retrieveComptetitre(int i) {

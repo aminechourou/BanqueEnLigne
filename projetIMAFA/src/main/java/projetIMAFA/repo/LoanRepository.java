@@ -1,4 +1,4 @@
-package projetIMAFA.repo;
+/*package projetIMAFA.repo;
 
 import java.util.Optional;
 
@@ -20,3 +20,4 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
 	boolean existsByuserId(long userId);
 	Optional<Loan>findByloanApplication(LoanApplication ln);
 }
+*/
